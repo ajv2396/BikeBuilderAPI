@@ -1,0 +1,175 @@
+﻿body {
+    font-family: Arial, sans-serif;
+    font-weight: 200;
+    margin: 0;
+    background-color: #2b2b2b;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #b79891, #94716b, #2e1f27);
+    background-size: 400% 400%;
+    animation: gradient 10s ease infinite;
+}
+@keyframes gradient {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+h1 {
+    text-align: center;
+    color: #ffffff;
+    margin: 20px 0;
+    font-size: 46px;
+}
+
+.part-option {
+    display: inline-block;
+    text-align: center;
+    width: 200px;
+    margin: 10px;
+    border: 2px solid transparent;
+    padding: 5px;
+    transition: all 0.5s ease;
+    cursor: pointer;
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 8px;
+}
+
+
+    .part-option.selected {
+        border: 2px solid #ffd800;
+    }
+
+    .part-option img {
+        width: 100px;
+        height: auto;
+        object-fit: contain;
+        cursor: pointer;
+    }
+
+
+
+#bike-display {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    width: 100%;
+}
+
+    #bike-display img {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 1300px;
+        z-index: 1;
+        pointer-events: none;
+    }
+
+
+.part-selector-bar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.7);
+    gap: 30px;
+}
+
+    .part-selector-bar label {
+        color: white;
+    }
+
+.menu-bar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    background-color: #ff0000;
+    gap: 30px;
+}
+
+.bike-part-select {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: white;
+}
+
+.next-button button {
+    height: 75px;
+    width: 200px;
+    justify-content: center;
+    align-items: center;
+    border-color: #2e2e2e;
+    color: #ffffff;
+}
+
+
+.back-button button {
+    height: 75px;
+    width: 200px;
+    border-color: #2e2e2e;
+    color: #ffffff;
+}
+
+.save-button button {
+    height: 75px;
+    width: 200px;
+    border-color: #2e2e2e;
+    color: #ffffff;
+}
+
+.return-button button {
+    height: 75px;
+    width: 200px;
+    border-color: #2e2e2e;
+    color: #ffffff;
+}
+
+
+
+button {
+    display: inline-block;
+    padding: 15px 30px;
+    font-size: 1.0rem;
+    font-weight: bold;
+    text-decoration: none;
+    color: white;
+    background-color: rgba(255, 255, 255, 0.1);
+    border: 2px solid white;
+    border-radius: 50px;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: pointer;
+}
+
+    button:hover {
+        background-color: rgba(255, 255, 255, 0.2);
+        transform: translateY(-3px);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    button:active {
+        transform: translateY(1px);
+    }
+
+
+
+label {
+    font-weight: bold;
+}
+
+select {
+    padding: 5px;
+}

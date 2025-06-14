@@ -1,0 +1,244 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>MTB Builder - DH</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <h1>DOWNHILL BIKE BUILDER</h1>
+
+    <div id="bike-display">
+        <img id="tyres-img" src="" alt="" />
+        <img id="shock-img" src="" alt="" />
+        <img id="wheels-img" src="" alt="">
+        <img id="saddle-img" src="" alt="">
+        <img id="seatpost-img" src="" alt="">
+        <img id="drivetrain-rear-img" src="" alt="" />
+        <img id="frame-img" src="" alt="">
+        <img id="fork-img" src="" alt="">
+        <img id="stem-img" src="" alt="">
+        <img id="drivetrain-img" src="" alt="">
+        <img id="bars-img" src="" alt="">
+        <img id="pedals-img" src="" alt="">
+    </div>
+
+    <div class="part-selector-bar">
+        <!-- Return to Start -->
+        <div class="return-button" style=display:none;>
+            <button id="return-button">Return to Start</button>
+        </div>
+
+        <!-- BACK Button -->
+        <div class="back-button" style=display:none;>
+            <button id="back-button">Back</button>
+        </div>
+
+        <!-- FRAME -->
+        <div id="step-frame" class="bike-part-select" style="display:none;">
+            <label>Choose Frame:</label>
+            <div class="frame-options">
+                <!--Santa Cruz V10-->
+                <div class="part-option frame-option" data-image="frame1.png">
+                    <img src="images/DH/frames/frame1-thumb.png" alt="Santa Cruz V10">
+                    <p>Santa Cruz V10</p>
+                </div>
+                <!--Atherton A.200-->
+                <div class="part-option frame-option" data-image="frame2.png">
+                    <img src="images/DH/frames/frame2-thumb.png" alt="Atherton A.200">
+                    <p>Atherton A.200</p>
+                </div>
+                <!--Specialized Demo-->
+                <div class="part-option frame-option" data-image="frame3.png">
+                    <img src="images/DH/frames/frame3-thumb.png" alt="Specialized Demo">
+                    <p>Specialized Demo</p>
+                </div>
+            </div>
+        </div>
+
+        <!--SHOCKS-->
+        <div id="step-shock" class="bike-part-select" style="display:none;">
+            <label>Choose Shock:</label>
+            <div class="shock-options">
+                <!--Fox Float DHX2-->
+                <div class="part-option shock-option" data-image="shock1">
+                    <img src="images/DH/frame-specific/shock1-thumb.png" alt="Fox Float DHX2">
+                    <p>Fox Float DHX2</p>
+                </div>
+                <!--Fox Float X2-->
+                <div class="part-option shock-option" data-image="shock2">
+                    <img src="images/DH/frame-specific/shock2-thumb.png" alt="Fox Float X2">
+                    <p>Fox Float X2</p>
+                </div>
+            </div>
+        </div>
+
+
+        <!--FORKS-->
+        <div id="step-fork" class="bike-part-select" style="display:none;">
+            <label>Choose Fork:</label>
+            <div class="fork-options">
+                <!--Fox Factory 40-->
+                <div class="part-option fork-option" data-image="fork1.png">
+                    <img src="images/DH/forks/fork1-thumb.png" alt="Fox Factory 40">
+                    <p>Fox Factory 40</p>
+                </div>
+                <!--Rockshox Boxxer-->
+                <div class="part-option fork-option" data-image="fork2.png">
+                    <img src="images/DH/forks/fork2-thumb.png" alt="Rockshox Boxxer Ultimate">
+                    <p>Rockshox Boxxer Ultimate</p>
+                </div>
+            </div>
+        </div>
+
+        <!--WHEELS-->
+        <div id="step-wheels" class="bike-part-select" style="display:none;">
+            <label>Choose Wheels:</label>
+            <div class="wheels-options">
+                <!--Hope Fortus 30W-->
+                <div class="part-option wheels-option" data-image="wheels1.png">
+                    <img src="images/DH/wheels/wheels1-thumb.png" alt="Hope Fortus 30W">
+                    <p>Hope Fortus 30W</p>
+                </div>
+                <!--Industry Nine Enduro S-->
+                <div class="part-option wheels-option" data-image="wheels2.png">
+                    <img src="images/DH/wheels/wheels2-thumb.png" alt="Industry Nine Enduro S">
+                    <p>Industry Nine Enduro S</p>
+                </div>
+            </div>
+        </div>
+
+        <!--TYRES-->
+        <div id="step-tyres" class="bike-part-select" style="display:none;">
+            <label>Choose Tyres:</label>
+            <div class="tyres-options">
+                <!--Continental Kryptotals-->
+                <div class="part-option tyres-option" data-image="tyres1.png">
+                    <img src="images/DH/tyres/tyres1-thumb.png" alt="Continental Kryptotal">
+                    <p>Continental Kryptotal</p>
+                </div>
+            </div>
+        </div>
+
+        <!--DRIVETRAIN-->
+        <div id="step-drivetrain" class="bike-part-select" style="display:none;">
+            <label>Choose Drivetrain:</label>
+            <div class="drivetrain-options">
+                <!--SRAM X0-->
+                <div class="part-option drivetrain-option" data-image="drivetrain1">
+                    <img src="images/DH/drivetrains/drivetrain1-thumb.png" alt="SRAM X0">
+                    <p>SRAM X0</p>
+                </div>
+            </div>
+        </div>
+
+        <!--PEDALS-->
+        <div id="step-pedals" class="bike-part-select" style="display:none;">
+            <label>Choose Pedals:</label>
+            <div class="pedals-options">
+                <!--Hope F22-->
+                <div class="part-option pedals-option" data-image="pedals1.png">
+                    <img src="images/pedals/pedals1-thumb.png" alt="Hope F22">
+                    <p>Hope F22</p>
+                </div>
+                <!--RaceFace Aeffect R-->
+                <div class="part-option pedals-option" data-image="pedals2.png">
+                    <img src="images/pedals/pedals2-thumb.png" alt="RaceFace Aeffect R">
+                    <p>RaceFace Aeffect R</p>
+                </div>
+                <!--Burgtec Penthouse-->
+                <div class="part-option pedals-option" data-image="pedals3.png">
+                    <img src="images/pedals/pedals3-thumb.png" alt="Burgtec Penthouse">
+                    <p>Burgtec Penthouse</p>
+                </div>
+            </div>
+        </div>
+
+        <!--STEM-->
+        <div id="step-stem" class="bike-part-select" style="display:none;">
+            <label>Choose Stem:</label>
+            <div class="stem-options">
+                <!--ENVE Alloy-->
+                <div class="part-option stem-option" data-image="stem1.png">
+                    <img src="images/stems/stem1-thumb.png" alt="ENVE Alloy">
+                    <p>ENVE Alloy</p>
+                </div>
+                <!--Hope Gravity-->
+                <div class="part-option stem-option" data-image="stem2.png">
+                    <img src="images/stems/stem2-thumb.png" alt="Hope Gravity">
+                    <p>Hope Gravity</p>
+                </div>
+            </div>
+        </div>
+
+        <!--BARS-->
+        <div id="step-bars" class="bike-part-select" style="display:none;">
+            <label>Choose Bars:</label>
+            <div class="bars-options">
+                <!--RaceFace Chester-->
+                <div class="part-option bars-option" data-image="bars1.png">
+                    <img src="images/bars/bars1-thumb.png" alt="RaceFace Chester">
+                    <p>RaceFace Chester</p>
+                </div>
+                <!--Burgtec Ridewide-->
+                <div class="part-option bars-option" data-image="bars2.png">
+                    <img src="images/bars/bars2-thumb.png" alt="Burgtec Ridewide">
+                    <p>Burgtec Ridewide</p>
+                </div>
+            </div>
+        </div>
+
+        <!--SEATPOSTS-->
+        <div id="step-seatpost" class="bike-part-select" style="display:none;">
+            <label>Choose Seatpost:</label>
+            <div class="seatpost-options">
+                <!--OneUp Dropper Post V3-->
+                <div class="part-option seatpost-option" data-image="seatpost1">
+                    <img src="images/frame-specific/seatpost1-thumb.png" alt="OneUp Dropper Post V3">
+                    <p>OneUp Dropper Post V3</p>
+                </div>
+                <!--Fox Factory Transfer-->
+                <div class="part-option seatpost-option" data-image="seatpost2">
+                    <img src="images/frame-specific/seatpost2-thumb.png" alt="Fox Factory Transfer">
+                    <p>Fox Factory Transfer</p>
+                </div>
+            </div>
+        </div>
+
+        <!--SADDLES-->
+        <div id="step-saddle" class="bike-part-select" style="display:none;">
+            <label>Choose Saddle:</label>
+            <div class="saddle-options">
+                <!--Deity Speedtrap-->
+                <div class="part-option saddle-option" data-image="saddle1">
+                    <img src="images/frame-specific/saddle1-thumb.png" alt="Deity Speedtrap">
+                    <p>Deity Speedtrap</p>
+                </div>
+                <!--Title JS1-->
+                <div class="part-option saddle-option" data-image="saddle2">
+                    <img src="images/frame-specific/saddle2-thumb.png" alt="Title JS1">
+                    <p>Title JS1</p>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- NEXT Button -->
+        <div class="next-button">
+            <button id="next-button">Add to Build</button>
+        </div>
+
+        <!-- SAVE Button-->
+        <div class="save-button">
+            <button id="save-button">Save Bike</button>
+        </div>
+
+
+        <script>
+            window.IsDHSelected = true;
+            window.IsEnduroSelected = false;
+        </script>
+        <script src="script.js"></script>
+</body>
+</html>
