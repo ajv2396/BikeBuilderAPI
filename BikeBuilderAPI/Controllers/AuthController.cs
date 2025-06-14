@@ -19,11 +19,26 @@ namespace BikeBuilderAPI.Controllers
         [HttpPost("login")]
         public IActionResult Login([FromBody] LoginRequest request)
         {
-            if (request.Email == "test@example.com" && request.Password == "password123")
+            using (var db = new AccountsContext())
             {
-                return Ok(new { sucess = true, message = "Login Sucessful" });
+                var account = db.Accounts.FirstOrDefault(a =>  a.Email == request.Email);
+
+                //if the email isnt found on database
+                if (account == null)
+                {
+                    return Unauthorized(new { sucess = false, message = "Invalid credentials" });
+                }
+
+                //if the email is found then check if the password mathces it
+                if (account.Password == request.Password)
+                {
+                    return Ok(new { sucess = true, message = "Login sucessful" });
+                }
+                else
+                {
+                    return Unauthorized(new { success = false, message = "Invalid credentials" });
+                }
             }
-            return Unauthorized(new { sucess = false, message = "Invalid credentials" });
         }
 
         //-------------------------------SIGN UP-------------------------------

@@ -56,6 +56,7 @@
             width: 90%;
         }
 
+
         .selection-container {
             background-color: rgba(0, 0, 0, 0.7);
             padding: 40px;
@@ -196,6 +197,9 @@
 
 <header>
     <!--Login/Sign Up-->
+    <div class="is-logged-in">
+        <label>Logged in as: </label><span id="loggedInName"></span>
+    </div>
     <div class="login-signup">
         <a href="login.html" class="loginsignup-button login-button">
             LOGIN
@@ -230,6 +234,10 @@
 
 
     <script>
+        const LoggedInName = "";
+        document.getElementById('loggedInName').textContent = LoggedInName;
+
+
         var SplashScreen = document.querySelector('.splash');
         SplashScreen.addEventListener('click', () => {
             SplashScreen.style.opacity = 0;
