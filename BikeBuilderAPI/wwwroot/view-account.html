@@ -1,0 +1,54 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+
+
+
+
+
+
+    <div class="first-name">
+        <label>First Name: </label><span id="FirstName"></span>
+    </div>
+    <div class="last-name">
+        <label>Last Name: </label><span id="LastName"></span>
+    </div>
+    <div class="first-name">
+        <label>Email: </label><span id="Email"></span>
+    </div>
+    <div class="account-id">
+        <label>Account ID: </label><span id="ID"></span>
+    </div>
+
+    <script>
+        //Get details from user_session
+        fetch('user_session.json')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log(data);
+
+                const FirstName = data.FirstName;
+                const LastName = data.LastName;
+                const LoggedInAccountID = data.AccountID;
+                const Email = data.Email;
+
+                document.getElementById('FirstName').textContent = FirstName;
+                document.getElementById('LastName').textContent = LastName;
+                document.getElementById('Email').textContent = Email;
+                document.getElementById('ID').textContent = LoggedInAccountID;
+            })
+            .catch(error => {
+                console.error('Error fetching JSON:', error);
+            })
+    </script>
+</body>
+</html>
