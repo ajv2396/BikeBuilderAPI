@@ -1,7 +1,7 @@
 ﻿body {
     font-family: 'Arial', sans-serif;
     font-size: 1.0rem;
-    font-weight: bold;
+    font-weight: normal;
     margin: 0;
     padding: 0;
     background: linear-gradient(135deg, #ffffff, #767676);
@@ -33,7 +33,7 @@
 .FormBox {
     background-color: #2e2e2e;
     color: white;
-    border: 1px solid black;
+    border: 0px #2e2e2e;
     border-radius: 10px;
     height: 30px;
     width: 500px;
@@ -43,7 +43,7 @@
 .FormBoxName {
     background-color: #2e2e2e;
     color: white;
-    border: 1px solid black;
+    border: 0px #2e2e2e;
     border-radius: 10px;
     height: 30px;
     width: 238px;
@@ -67,8 +67,8 @@
     text-decoration: none;
     color: white;
     background-color: #2e2e2e;
-    border: 1px solid black;
-    border-radius: 50px;
+    border: 0px #2e2e2e;
+    border-radius: 10px;
     transition: all 0.3s ease;
     text-transform: uppercase;
     letter-spacing: 1px;
