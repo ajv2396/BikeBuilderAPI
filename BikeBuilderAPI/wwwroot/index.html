@@ -198,7 +198,7 @@
 <header>
     <!--Login/Sign Up-->
     <div class="is-logged-in">
-        <label>Logged in as: </label><span id="loggedInName"></span>
+        <label>Logged in as: </label><span id="LoggedInName"></span>
     </div>
     <div class="login-signup">
         <a href="login.html" class="loginsignup-button login-button">
@@ -228,23 +228,33 @@
         </div>
     </div>
 
-    <!--<div class="splash">
-            <h1 class="splash-header">MTB BUILDER</h1>
-        </div>-->
-
 
     <script>
-        const LoggedInName = "";
-        document.getElementById('loggedInName').textContent = LoggedInName;
 
+        //Get details from user_session
+        fetch('user_session.json')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log(data);
 
-        var SplashScreen = document.querySelector('.splash');
-        SplashScreen.addEventListener('click', () => {
-            SplashScreen.style.opacity = 0;
-            setTimeout(() => {
-                SplashScreen.classList.add('hidden')
-            }, 610)
-        })
+                //If noone is logged in
+                if (data.FirstName == null && data.LastName == null && data.Email == null) {
+                    return;
+                }
+
+                const LoggedInName = data.FirstName + " " + data.LastName;
+                document.getElementById('LoggedInName').textContent = LoggedInName;
+                const LoggedInAccountID = data.AccountID;
+                const Email = data.Email;
+            })
+            .catch(error => {
+                console.error('Error fetching JSON:', error);
+            })
     </script>
 </body>
     </html>

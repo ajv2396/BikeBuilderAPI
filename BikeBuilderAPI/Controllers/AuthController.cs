@@ -1,6 +1,8 @@
 ﻿using BikeBuilderAPI.Model;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.IO;
+using System.Text.Json;
 
 namespace BikeBuilderAPI.Controllers
 {
@@ -32,8 +34,9 @@ namespace BikeBuilderAPI.Controllers
                 //if the email is found then check if the password mathces it
                 if (account.Password == request.Password)
                 {
-                    return Ok(new { sucess = true, message = "Login sucessful" });
+                    SaveUserSession(account);
 
+                    return Ok(new { sucess = true, message = "Login sucessful" });
                 }
                 else
                 {
@@ -61,7 +64,7 @@ namespace BikeBuilderAPI.Controllers
 
                 if (EmailCheck != null)
                 {
-                    return Conflict(new { success = false, message = "Email already registered" });
+                    return Conflict(new { success = false, message = "Email already registered" }); // "res.status === 409" in login.html handles this to stop users creating multiple accounts
                 }
 
                 var account = new Account
@@ -74,8 +77,30 @@ namespace BikeBuilderAPI.Controllers
 
                 db.Add(account);
                 db.SaveChanges();
+                SaveUserSession(account);
             }
             return Ok("User signed up");
+        }
+
+        //-------------------------------SAVE USER SESSION-------------------------------
+        public void SaveUserSession(Account account)
+        {
+            var sessionUser = new SessionUser
+            {
+                AccountId = account.AccountId,
+                FirstName = account.FirstName,
+                LastName = account.LastName,
+                Email = account.Email
+            };
+
+            string json = JsonSerializer.Serialize(sessionUser);
+            string FilePath = "wwwroot/user_session.json";
+
+            using (FileStream FileStream = new FileStream(FilePath, FileMode.Create))
+            using (StreamWriter StreamWriter = new StreamWriter(FileStream))
+            {
+                StreamWriter.Write(json);
+            }
         }
     }
 }
