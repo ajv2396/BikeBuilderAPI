@@ -33,6 +33,7 @@ namespace BikeBuilderAPI.Controllers
                 if (account.Password == request.Password)
                 {
                     return Ok(new { sucess = true, message = "Login sucessful" });
+
                 }
                 else
                 {
@@ -55,6 +56,14 @@ namespace BikeBuilderAPI.Controllers
         {
             using (var db = new AccountsContext())
             {
+                //for checking if email already exists in the database
+                var EmailCheck = db.Accounts.FirstOrDefault(a => a.Email == request.Email);
+
+                if (EmailCheck != null)
+                {
+                    return Conflict(new { success = false, message = "Email already registered" });
+                }
+
                 var account = new Account
                 {
                     FirstName = request.FirstName,

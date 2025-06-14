@@ -182,8 +182,10 @@
                         alert("Sign Up Sucessful")
                         //redirect to homepage
                         window.location.href = "index.html";
+                    } else if (res.status === 409) {  //conflict (email already exists in database)
+                        alert("Email already in use.")
                     } else {
-                        alert("Sign Up Failed. Please check your credentials.");
+                        alert("Sign Up Failed.");
                     }
                 })
                 .catch(err => {
