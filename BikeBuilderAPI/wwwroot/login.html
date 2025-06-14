@@ -3,102 +3,42 @@
 <head>
     <meta charset="utf-8" />
     <title>Login</title>
-
-    <!--CSS-->
-    <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            font-size: 1.0rem;
-            font-weight: bold;
-            margin: 0;
-            padding: 0;
-            background: linear-gradient(135deg, #b79891, #94716b, #2e1f27);
-            background-size: 400% 400%;
-            animation: gradient 10s ease infinite;
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            text-align: left;
-        }
-
-        @keyframes gradient {
-            0% {
-                background-position: 0% 50%;
-            }
-
-            50% {
-                background-position: 100% 50%;
-            }
-
-            100% {
-                background-position: 0% 50%;
-            }
-        }
-
-        .FormBox {
-            background-color: #2e2e2e;
-            color: white;
-            border: 1px solid black;
-            border-radius: 10px;
-            height: 30px;
-            width: 500px;
-            font-size: 1.1rem;
-        }
-
-        .SubmitButton {
-            display: inline-block;
-            font-size: 1.0rem;
-            font-weight: bold;
-            text-decoration: none;
-            color: white;
-            background-color: #2e2e2e;
-            border: 1px solid black;
-            border-radius: 50px;
-            transition: all 0.3s ease;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            height: 30px;
-            width: 130px;
-            justify-content: center;
-        }
-
-            .SubmitButton:hover {
-                background-color: rgba(255, 255, 255, 0.2);
-                transform: translateY(-2px);
-                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-            }
-
-            .SubmitButton:active {
-                transform: translateY(1px);
-            }
-    </style>
+    <link rel="stylesheet" href="styles/login-signup-styles.css">
 </head>
 
+<header>
+    <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+    <div class="login-signup">
+        <a href="index.html" class="back-button header-button">
+            BACK
+        </a>
+    </div>
+</header>
 
 <body>
-    <!--LOGIN FORM HTML-->
-    <div>
-        <h1>LOGIN</h1>
-    </div>
-    <form id="LoginForm">
-        <div>
-            <label>EMAIL</label>
-            <br />
-            <input class="FormBox" type="email" id="email" required />
-        </div>
-        <br />
-        <div>
-            <label>PASSWORD</label>
-            <br />
-            <input class="FormBox" type="password" id="password" required />
-        </div>
-        <br />
-        <button class="SubmitButton" type="submit">SUBMIT</button>
-    </form>
 
+
+    <div class="main-container">
+        <!--LOGIN FORM HTML-->
+        <div>
+            <h1>LOGIN</h1>
+        </div>
+        <form id="LoginForm">
+            <div>
+                <label>EMAIL</label>
+                <br />
+                <input class="FormBox" type="email" id="email" required />
+            </div>
+            <br />
+            <div>
+                <label>PASSWORD</label>
+                <br />
+                <input class="FormBox" type="password" id="password" required />
+            </div>
+            <br />
+            <button class="SubmitButton" type="submit">SUBMIT</button>
+        </form>
+    </div>
 
     <!--JAVASCRIPT-->
     <script>

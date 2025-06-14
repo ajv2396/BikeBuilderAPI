@@ -2,28 +2,43 @@
 <html>
 <head>
     <meta charset="utf-8" />
-    <title></title>
+    <title>View Account</title>
+    <link rel="stylesheet" href="styles/view-account-styles.css">
 </head>
+
+<header>
+    <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+    <div class="login-signup">
+        <a href="index.html" class="back-button header-button">
+            BACK
+        </a>
+    </div>
+</header>
+
 <body>
-
-
-
-
-
-
-    <div class="first-name">
-        <label>First Name: </label><span id="FirstName"></span>
+    <div class="info-container">
+        <div class="image">
+            <div class="profile-image">
+                <img src="profile_image.png" alt="Profile Image">
+            </div>
+        </div>
+        <br />
+        <div class="first-name">
+            <label>First Name: </label><span id="FirstName"></span>
+        </div>
+        <br />
+        <div class="last-name">
+            <label>Last Name: </label><span id="LastName"></span>
+        </div>
+        <br />
+        <div class="first-name">
+            <label>Email: </label><span id="Email"></span>
+        </div>
+        <br />
+        <div class="account-id">
+            <label>Account ID: </label><span id="ID"></span>
+        </div>
     </div>
-    <div class="last-name">
-        <label>Last Name: </label><span id="LastName"></span>
-    </div>
-    <div class="first-name">
-        <label>Email: </label><span id="Email"></span>
-    </div>
-    <div class="account-id">
-        <label>Account ID: </label><span id="ID"></span>
-    </div>
-
     <script>
         //Get details from user_session
         fetch('user_session.json')
@@ -38,7 +53,7 @@
 
                 const FirstName = data.FirstName;
                 const LastName = data.LastName;
-                const LoggedInAccountID = data.AccountID;
+                const LoggedInAccountID = data.AccountId;
                 const Email = data.Email;
 
                 document.getElementById('FirstName').textContent = FirstName;

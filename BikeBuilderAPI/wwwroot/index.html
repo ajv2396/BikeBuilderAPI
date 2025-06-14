@@ -9,7 +9,7 @@
             font-family: 'Arial', sans-serif;
             margin: 0;
             padding: 0;
-            background: linear-gradient(135deg, #b79891, #94716b, #2e1f27);
+            background: linear-gradient(135deg, #ffffff, #767676);
             background-size: 400% 400%;
             animation: gradient 10s ease infinite;
             height: 100vh;
@@ -159,44 +159,6 @@
             border-color: #2e2e2e;
             color: #ffffff;
         }
-
-        .logo {
-            width: 120px;
-            margin-bottom: 20px;
-            filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.5));
-        }
-
-        footer {
-            margin-top: 40px;
-            font-size: 0.9rem;
-            opacity: 0.7;
-        }
-        .splash{
-            cursor: none;
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            height: 100%;
-            width: 100%;
-            transform: translate(-50%,-50%);
-            background-color: rgba(0,0,0);
-            transition: all ease-in-out 600ms;
-        }
-        .hidden{
-            transition: 0.5s;
-            display: none;
-        }
-        .splash-header {
-            height: 90%;
-            color: white;
-            font-family: Arial, sans-serif;
-            font-weight: 200;
-            font-size: 30px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
     </style>
 
 </head>
@@ -228,11 +190,11 @@
         <p class="subtitle">Select Bike Type:</p>
 
         <div class="button-container">
-            <a href="EnduroBuilder.html" class="bike-button enduro-button">
+            <a href="enduro-builder.html" class="bike-button enduro-button">
                 Build Enduro Bike
             </a>
 
-            <a href="DHBuilder.html" class="bike-button dh-button">
+            <a href="downhill-builder.html" class="bike-button dh-button">
                 Build Downhill Bike
             </a>
         </div>
@@ -260,8 +222,8 @@
                 }
 
                 const LoggedInName = data.FirstName + " " + data.LastName;
-                document.getElementById('LoggedInName').textContent = LoggedInName;
-                const LoggedInAccountID = data.AccountID;
+                const LoggedInAccountID = data.AccountId;
+                document.getElementById('LoggedInName').textContent = LoggedInName + " | ID: " + LoggedInAccountID;
                 const Email = data.Email;
 
                 document.querySelector(".view-account-button").style.display = "flex";
