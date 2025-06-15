@@ -8,7 +8,7 @@
 <header>
     <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
     <div class="login-signup">
-        <a href="index.html" class="back-button header-button">
+        <a href="index.html" class="header-back-button header-button">
             BACK
         </a>
     </div>
@@ -16,15 +16,16 @@
 <body>
 
     <div id="bike-display">
+        <img id="brakes-img" src="" alt="" />
         <img id="tyres-img" src="" alt="" />
         <img id="shock-img" src="" alt="" />
         <img id="wheels-img" src="" alt="">
         <img id="saddle-img" src="" alt="">
         <img id="seatpost-img" src="" alt="">
+        <img id="stem-img" src="" alt="">
         <img id="drivetrain-rear-img" src="" alt="" />
         <img id="frame-img" src="" alt="">
         <img id="fork-img" src="" alt="">
-        <img id="stem-img" src="" alt="">
         <img id="drivetrain-img" src="" alt="">
         <img id="bars-img" src="" alt="">
         <img id="pedals-img" src="" alt="">
@@ -139,23 +140,35 @@
             </div>
         </div>
 
+        <!--BRAKES-->
+        <div id="step-brakes" class="bike-part-select" style="display:none;">
+            <label>Choose Brakes:</label>
+            <div class="brakes-options">
+                <!--Hope Tech 3 E4-->
+                <div class="part-option brakes-option" data-image="brakes1">
+                    <img src="images/DH/frame-specific/brakes1-thumb.png" alt="Hope Tech 3 E4">
+                    <p>Hope Tech 3 E4</p>
+                </div>
+            </div>
+        </div>
+
         <!--PEDALS-->
         <div id="step-pedals" class="bike-part-select" style="display:none;">
             <label>Choose Pedals:</label>
             <div class="pedals-options">
                 <!--Hope F22-->
                 <div class="part-option pedals-option" data-image="pedals1.png">
-                    <img src="images/pedals/pedals1-thumb.png" alt="Hope F22">
+                    <img src="images/DH/pedals/pedals1-thumb.png" alt="Hope F22">
                     <p>Hope F22</p>
                 </div>
                 <!--RaceFace Aeffect R-->
                 <div class="part-option pedals-option" data-image="pedals2.png">
-                    <img src="images/pedals/pedals2-thumb.png" alt="RaceFace Aeffect R">
+                    <img src="images/DH/pedals/pedals2-thumb.png" alt="RaceFace Aeffect R">
                     <p>RaceFace Aeffect R</p>
                 </div>
                 <!--Burgtec Penthouse-->
                 <div class="part-option pedals-option" data-image="pedals3.png">
-                    <img src="images/pedals/pedals3-thumb.png" alt="Burgtec Penthouse">
+                    <img src="images/DH/pedals/pedals3-thumb.png" alt="Burgtec Penthouse">
                     <p>Burgtec Penthouse</p>
                 </div>
             </div>
@@ -165,15 +178,15 @@
         <div id="step-stem" class="bike-part-select" style="display:none;">
             <label>Choose Stem:</label>
             <div class="stem-options">
-                <!--ENVE Alloy-->
+                <!--DMR Defy DH-->
                 <div class="part-option stem-option" data-image="stem1.png">
-                    <img src="images/stems/stem1-thumb.png" alt="ENVE Alloy">
-                    <p>ENVE Alloy</p>
+                    <img src="images/DH/stems/stem1-thumb.png" alt="DMR Defy DH">
+                    <p>DMR Defy DH</p>
                 </div>
-                <!--Hope Gravity-->
+                <!--Title DM1 35-->
                 <div class="part-option stem-option" data-image="stem2.png">
-                    <img src="images/stems/stem2-thumb.png" alt="Hope Gravity">
-                    <p>Hope Gravity</p>
+                    <img src="images/DH/stems/stem2-thumb.png" alt="Title DM1 35">
+                    <p>Title DM1 35</p>
                 </div>
             </div>
         </div>
@@ -184,12 +197,12 @@
             <div class="bars-options">
                 <!--RaceFace Chester-->
                 <div class="part-option bars-option" data-image="bars1.png">
-                    <img src="images/bars/bars1-thumb.png" alt="RaceFace Chester">
+                    <img src="images/DH/bars/bars1-thumb.png" alt="RaceFace Chester">
                     <p>RaceFace Chester</p>
                 </div>
                 <!--Burgtec Ridewide-->
                 <div class="part-option bars-option" data-image="bars2.png">
-                    <img src="images/bars/bars2-thumb.png" alt="Burgtec Ridewide">
+                    <img src="images/DH/bars/bars2-thumb.png" alt="Burgtec Ridewide">
                     <p>Burgtec Ridewide</p>
                 </div>
             </div>

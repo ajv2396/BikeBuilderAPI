@@ -1,4 +1,6 @@
-﻿namespace BikeBuilderAPI.Model
+﻿using BikeBuilderAPI.Models;
+
+namespace BikeBuilderAPI.Model
 {
     public class Account
     {
@@ -7,5 +9,7 @@
         public string LastName { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
+
+        public List<SavedBike> SavedBikes { get; set; } = new();
     }
 }

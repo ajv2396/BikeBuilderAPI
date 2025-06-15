@@ -1,3 +1,24 @@
+let LoggedInAccountID;
+
+//Get details from user_session
+fetch('user_session.json')
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Response was not ok');
+        }
+        return response.json();
+    })
+    .then(data => {
+        console.log(data);
+
+        const FirstName = data.FirstName;
+        const LastName = data.LastName;
+        LoggedInAccountID = data.AccountId;
+        const Email = data.Email;
+    })
+    .catch(error => {
+        console.error('Error fetching JSON:', error);
+    })
 
 
 //get which html file is being used so that the bike type can be set
@@ -22,6 +43,7 @@ const BuildSteps = [
     "step-wheels",
     "step-tyres",
     "step-drivetrain",
+    "step-brakes",
     "step-pedals",
     "step-stem",
     "step-bars",
@@ -35,6 +57,7 @@ let fork = "";
 let wheels = "";
 let tyres = "";
 let drivetrain = "";
+let brakes = "";
 let seatpost = "";
 let saddle = "";
 let bars = "";
@@ -47,14 +70,18 @@ let FrameSelected = "";
 let IsSeatpostSelected = false;
 let IsSaddleSelected = false;
 let IsShockSelected = false;
+let IsBrakesSelected = false;
 let SeatpostSelected = "";
 let SaddleSelected = "";
 let ShockSelected = "";
+let BrakesSelected = "";
 
 
 document.addEventListener("DOMContentLoaded", () => {
+
     // -------------------------- NEXT STEP --------------------------
     document.getElementById("next-button").addEventListener("click", () => {
+
         //hide current step of the build
         if (StepOfBuild < BuildSteps.length) {
             const CurrentStep = document.getElementById(BuildSteps[StepOfBuild]);
@@ -165,6 +192,9 @@ document.addEventListener("DOMContentLoaded", () => {
                 document.getElementById("shock-img").src = `images/${BikeType}/frame-specific/shocks/${ShockSelected}_${FrameSelected}`;
 
             }
+            if (IsBrakesSelected === true) {
+                document.getElementById("brakes-img").src = `images/${BikeType}/frame-specific/brakes/${BrakesSelected}_${FrameSelected}`;
+            }
             if (IsSeatpostSelected === true) {
                 document.getElementById("seatpost-img").src = `images/${BikeType}/frame-specific/seatposts/${SeatpostSelected}-${FrameSelected}`;
 
@@ -234,6 +264,21 @@ document.addEventListener("DOMContentLoaded", () => {
             drivetrain = imageName.replace(".png", "");
         });
     });
+
+    //BRAKES
+    document.querySelectorAll(".brakes-option").forEach(option => {
+        option.addEventListener("click", () => {
+            const imageName = option.dataset.image;
+            document.getElementById("brakes-img").src = `images/${BikeType}/frame-specific/brakes/${imageName}_${FrameSelected}`;
+            document.querySelectorAll(".brakes-option").forEach(el => el.classList.remove("selected"));
+            option.classList.add("selected");
+            IsBrakesSelected = true;
+            BrakesSelected = null;
+            BrakesSelected = imageName;
+            brakes = imageName.replace(".png", "");
+        });
+    });
+
     //PEDALS
     document.querySelectorAll(".pedals-option").forEach(option => {
         option.addEventListener("click", () => {
@@ -299,7 +344,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
     document.getElementById("save-button").addEventListener("click", () => {
 
+
         const data = {
+            AccountId: LoggedInAccountID,
             biketype: BikeType, //also send bike type so different bikes can be differentiated
             frame: frame,
             shock: shock,
@@ -307,6 +354,7 @@ document.addEventListener("DOMContentLoaded", () => {
             wheels: wheels,
             tyres: tyres,
             drivetrain: drivetrain,
+            brakes: brakes,
             seatpost: seatpost,
             saddle: saddle,
             bars: bars,
@@ -326,7 +374,7 @@ document.addEventListener("DOMContentLoaded", () => {
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(data)
         })
-            .then(res => res.ok ? alert("Bike Configuration Saved!") : alert("Save failed"))
+            .then(res => res.ok ? alert("Bike Configuration Saved!") : alert("Save failed" + LoggedInAccountID))
             .catch(err => console.error("Error saving bike:", err));
     })
 });
