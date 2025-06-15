@@ -3,6 +3,7 @@ using BikeBuilderAPI.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.IO;
 using System.Security.Cryptography.X509Certificates;
+using System.Text.Json;
 
 namespace BikeBuilderAPI.Controllers
 {
@@ -20,7 +21,7 @@ namespace BikeBuilderAPI.Controllers
         [HttpPost]
         public async Task<IActionResult> SaveBike([FromBody] BikeModel bike)
         {
-            Console.WriteLine($"Saving bike: Account Idn = {bike.AccountId} Bike Type = {bike.BikeType} Frame={bike.Frame}, Shock={bike.Shock}, Fork={bike.Fork}, Wheels={bike.Wheels}, Tyres={bike.Tyres}, Drivetrain={bike.Drivetrain}, Seatpost={bike.Seatpost}, Saddle={bike.Saddle}, Bars={bike.Bars}, Stem={bike.Stem}, Pedals={bike.Pedals}");
+            Console.WriteLine($"Saving bike: Account Id = {bike.AccountId} Bike Type = {bike.BikeType} Frame={bike.Frame}, Shock={bike.Shock}, Fork={bike.Fork}, Wheels={bike.Wheels}, Tyres={bike.Tyres}, Drivetrain={bike.Drivetrain}, Seatpost={bike.Seatpost}, Saddle={bike.Saddle}, Bars={bike.Bars}, Stem={bike.Stem}, Pedals={bike.Pedals}");
 
             if (bike.AccountId == 0)
             {

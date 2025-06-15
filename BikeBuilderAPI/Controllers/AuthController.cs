@@ -10,7 +10,6 @@ namespace BikeBuilderAPI.Controllers
     [ApiController]
     public class AuthController : ControllerBase
     {
-
         //--------------------------------LOGIN--------------------------------
         public class LoginRequest
         {
@@ -35,7 +34,7 @@ namespace BikeBuilderAPI.Controllers
                 if (account.Password == request.Password)
                 {
                     SaveUserSession(account);
-
+                    UserSaveExporter.ExportUserSavesToJson(account.AccountId, db);
                     return Ok(new { sucess = true, message = "Login sucessful" });
                 }
                 else

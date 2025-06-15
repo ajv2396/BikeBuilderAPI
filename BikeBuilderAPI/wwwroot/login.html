@@ -56,6 +56,7 @@
             console.log("Email:", LoginEmail);
             console.log("Password:", LoginPassword);
 
+            // CHECK IF ACCOUNT INFORMATION MATCHES DATABASE (AuthController.cs)
             fetch("https://localhost:7165/api/auth/login", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
@@ -75,6 +76,7 @@
                     alert("An error occurred during login.");
                 });
         });
+
     </script>
 </body>
 </html>
