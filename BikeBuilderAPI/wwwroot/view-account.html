@@ -17,12 +17,6 @@
 
 <body>
     <div class="info-container">
-        <div class="image">
-            <div class="profile-image">
-                <img src="profile_image.png" alt="Profile Image">
-            </div>
-        </div>
-        <br />
         <div class="title">
             <label>ACCOUNT INFORMATION</label>
         </div>
@@ -30,44 +24,91 @@
         <div class="first-name">
             <label>FIRST NAME: </label><span id="FirstName"></span>
         </div>
-        <br />
         <div class="last-name">
             <label>LAST NAME: </label><span id="LastName"></span>
         </div>
-        <br />
         <div class="first-name">
             <label>EMAIL: </label><span id="Email"></span>
         </div>
-        <br />
         <div class="account-id">
             <label>ACCOUNT ID: </label><span id="ID"></span>
         </div>
-    </div>
-    <script>
-        //Get details from user_session
-        fetch('user_session.json')
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Response was not ok');
-                }
-                return response.json();
-            })
-            .then(data => {
-                console.log(data);
+        <br />
+        <br />
+        <div class="title">
+            <label>SAVE INFO: </label>
+        </div>
+        <div class="bike-cards-container" id="SavedBikesContainer"></div>
+        <script>
+            //Get details from user_session.json
+            fetch('user_session.json')
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Response was not ok');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    console.log(data);
 
-                const FirstName = data.FirstName;
-                const LastName = data.LastName;
-                const LoggedInAccountID = data.AccountId;
-                const Email = data.Email;
+                    const FirstName = data.FirstName;
+                    const LastName = data.LastName;
+                    const LoggedInAccountID = data.AccountId;
+                    const Email = data.Email;
 
-                document.getElementById('FirstName').textContent = FirstName;
-                document.getElementById('LastName').textContent = LastName;
-                document.getElementById('Email').textContent = Email;
-                document.getElementById('ID').textContent = LoggedInAccountID;
-            })
-            .catch(error => {
-                console.error('Error fetching JSON:', error);
-            })
-    </script>
+                    document.getElementById('FirstName').textContent = FirstName;
+                    document.getElementById('LastName').textContent = LastName;
+                    document.getElementById('Email').textContent = Email;
+                    document.getElementById('ID').textContent = LoggedInAccountID;
+                })
+                .catch(error => {
+                    console.error('Error fetching JSON:', error);
+                })
+
+            //Get details from user_saves.json
+            fetch('user_saves.json')
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Response was not ok');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    console.log(data);
+                    const container = document.getElementById('SavedBikesContainer');
+
+                    //if its an object
+                    if (!Array.isArray(data)) {
+                        console.warn("Data is not an array");
+                        return;
+                    }
+
+                    data.forEach((bike, index) => {
+                        const BikeCard = document.createElement('div');
+                        BikeCard.classList.add('bike-card');
+                        BikeCard.innerHTML = `
+                            <h3>Bike #${index + 1}</h3>
+                            <p><strong>Type:</strong> ${bike.BikeType}</p>
+                            <p><strong>Frame:</strong> ${bike.Frame}</p>
+                            <p><strong>Fork:</strong> ${bike.Fork}</p>
+                            <p><strong>Shock:</strong> ${bike.Shock}</p>
+                            <p><strong>Wheels:</strong> ${bike.Wheels}</p>
+                            <p><strong>Tyres:</strong> ${bike.Tyres}</p>
+                            <p><strong>Drivetrain:</strong> ${bike.Drivetrain}</p>
+                            <p><strong>Brakes:</strong> ${bike.Brakes}</p>
+                            <p><strong>Seatpost:</strong> ${bike.Seatpost}</p>
+                            <p><strong>Saddle:</strong> ${bike.Saddle}</p>
+                            <p><strong>Bars:</strong> ${bike.Bars}</p>
+                            <p><strong>Stem:</strong> ${bike.Stem}</p>
+                            <p><strong>Pedals:</strong> ${bike.Pedals}</p>
+                        `;
+                        container.appendChild(BikeCard);
+                    })
+
+                })
+                .catch(error => {
+                    console.error('Error fetching JSON:', error);
+                })
+        </script>
 </body>
 </html>
