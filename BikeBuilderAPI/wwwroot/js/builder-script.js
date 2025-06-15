@@ -344,6 +344,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
     document.getElementById("save-button").addEventListener("click", () => {
 
+        if (LoggedInAccountID == null) {
+            alert("You are not logged in. Login or signup.")
+            return;
+        }
 
         const data = {
             AccountId: LoggedInAccountID,

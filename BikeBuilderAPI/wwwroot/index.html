@@ -103,6 +103,7 @@
                 background-color: rgba(255, 255, 255, 0.2);
                 transform: translateY(-2px);
                 box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+                cursor: pointer;
             }
 
             .loginsignup-button:active {
@@ -113,7 +114,6 @@
             background-color: #1859c9;
             color: #ffffff;
         }
-
         .signup-button {
             background-color: #e9ecf0;
             color: #000000;
@@ -122,6 +122,12 @@
         .view-account-button {
             background-color: #e9ecf0;
             color: #000000;
+            display: none;
+        }
+
+        .log-out-button {
+            background-color: #a50000;
+            color: #ffffff;
             display: none;
         }
 
@@ -169,10 +175,13 @@
         <label>Logged in as: </label><span id="LoggedInName"></span>
     </div>
     <div class="login-signup">
-        <a href="view-account.html" class="loginsignup-button view-account-button">
+        <a class="loginsignup-button view-account-button" id="view-account-button">
             VIEW ACCOUNT
         </a>
         <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+        <a class="loginsignup-button log-out-button" id="log-out-button">
+            LOG OUT
+        </a>
         <a href="login.html" class="loginsignup-button login-button">
             LOGIN
         </a>
@@ -202,7 +211,25 @@
 
 
     <script>
-
+        document.addEventListener("DOMContentLoaded", () => {
+            document.getElementById("log-out-button").addEventListener("click", async () => {
+                try {
+                    await fetch("/api/logout/clear-session", { method: "POST" });
+                    await fetch("/api/logout/clear-saves", { method: "POST" });
+                    window.location.href = "index.html"; //refresh to load new buttons
+                } catch (error) {
+                    console.error("logout failed", error);
+                }
+            });
+            document.getElementById("view-account-button").addEventListener("click", async () => {
+                try {
+                    await fetch("/api/logout/refresh-user-saves", { method: "POST" });
+                    window.location.href = "view-account.html"; //go to view account page
+                } catch (error) {
+                    console.error("refresh failed", error);
+                }
+            });
+        });
 
         //Get details from user_session
         fetch('user_session.json')
@@ -227,6 +254,9 @@
                 const Email = data.Email;
 
                 document.querySelector(".view-account-button").style.display = "flex";
+                document.querySelector(".log-out-button").style.display = "flex";
+                document.querySelector(".login-button").style.display = "none";
+                document.querySelector(".signup-button").style.display = "none";
             })
             .catch(error => {
                 console.error('Error fetching JSON:', error);
