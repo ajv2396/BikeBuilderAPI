@@ -64,7 +64,22 @@ fetch('user_saves.json')
                     <img class="bars-img" />
                     <img class="pedals-img" />
                 </div>
-                        `;
+                <div class="bike-display-data">
+                    <p><strong>Type:</strong> ${bike.BikeType}</p>
+                    <p><strong>Frame:</strong> ${bike.Frame}</p>
+                    <p><strong>Fork:</strong> ${bike.Fork}</p>
+                    <p><strong>Shock:</strong> ${bike.Shock}</p>
+                    <p><strong>Wheels:</strong> ${bike.Wheels}</p>
+                    <p><strong>Tyres:</strong> ${bike.Tyres}</p>
+                    <p><strong>Drivetrain:</strong> ${bike.Drivetrain}</p>
+                    <p><strong>Brakes:</strong> ${bike.Brakes}</p>
+                    <p><strong>Seatpost:</strong> ${bike.Seatpost}</p>
+                    <p><strong>Saddle:</strong> ${bike.Saddle}</p>
+                    <p><strong>Bars:</strong> ${bike.Bars}</p>
+                    <p><strong>Stem:</strong> ${bike.Stem}</p>
+                    <p><strong>Pedals:</strong> ${bike.Pedals}</p>
+                </div>
+                `;
             BikeCard.querySelector('.frame-img').src = `images/${bike.BikeType}/frames/${bike.Frame}.png`;
             BikeCard.querySelector('.shock-img').src = `images/${bike.BikeType}/frame-specific/shocks/${bike.Shock}_${bike.Frame}.png`;
             BikeCard.querySelector('.fork-img').src = `images/${bike.BikeType}/forks/${bike.Fork}.png`;

@@ -101,17 +101,18 @@ header {
     background: #f9f9f9;
     color: #000000;
     font-size: 0.85rem;
-    height: 350px; /* reduced from 400px to avoid too much vertical space */
+    height: 350px;
     padding: 15px 10px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: start;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    transition: transform 0.2s ease;
+    transition: height 0.8s ease, transform 0.5s ease;
 }
     .bike-card:hover {
         transform: translateY(-5px);
+        height: 600px;
     }
 
     .bike-card h3 {
@@ -120,15 +121,30 @@ header {
         text-align: center;
     }
 
+.bike-display-data {
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    height: auto;
+    margin-top: 10px;
+    line-height: 50%;
+}
+
+.bike-card:hover .bike-display-data {
+    opacity: 1;
+}
+
 #bike-display {
     position: relative;
+    top: 100px;
     width: 260px;
     height: 260px;
     margin-top: 10px;
     display: flex;
     justify-content: center;
     align-items: center;
+    transition: top 0.8s ease;
 }
+
 
     #bike-display img {
         position: absolute;
@@ -138,3 +154,7 @@ header {
         transform: translate(-50%, -50%);
         pointer-events: none;
     }
+
+.bike-card:hover #bike-display {
+    top: 0px;
+}

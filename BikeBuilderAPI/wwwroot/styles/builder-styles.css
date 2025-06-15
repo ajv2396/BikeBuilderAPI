@@ -42,7 +42,6 @@ h1 {
     border-radius: 8px;
 }
 
-
     .part-option.selected {
         border: 2px solid #ffd800;
     }
@@ -52,6 +51,10 @@ h1 {
         height: auto;
         object-fit: contain;
         cursor: pointer;
+    }
+
+    .part-option:hover {
+        transform: translateY(-5px);
     }
 
 
