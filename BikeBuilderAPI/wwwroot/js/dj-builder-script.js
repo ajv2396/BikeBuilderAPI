@@ -1,4 +1,4 @@
-let LoggedInAccountID;
+﻿let LoggedInAccountID;
 
 //Get details from user_session
 fetch('user_session.json')
@@ -28,16 +28,11 @@ let IsDHSelected = window.IsDHSelected || false;
 let BikeType;
 
 //set bike type. for using for displaying images (correct file path) and using in database
-if (IsDHSelected == true) {
-    BikeType = "DH";
-}
-if (IsEnduroSelected == true) {
-    BikeType = "Enduro";
-}
+BikeType = "DJ";
+
 let StepOfBuild = 0;
 const BuildSteps = [
     "step-frame",
-    "step-shock",
     "step-fork",
     "step-wheels",
     "step-tyres",
@@ -51,7 +46,6 @@ const BuildSteps = [
 ];
 
 let frame = "";
-let shock = "";
 let fork = "";
 let wheels = "";
 let tyres = "";
@@ -68,11 +62,9 @@ let FrameSelected = "";
 
 let IsSeatpostSelected = false;
 let IsSaddleSelected = false;
-let IsShockSelected = false;
 let IsBrakesSelected = false;
 let SeatpostSelected = "";
 let SaddleSelected = "";
-let ShockSelected = "";
 let BrakesSelected = "";
 
 
@@ -109,7 +101,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         // Change next button to finish build
-        if (StepOfBuild == BuildSteps.length -1 ) {
+        if (StepOfBuild == BuildSteps.length - 1) {
             document.getElementById("next-button").textContent = "Finish";
         }
         //Hide Next Button after complete & return to build button 
@@ -187,10 +179,6 @@ document.addEventListener("DOMContentLoaded", () => {
             FrameSelected = imageName; //SET FRAME SELECTED TO IMAGE CLICKED ON - SO SADDLES/SEATPOSTS ARE CORRECT
 
             //Check if both are already selected so if user goes back and changes frame then the saddle and/or seatpost are updated
-            if (IsShockSelected === true) {
-                document.getElementById("shock-img").src = `images/${BikeType}/frame-specific/shocks/${ShockSelected}_${FrameSelected}`;
-
-            }
             if (IsBrakesSelected === true) {
                 document.getElementById("brakes-img").src = `images/${BikeType}/frame-specific/brakes/${BrakesSelected}_${FrameSelected}`;
             }
@@ -203,20 +191,6 @@ document.addEventListener("DOMContentLoaded", () => {
             }
             frame = imageName.replace(".png", "");
 
-        });
-    });
-
-    //SHOCKS
-    document.querySelectorAll(".shock-option").forEach(option => {
-        option.addEventListener("click", () => {
-            const imageName = option.dataset.image;
-            document.getElementById("shock-img").src = `images/${BikeType}/frame-specific/shocks/${imageName}_${FrameSelected}`;
-            document.querySelectorAll(".shock-option").forEach(el => el.classList.remove("selected"));
-            option.classList.add("selected");
-            IsShockSelected = true;
-            ShockSelected = null;
-            ShockSelected = imageName;
-            shock = imageName.replace(".png", "");
         });
     });
 
@@ -352,7 +326,6 @@ document.addEventListener("DOMContentLoaded", () => {
             AccountId: LoggedInAccountID,
             biketype: BikeType, //also send bike type so different bikes can be differentiated
             frame: frame,
-            shock: shock,
             fork: fork,
             wheels: wheels,
             tyres: tyres,
@@ -365,7 +338,7 @@ document.addEventListener("DOMContentLoaded", () => {
             pedals: pedals
         };
         // For if not all bike parts are selected
-        for (let key in data){
+        for (let key in data) {
             if (!data[key]) {
                 alert("Not all parts selected. Save failed")
                 return;
