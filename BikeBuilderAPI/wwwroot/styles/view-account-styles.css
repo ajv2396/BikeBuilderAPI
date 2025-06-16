@@ -112,7 +112,7 @@ header {
 }
     .bike-card:hover {
         transform: translateY(-5px);
-        height: 600px;
+        height: 500px;
     }
 
     .bike-card h3 {
@@ -122,11 +122,14 @@ header {
     }
 
 .bike-display-data {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 40px;
     opacity: 0;
-    transition: opacity 0.5s ease;
+    transition: all 0.5s ease;
     height: auto;
     margin-top: 10px;
-    line-height: 50%;
+    line-height: 0.1;
 }
 
 .bike-card:hover .bike-display-data {
@@ -158,3 +161,19 @@ header {
 .bike-card:hover #bike-display {
     top: 0px;
 }
+
+.delete-button {
+    margin-top: 10px;
+    padding: 6px 12px;
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.1s ease;
+}
+
+    .delete-button:hover {
+        transform: translateY(-1px);
+        background-color: #c0392b;
+    }

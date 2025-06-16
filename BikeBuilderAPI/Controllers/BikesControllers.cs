@@ -1,6 +1,8 @@
 ﻿using BikeBuilderAPI.Model;
 using BikeBuilderAPI.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using SQLitePCL;
 using System.IO;
 using System.Security.Cryptography.X509Certificates;
 using System.Text.Json;
@@ -18,7 +20,7 @@ namespace BikeBuilderAPI.Controllers
             _db = db;
         }
 
-        [HttpPost]
+        [HttpPost("save-bike")]
         public async Task<IActionResult> SaveBike([FromBody] BikeModel bike)
         {
             Console.WriteLine($"Saving bike: Account Id = {bike.AccountId} Bike Type = {bike.BikeType} Frame={bike.Frame}, Shock={bike.Shock}, Fork={bike.Fork}, Wheels={bike.Wheels}, Tyres={bike.Tyres}, Drivetrain={bike.Drivetrain}, Seatpost={bike.Seatpost}, Saddle={bike.Saddle}, Bars={bike.Bars}, Stem={bike.Stem}, Pedals={bike.Pedals}");
@@ -67,6 +69,28 @@ namespace BikeBuilderAPI.Controllers
             public string Bars { get; set; }
             public string Stem { get; set; }
             public string Pedals { get; set; }
+        }
+
+        //-------------------------------DELETE BIKE-------------------------------
+        public class DeleteBikeRequest
+        {
+            public int BikeID { get; set; }
+        }
+
+        [HttpPost("delete-bike")]
+        public async Task<IActionResult> DeleteBike(DeleteBikeRequest request)
+        {
+            var bike = await _db.SavedBikes.FirstOrDefaultAsync(b => b.Id == request.BikeID);
+
+            if (bike == null)
+            {
+                return NotFound("Bike not found");
+            }
+
+            _db.SavedBikes.Remove(bike);
+            await _db.SaveChangesAsync();
+
+            return Ok("Bike deleted");
         }
     }
 }

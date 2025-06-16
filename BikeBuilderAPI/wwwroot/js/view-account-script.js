@@ -78,8 +78,14 @@ fetch('user_saves.json')
                     <p><strong>Bars:</strong> ${bike.Bars}</p>
                     <p><strong>Stem:</strong> ${bike.Stem}</p>
                     <p><strong>Pedals:</strong> ${bike.Pedals}</p>
+                    <p><strong>Bike ID:</strong> ${bike.Id}</p>
+                    <br>
+                    <div class="delete-container">
+                        <button class="delete-button" data-bike-id="${bike.Id}">Delete</button>
+                    </div>
                 </div>
                 `;
+
             BikeCard.querySelector('.frame-img').src = `images/${bike.BikeType}/frames/${bike.Frame}.png`;
             BikeCard.querySelector('.shock-img').src = `images/${bike.BikeType}/frame-specific/shocks/${bike.Shock}_${bike.Frame}.png`;
             BikeCard.querySelector('.fork-img').src = `images/${bike.BikeType}/forks/${bike.Fork}.png`;
@@ -96,10 +102,41 @@ fetch('user_saves.json')
 
             container.appendChild(BikeCard);
         })
-
-
-
     })
     .catch(error => {
         console.error('Error fetching JSON:', error);
     })
+
+document.getElementById('SavedBikesContainer').addEventListener('click', function (event) {
+    if (event.target && event.target.classList.contains('delete-button')) {
+        const SelectedBikeCard = event.target.closest('.bike-card');
+        if (SelectedBikeCard) {
+            const bikeId = event.target.dataset.bikeId; //get the bikes id thats being deleted from the card
+
+            const data = {
+                BikeID: bikeId
+            };
+
+            fetch("https://localhost:7165/api/bikes/delete-bike", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(data)
+            })
+                .then(res => {
+                    if (res.ok) {
+                        alert("Bike Deleted!");
+                        //REFRESH THE USER SAVES FROM DATABASE AND REFRESH PAGE
+                        fetch("/api/logout/refresh-user-saves", { method: "POST" });
+                        window.location.reload();
+
+
+                    } else {
+                        alert("Delete failed");
+                    }
+                })
+                .catch(err => {
+                    console.error("Error deleting bike:", err);
+                });
+        }
+    }
+});

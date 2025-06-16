@@ -373,7 +373,7 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         }
 
-        fetch("https://localhost:7165/api/bikes", {
+        fetch("https://localhost:7165/api/bikes/save-bike", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(data)
