@@ -46,6 +46,7 @@ const BuildSteps = [
 ];
 
 let frame = "";
+let shock = "shock0"
 let fork = "";
 let wheels = "";
 let tyres = "";
@@ -183,7 +184,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 document.getElementById("brakes-img").src = `images/${BikeType}/frame-specific/brakes/${BrakesSelected}_${FrameSelected}`;
             }
             if (IsSeatpostSelected === true) {
-                document.getElementById("seatpost-img").src = `images/${BikeType}/frame-specific/seatposts/${SeatpostSelected}-${FrameSelected}`;
+                document.getElementById("seatpost-img").src = `images/${BikeType}/frame-specific/seatposts/${SeatpostSelected}_${FrameSelected}`;
 
             }
             if (IsSaddleSelected === true) {
@@ -326,6 +327,7 @@ document.addEventListener("DOMContentLoaded", () => {
             AccountId: LoggedInAccountID,
             biketype: BikeType, //also send bike type so different bikes can be differentiated
             frame: frame,
+            shock: shock,
             fork: fork,
             wheels: wheels,
             tyres: tyres,
