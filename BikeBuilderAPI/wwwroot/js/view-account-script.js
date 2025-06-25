@@ -46,6 +46,24 @@ fetch('user_saves.json')
         data.forEach((bike, index) => {
             const BikeCard = document.createElement('div');
             BikeCard.classList.add('bike-card');
+
+            //Get Todays date
+            const today = new Date();
+            const day = String(today.getDate()).padStart(2, '0');
+            const month = String(today.getMonth() + 1).padStart(2, '0');
+            const year = today.getFullYear();
+            const TodaysDate = `${year}-${month}-${day}`;
+
+            //trim the length of the bike saved at as it shows time in json/database
+            let BikeSaveDate = bike.SavedAt.substring(0, 10);
+
+            //If the bike was created today, then show time, if its created another day then show date
+            if (TodaysDate == BikeSaveDate) {
+                BikeSaveDate = bike.SavedAt.substring(11, 16);
+            } else {
+                BikeSaveDate = bike.SavedAt.substring(0, 10);
+            }
+
             BikeCard.innerHTML = `
                 <h3>Bike #${index + 1}</h3>
                 <br/>
@@ -79,6 +97,7 @@ fetch('user_saves.json')
                     <p><strong>Stem:</strong> ${bike.Stem}</p>
                     <p><strong>Pedals:</strong> ${bike.Pedals}</p>
                     <p><strong>Bike ID:</strong> ${bike.Id}</p>
+                    <p><strong>Created At:</strong> ${BikeSaveDate}</p>
                     <br>
                     <div class="delete-container">
                         <button class="delete-button" data-bike-id="${bike.Id}">Delete</button>

@@ -24,7 +24,8 @@ public static class UserSaveExporter
             b.Saddle,
             b.Bars,
             b.Stem,
-            b.Pedals
+            b.Pedals,
+            b.SavedAt
         }).ToList();
 
         var json = JsonSerializer.Serialize(SaveItems, new JsonSerializerOptions { WriteIndented = true });

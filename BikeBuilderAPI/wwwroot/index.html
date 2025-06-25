@@ -260,7 +260,9 @@
 
                 const LoggedInName = data.FirstName + " " + data.LastName;
                 const LoggedInAccountID = data.AccountId;
+
                 document.getElementById('LoggedInName').textContent = LoggedInName + " | ID: " + LoggedInAccountID;
+
                 const Email = data.Email;
 
                 document.querySelector(".view-account-button").style.display = "flex";
