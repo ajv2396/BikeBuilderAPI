@@ -115,7 +115,7 @@ document.addEventListener("DOMContentLoaded", () => {
         //Hide Next Button after complete & return to build button 
         if (StepOfBuild == BuildSteps.length) {
             document.getElementById("next-button").style.display = "none";
-            document.getElementById("back-button").textContent = "Return to Build"
+            document.getElementById("back-button").textContent = "Return to Build";
             ShowBuildInfo();
         }
 
