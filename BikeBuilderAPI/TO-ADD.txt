@@ -3,7 +3,13 @@
 - Link values to the view account page so that it shows part names etc.
 - Link these values to the checkout so that they can see what parts they are buying and overall price calculated
 - Link the checkout to the builders
-- Improve overall UI to match simular style to the checkout? 
+- Improve overall UI to match similar style to the checkout? 
 - Add password encryption
 - Ability to share builds/make them public so people can see other peoples builds
 - Add it so that you can load a saved build into the builder
+
+
+
+
+Code used in checkout page:
+https://designmodo.com/checkout-form/

@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.IO;
 using System.Text.Json;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace BikeBuilderAPI.Controllers
 {
@@ -30,8 +32,9 @@ namespace BikeBuilderAPI.Controllers
                     return Unauthorized(new { sucess = false, message = "Invalid credentials" });
                 }
 
+                string LoginHashedPassword = HashPassword(request.Password);
                 //if the email is found then check if the password mathces it
-                if (account.Password == request.Password)
+                if (LoginHashedPassword == account.Password)
                 {
                     SaveUserSession(account);
                     UserSaveExporter.ExportUserSavesToJson(account.AccountId, db);
@@ -61,17 +64,22 @@ namespace BikeBuilderAPI.Controllers
                 //for checking if email already exists in the database
                 var EmailCheck = db.Accounts.FirstOrDefault(a => a.Email == request.Email);
 
+
+
                 if (EmailCheck != null)
                 {
                     return Conflict(new { success = false, message = "Email already registered" }); // "res.status === 409" in login.html handles this to stop users creating multiple accounts
                 }
+
+                string HashedPassword = HashPassword(request.Password);
+
 
                 var account = new Account
                 {
                     FirstName = request.FirstName,
                     LastName = request.LastName,
                     Email = request.Email,
-                    Password = request.Password
+                    Password = HashedPassword
                 };
 
                 db.Add(account);
@@ -99,6 +107,23 @@ namespace BikeBuilderAPI.Controllers
             using (StreamWriter StreamWriter = new StreamWriter(FileStream))
             {
                 StreamWriter.Write(json);
+            }
+        }
+
+        //-------------------------------SHA256 ENCRYPTION-------------------------------
+        public static string HashPassword(string password)
+        {
+            using (SHA256 sha256 = SHA256.Create())
+            {
+                byte[] bytes = Encoding.UTF8.GetBytes(password);
+                byte[] hashBytes = sha256.ComputeHash(bytes);
+                StringBuilder builder = new StringBuilder();
+                foreach (byte b in hashBytes)
+                {
+                    builder.Append(b.ToString("x2"));
+                }
+
+                return builder.ToString();
             }
         }
     }

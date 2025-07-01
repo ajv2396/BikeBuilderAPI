@@ -10,19 +10,34 @@ document.querySelectorAll('.next-btn').forEach(btn => {
         CollectFormData();
 
 
-        //Stop user from progressing if the inputs arent all entered (apart from address2)
+        //Stop user from progressing if the inputs arent all entered (apart from address2) + regex for valid postcode check
         if (currentStep === 0) {
             //highlight empty fields
-            ['firstname', 'lastname', 'address1', 'city', 'postcode'].forEach(highlightEmptyField);
+            ['firstname', 'lastname', 'address1', 'city', 'postcode'].forEach(HighlightEmptyField);
 
             if (!formData.firstname || !formData.lastname || !formData.address1 || !formData.city || !formData.postcode) {
                 return;
             }
+
+            //--------------------------------------------------------------------
+            //regex for checking if postcode is valid
+            const Postcode = formData.postcode.trim().toUpperCase().replace(/\s+/, ' ');
+            const regex = /^[A-Z]{1,2}[0-9R][0-9A-Z]? [0-9][ABD-HJLNP-UW-Z]{2}$/i;
+
+            const IsValidPostcode = regex.test(Postcode);
+
+            if (!IsValidPostcode) {
+                // Highlight postcode field as invalid
+                HighlightPostcodeBox();
+                return;
+            }
+            //--------------------------------------------------------------------
+
         }
 
         if (currentStep === 1) {
             //highlight empty fields
-            ['cardholder', 'cardnumber', 'date', 'verification'].forEach(highlightEmptyField);
+            ['cardholder', 'cardnumber', 'date', 'verification'].forEach(HighlightEmptyField);
 
             const selectedPayment = document.querySelector('input[name="payment"]:checked');
             if (!selectedPayment) {
@@ -69,6 +84,14 @@ document.querySelectorAll('.next-btn').forEach(btn => {
 document.querySelectorAll('.back-btn').forEach(btn => {
     btn.addEventListener('click', () => {
         if (currentStep > 0) {
+            if (currentStep === 3) {
+                document.querySelector(".next-btn").textContent = "Next Step";
+            }
+            if (currentStep === 2) {
+                document.querySelector(".next-btn").textContent = "Next Step";
+            }
+
+
             panels[currentStep].style.display = 'none';
             currentStep--;
             panels[currentStep].style.display = 'block';
@@ -158,12 +181,27 @@ function ProcessPayment() {
 
 
 //--------------------------HIGHLIGHT EMPTY BOXES--------------------------
-function highlightEmptyField(id) {
+function HighlightEmptyField(id) {
     const el = document.getElementById(id);
     if (!el.value.trim()) {
         el.style.border = '1px solid red';
     } else {
         el.style.border = '';
+    }
+}
+
+//--------------------------HIGHLIGHT POSTCODE BOX--------------------------
+function HighlightPostcodeBox() {
+    const el = document.getElementById('postcode'); // 'postcode' must be a string
+    const label = document.getElementById('invalid-postcode'); // Use correct ID
+
+    if (label) {
+        label.textContent = "Use a Valid Postcode - E.g. WA7 5WN";
+        label.style.color = 'red';
+    }
+
+    if (el) {
+        el.style.border = '1px solid red';
     }
 }
 
