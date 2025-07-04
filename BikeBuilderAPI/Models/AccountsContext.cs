@@ -7,7 +7,6 @@ namespace BikeBuilderAPI.Model
     {
         public DbSet<Account> Accounts {  get; set; }
         public DbSet<SavedBike> SavedBikes { get; set; }
-
         public DbSet<BikeParts> BikeParts { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder options)

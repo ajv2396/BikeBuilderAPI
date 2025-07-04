@@ -8,6 +8,11 @@ using System.Security.Principal;
 ClearUserSaves.Clear();
 ClearUserSession.Clear();
 
+//Export bike parts on start up
+using (var db = new AccountsContext())
+{
+    BikePartsExporter.ExportBikePartsToJson(db);
+}
 
 
 var builder = WebApplication.CreateBuilder(args);

@@ -1,0 +1,222 @@
+[
+  {
+    "Id": 82,
+    "BikeTypeId": 3,
+    "PartType": "frame",
+    "Name": "NS Bikes Movement",
+    "Description": "Aluminum dirt jump frame, short chainstays for agility.",
+    "ImagePath": "frame1.png",
+    "ThumbnailPath": "images/DJ/frames/frame1-thumb.png",
+    "Price": 450
+  },
+  {
+    "Id": 83,
+    "BikeTypeId": 3,
+    "PartType": "frame",
+    "Name": "Airdrop Fade",
+    "Description": "Chromoly DJ frame with clean internal cable routing.",
+    "ImagePath": "frame2.png",
+    "ThumbnailPath": "images/DJ/frames/frame2-thumb.png",
+    "Price": 500
+  },
+  {
+    "Id": 84,
+    "BikeTypeId": 3,
+    "PartType": "frame",
+    "Name": "Octane One Zircus",
+    "Description": "Durable aluminum DJ frame, ideal for pump tracks and street.",
+    "ImagePath": "frame3.png",
+    "ThumbnailPath": "images/DJ/frames/frame3-thumb.png",
+    "Price": 320
+  },
+  {
+    "Id": 85,
+    "BikeTypeId": 3,
+    "PartType": "frame",
+    "Name": "Marin Alcatraz",
+    "Description": "Designed by Matt Jones, top-tier alloy DJ frame.",
+    "ImagePath": "frame4.png",
+    "ThumbnailPath": "images/DJ/frames/frame4-thumb.png",
+    "Price": 500
+  },
+  {
+    "Id": 86,
+    "BikeTypeId": 3,
+    "PartType": "fork",
+    "Name": "RockShox Pike DJ",
+    "Description": "100mm travel, DJ-specific air spring, 35mm stanchions.",
+    "ImagePath": "fork1.png",
+    "ThumbnailPath": "images/DJ/forks/fork1-thumb.png",
+    "Price": 750
+  },
+  {
+    "Id": 87,
+    "BikeTypeId": 3,
+    "PartType": "fork",
+    "Name": "Marzocchi Bomber DJ",
+    "Description": "100mm travel, bombproof DJ fork built for abuse.",
+    "ImagePath": "fork2.png",
+    "ThumbnailPath": "images/DJ/forks/fork2-thumb.png",
+    "Price": 620
+  },
+  {
+    "Id": 88,
+    "BikeTypeId": 3,
+    "PartType": "wheels",
+    "Name": "NS Bikes Enigma 26",
+    "Description": "Strong 26\u0022 wheelset, DJ rated with sealed hubs.",
+    "ImagePath": "wheels1.png",
+    "ThumbnailPath": "images/DJ/wheels/wheels1-thumb.png",
+    "Price": 300
+  },
+  {
+    "Id": 89,
+    "BikeTypeId": 3,
+    "PartType": "wheels",
+    "Name": "Industry Nine Hydra2 DJ",
+    "Description": "High-engagement hubs, super stiff alloy rims.",
+    "ImagePath": "wheels2.png",
+    "ThumbnailPath": "images/DJ/wheels/wheels2-thumb.png",
+    "Price": 700
+  },
+  {
+    "Id": 90,
+    "BikeTypeId": 3,
+    "PartType": "tyres",
+    "Name": "Schwalbe Billy Bonkers",
+    "Description": "Lightweight, fast-rolling dirt jump tyres.",
+    "ImagePath": "tyres1.png",
+    "ThumbnailPath": "images/DJ/tyres/tyres1-thumb.png",
+    "Price": 45
+  },
+  {
+    "Id": 91,
+    "BikeTypeId": 3,
+    "PartType": "tyres",
+    "Name": "DMR Moto DJ",
+    "Description": "Chunky tread pattern for dirt control.",
+    "ImagePath": "tyres2.png",
+    "ThumbnailPath": "images/DJ/tyres/tyres2-thumb.png",
+    "Price": 40
+  },
+  {
+    "Id": 92,
+    "BikeTypeId": 3,
+    "PartType": "drivetrain",
+    "Name": "SRAM GX",
+    "Description": "Single-speed or 1x DJ-specific setup.",
+    "ImagePath": "drivetrain1",
+    "ThumbnailPath": "images/DJ/drivetrains/drivetrain1-thumb.png",
+    "Price": 220
+  },
+  {
+    "Id": 93,
+    "BikeTypeId": 3,
+    "PartType": "brakes",
+    "Name": "SRAM Guide",
+    "Description": "Powerful 4-piston brakes for park and street.",
+    "ImagePath": "brakes1",
+    "ThumbnailPath": "images/DJ/frame-specific/brakes1-thumb.png",
+    "Price": 180
+  },
+  {
+    "Id": 94,
+    "BikeTypeId": 3,
+    "PartType": "pedals",
+    "Name": "Hope F22",
+    "Description": "Durable CNC flat pedals, big pins, grippy.",
+    "ImagePath": "pedals1.png",
+    "ThumbnailPath": "images/DJ/pedals/pedals1-thumb.png",
+    "Price": 145
+  },
+  {
+    "Id": 95,
+    "BikeTypeId": 3,
+    "PartType": "pedals",
+    "Name": "Burgtec Penthouse",
+    "Description": "High-traction flat pedals for aggressive DJ riding.",
+    "ImagePath": "pedals2.png",
+    "ThumbnailPath": "images/DJ/pedals/pedals2-thumb.png",
+    "Price": 130
+  },
+  {
+    "Id": 96,
+    "BikeTypeId": 3,
+    "PartType": "stem",
+    "Name": "ENVE Alloy",
+    "Description": "Short, stiff DJ stem. 35mm clamp.",
+    "ImagePath": "stem1.png",
+    "ThumbnailPath": "images/DJ/stems/stem1-thumb.png",
+    "Price": 160
+  },
+  {
+    "Id": 97,
+    "BikeTypeId": 3,
+    "PartType": "stem",
+    "Name": "Hope Gravity",
+    "Description": "High quality UK-made DJ stem.",
+    "ImagePath": "stem2.png",
+    "ThumbnailPath": "images/DJ/stems/stem2-thumb.png",
+    "Price": 150
+  },
+  {
+    "Id": 98,
+    "BikeTypeId": 3,
+    "PartType": "bars",
+    "Name": "NS Bikes Lick 740mm",
+    "Description": "740mm width, 3\u0022 rise, DJ-specific geometry.",
+    "ImagePath": "bars1.png",
+    "ThumbnailPath": "images/DJ/bars/bars1-thumb.png",
+    "Price": 80
+  },
+  {
+    "Id": 99,
+    "BikeTypeId": 3,
+    "PartType": "bars",
+    "Name": "RaceFace Chester",
+    "Description": "760mm rise bar, tough alloy build.",
+    "ImagePath": "bars2.png",
+    "ThumbnailPath": "images/DJ/bars/bars2-thumb.png",
+    "Price": 65
+  },
+  {
+    "Id": 100,
+    "BikeTypeId": 3,
+    "PartType": "bars",
+    "Name": "Title AH1 760mm",
+    "Description": "Popular among pros, 50mm rise, 31.8 clamp.",
+    "ImagePath": "bars3.png",
+    "ThumbnailPath": "images/DJ/bars/bars3-thumb.png",
+    "Price": 90
+  },
+  {
+    "Id": 101,
+    "BikeTypeId": 3,
+    "PartType": "seatpost",
+    "Name": "AP1 Alloy Seatpost",
+    "Description": "Simple fixed-length DJ seatpost.",
+    "ImagePath": "seatpost1",
+    "ThumbnailPath": "images/DJ/frame-specific/seatpost1_thumb.png",
+    "Price": 35
+  },
+  {
+    "Id": 102,
+    "BikeTypeId": 3,
+    "PartType": "saddle",
+    "Name": "Title JS1",
+    "Description": "DJ saddle with sleek design.",
+    "ImagePath": "saddle1",
+    "ThumbnailPath": "images/DJ/frame-specific/saddle1-thumb.png",
+    "Price": 70
+  },
+  {
+    "Id": 103,
+    "BikeTypeId": 3,
+    "PartType": "saddle",
+    "Name": "Burgtec Cloud Boost",
+    "Description": "Low-profile DJ saddle, minimalist padding.",
+    "ImagePath": "saddle2",
+    "ThumbnailPath": "images/DJ/frame-specific/saddle2-thumb.png",
+    "Price": 75
+  }
+]

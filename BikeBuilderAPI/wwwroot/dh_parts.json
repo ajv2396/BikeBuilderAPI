@@ -1,0 +1,252 @@
+[
+  {
+    "Id": 57,
+    "BikeTypeId": 2,
+    "PartType": "frame",
+    "Name": "Santa Cruz V10",
+    "Description": "Full carbon DH frame, 200mm rear travel",
+    "ImagePath": "frame1.png",
+    "ThumbnailPath": "images/DH/frames/frame1-thumb.png",
+    "Price": 3200
+  },
+  {
+    "Id": 58,
+    "BikeTypeId": 2,
+    "PartType": "frame",
+    "Name": "Atherton A.200",
+    "Description": "Custom geometry, DW-link suspension",
+    "ImagePath": "frame2.png",
+    "ThumbnailPath": "images/DH/frames/frame2-thumb.png",
+    "Price": 3500
+  },
+  {
+    "Id": 59,
+    "BikeTypeId": 2,
+    "PartType": "frame",
+    "Name": "Specialized Demo",
+    "Description": "Alloy frame, 200mm rear travel, World Cup proven",
+    "ImagePath": "frame3.png",
+    "ThumbnailPath": "images/DH/frames/frame3-thumb.png",
+    "Price": 2900
+  },
+  {
+    "Id": 60,
+    "BikeTypeId": 2,
+    "PartType": "shock",
+    "Name": "Fox Float DHX2",
+    "Description": "Coil shock, high/low speed compression and rebound",
+    "ImagePath": "shock1",
+    "ThumbnailPath": "images/DH/frame-specific/shock1-thumb.png",
+    "Price": 650
+  },
+  {
+    "Id": 61,
+    "BikeTypeId": 2,
+    "PartType": "shock",
+    "Name": "Fox Float X2",
+    "Description": "Air shock, 2-position lever, adjustable damping",
+    "ImagePath": "shock2",
+    "ThumbnailPath": "images/DH/frame-specific/shock2-thumb.png",
+    "Price": 700
+  },
+  {
+    "Id": 62,
+    "BikeTypeId": 2,
+    "PartType": "shock",
+    "Name": "Rockshox Super Deluxe",
+    "Description": "Air shock, DebonAir spring, tunable",
+    "ImagePath": "shock3",
+    "ThumbnailPath": "images/DH/frame-specific/shock3-thumb.png",
+    "Price": 500
+  },
+  {
+    "Id": 63,
+    "BikeTypeId": 2,
+    "PartType": "fork",
+    "Name": "Fox Factory 40",
+    "Description": "203mm travel, GRIP2 damper, 29\u201D compatible",
+    "ImagePath": "fork1.png",
+    "ThumbnailPath": "images/DH/forks/fork1-thumb.png",
+    "Price": 1800
+  },
+  {
+    "Id": 64,
+    "BikeTypeId": 2,
+    "PartType": "fork",
+    "Name": "Rockshox Boxxer Ultimate",
+    "Description": "200mm travel, Charger 2.1 RC2, ButterCups",
+    "ImagePath": "fork2.png",
+    "ThumbnailPath": "images/DH/forks/fork2-thumb.png",
+    "Price": 1600
+  },
+  {
+    "Id": 65,
+    "BikeTypeId": 2,
+    "PartType": "fork",
+    "Name": "Marzocchi Bomber 58",
+    "Description": "203mm travel, GRIP damper, coil spring",
+    "ImagePath": "fork3.png",
+    "ThumbnailPath": "images/DH/forks/fork3-thumb.png",
+    "Price": 1100
+  },
+  {
+    "Id": 66,
+    "BikeTypeId": 2,
+    "PartType": "wheels",
+    "Name": "Hope Fortus 30W",
+    "Description": "30mm internal, aluminum, Pro 5 hubs",
+    "ImagePath": "wheels1.png",
+    "ThumbnailPath": "images/DH/wheels/wheels1-thumb.png",
+    "Price": 850
+  },
+  {
+    "Id": 67,
+    "BikeTypeId": 2,
+    "PartType": "wheels",
+    "Name": "Industry Nine Enduro S",
+    "Description": "30.5mm internal, Hydra hubs, alloy",
+    "ImagePath": "wheels2.png",
+    "ThumbnailPath": "images/DH/wheels/wheels2-thumb.png",
+    "Price": 1150
+  },
+  {
+    "Id": 68,
+    "BikeTypeId": 2,
+    "PartType": "tyres",
+    "Name": "Continental Kryptotal",
+    "Description": "29x2.4 DH casing, soft compound",
+    "ImagePath": "tyres1.png",
+    "ThumbnailPath": "images/DH/tyres/tyres1-thumb.png",
+    "Price": 90
+  },
+  {
+    "Id": 69,
+    "BikeTypeId": 2,
+    "PartType": "drivetrain",
+    "Name": "SRAM X0",
+    "Description": "7-speed DH-specific groupset",
+    "ImagePath": "drivetrain1",
+    "ThumbnailPath": "images/DH/drivetrains/drivetrain1-thumb.png",
+    "Price": 600
+  },
+  {
+    "Id": 70,
+    "BikeTypeId": 2,
+    "PartType": "drivetrain",
+    "Name": "SRAM GX (1x1)",
+    "Description": "Entry-level DH drivetrain, minimal gearing",
+    "ImagePath": "drivetrain2",
+    "ThumbnailPath": "images/DH/drivetrains/drivetrain2-thumb.png",
+    "Price": 400
+  },
+  {
+    "Id": 71,
+    "BikeTypeId": 2,
+    "PartType": "brakes",
+    "Name": "Hope Tech 3 E4",
+    "Description": "4-piston calipers, CNC machined levers",
+    "ImagePath": "brakes1",
+    "ThumbnailPath": "images/DH/frame-specific/brakes1-thumb.png",
+    "Price": 520
+  },
+  {
+    "Id": 72,
+    "BikeTypeId": 2,
+    "PartType": "pedals",
+    "Name": "Hope F22",
+    "Description": "CNC flat pedals, replaceable pins",
+    "ImagePath": "pedals1.png",
+    "ThumbnailPath": "images/DH/pedals/pedals1-thumb.png",
+    "Price": 160
+  },
+  {
+    "Id": 73,
+    "BikeTypeId": 2,
+    "PartType": "pedals",
+    "Name": "RaceFace Aeffect R",
+    "Description": "Aluminum, sealed bearings, concave body",
+    "ImagePath": "pedals2.png",
+    "ThumbnailPath": "images/DH/pedals/pedals2-thumb.png",
+    "Price": 120
+  },
+  {
+    "Id": 74,
+    "BikeTypeId": 2,
+    "PartType": "pedals",
+    "Name": "Burgtec Penthouse",
+    "Description": "DH race pedals, large platform, 7075 alloy",
+    "ImagePath": "pedals3.png",
+    "ThumbnailPath": "images/DH/pedals/pedals3-thumb.png",
+    "Price": 150
+  },
+  {
+    "Id": 75,
+    "BikeTypeId": 2,
+    "PartType": "stem",
+    "Name": "DMR Defy DH",
+    "Description": "35mm clamp, 35mm reach, CNC alloy",
+    "ImagePath": "stem1.png",
+    "ThumbnailPath": "images/DH/stems/stem1-thumb.png",
+    "Price": 100
+  },
+  {
+    "Id": 76,
+    "BikeTypeId": 2,
+    "PartType": "stem",
+    "Name": "Title DM1 35",
+    "Description": "35mm bar clamp, 40mm length",
+    "ImagePath": "stem2.png",
+    "ThumbnailPath": "images/DH/stems/stem2-thumb.png",
+    "Price": 110
+  },
+  {
+    "Id": 77,
+    "BikeTypeId": 2,
+    "PartType": "bars",
+    "Name": "RaceFace Chester",
+    "Description": "780mm width, 35mm clamp, alloy",
+    "ImagePath": "bars1.png",
+    "ThumbnailPath": "images/DH/bars/bars1-thumb.png",
+    "Price": 60
+  },
+  {
+    "Id": 78,
+    "BikeTypeId": 2,
+    "PartType": "bars",
+    "Name": "Burgtec Ridewide",
+    "Description": "800mm width, 30mm rise, alloy",
+    "ImagePath": "bars2.png",
+    "ThumbnailPath": "images/DH/bars/bars2-thumb.png",
+    "Price": 90
+  },
+  {
+    "Id": 79,
+    "BikeTypeId": 2,
+    "PartType": "seatpost",
+    "Name": "AP1 Alloy Seatpost",
+    "Description": "Alloy fixed seatpost, 31.6mm diameter",
+    "ImagePath": "seatpost1",
+    "ThumbnailPath": "images/DH/frame-specific/seatpost1_thumb.png",
+    "Price": 40
+  },
+  {
+    "Id": 80,
+    "BikeTypeId": 2,
+    "PartType": "saddle",
+    "Name": "Deity Speedtrap",
+    "Description": "Chromoly rails, ergonomic design",
+    "ImagePath": "saddle1",
+    "ThumbnailPath": "images/DH/frame-specific/saddle1-thumb.png",
+    "Price": 85
+  },
+  {
+    "Id": 81,
+    "BikeTypeId": 2,
+    "PartType": "saddle",
+    "Name": "Title JS1",
+    "Description": "Lightweight saddle with mid-level padding",
+    "ImagePath": "saddle2",
+    "ThumbnailPath": "images/DH/frame-specific/saddle2-thumb.png",
+    "Price": 95
+  }
+]
