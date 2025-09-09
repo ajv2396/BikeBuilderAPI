@@ -12,6 +12,7 @@ namespace BikeBuilderAPI.Models
         public string ImagePath { get; set; }
         public string ThumbnailPath { get; set; }
         public decimal Price { get; set; }
+        public decimal Weight { get; set; }
     }
 
 }

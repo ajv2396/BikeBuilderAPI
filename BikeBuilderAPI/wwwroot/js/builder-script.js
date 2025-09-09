@@ -1,382 +1,337 @@
-let LoggedInAccountID;
+let LoggedInAccountID = null;
 
-//Get details from user_session
-fetch('user_session.json')
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('Response was not ok');
-        }
+// -------------------------- LOAD SESSION --------------------------
+fetch("user_session.json")
+    .then((response) => {
+        if (!response.ok) throw new Error("Response was not ok");
         return response.json();
     })
-    .then(data => {
-        console.log(data);
-
-        const FirstName = data.FirstName;
-        const LastName = data.LastName;
+    .then((data) => {
+        console.log("Session:", data);
         LoggedInAccountID = data.AccountId;
-        const Email = data.Email;
     })
-    .catch(error => {
-        console.error('Error fetching JSON:', error);
-    })
+    .catch((error) => console.error("Error fetching session:", error));
 
-
-//get which html file is being used so that the bike type can be set
-let IsEnduroSelected = window.IsEnduroSelected || false;
-let IsDHSelected = window.IsDHSelected || false;
-
-let BikeType;
-
-//set bike type. for using for displaying images (correct file path) and using in database
-if (IsDHSelected == true) {
-    BikeType = "DH";
+// -------------------------- BIKE TYPE --------------------------
+function GetBikeType() {
+    const qs = new URLSearchParams(window.location.search);
+    return (
+        qs.get("bike") ||
+        localStorage.getItem("bikeType") ||
+        "enduro"
+    ).toLowerCase();
 }
-if (IsEnduroSelected == true) {
-    BikeType = "Enduro";
+
+const BikeType = GetBikeType();
+const fileMap = {
+    enduro: "bike-parts/enduro_parts.json",
+    dh: "bike-parts/dh_parts.json",
+    dj: "bike-parts/dj_parts.json",
+};
+const PartFile = fileMap[BikeType];
+
+// -------------------------- LOAD PARTS --------------------------
+async function LoadParts(file) {
+    const resp = await fetch(file);
+    const parts = await resp.json();
+
+    const byType = parts.reduce((acc, p) => {
+        (acc[p.PartType] = acc[p.PartType] || []).push(p);
+        return acc;
+    }, {});
+    return { parts, byType };
 }
-let StepOfBuild = 0;
-const BuildSteps = [
-    "step-frame",
-    "step-shock",
-    "step-fork",
-    "step-wheels",
-    "step-tyres",
-    "step-drivetrain",
-    "step-brakes",
-    "step-pedals",
-    "step-stem",
-    "step-bars",
-    "step-seatpost",
-    "step-saddle",
+
+// -------------------------- UI ORDER --------------------------
+const desiredOrder = [
+    "frame",
+    "shock",
+    "fork",
+    "wheels",
+    "tyres",
+    "drivetrain",
+    "brakes",
+    "pedals",
+    "stem",
+    "bars",
+    "seatpost",
+    "saddle",
 ];
 
-let frame = "";
-let shock = "";
-let fork = "";
-let wheels = "";
-let tyres = "";
-let drivetrain = "";
-let brakes = "";
-let seatpost = "";
-let saddle = "";
-let bars = "";
-let stem = "";
-let pedals = "";
+const frameSpecificTypes = new Set(["saddle", "seatpost", "shock", "brakes"]);
 
+
+// -------------------------- RENDER PARTS --------------------------
+function RenderPartSection(partType, items) {
+    const container = document.createElement("div");
+    container.id = `step-${partType}`;
+    container.className = "bike-part-select";
+    container.style.display = "none";
+
+    const label = document.createElement("label");
+    label.textContent =
+        "Choose " + partType[0].toUpperCase() + partType.slice(1) + ":";
+    container.appendChild(label);
+
+
+
+    const optionsDiv = document.createElement("div");
+    optionsDiv.className = `${partType}-options`;
+
+    items.forEach((item) => {
+        const opt = document.createElement("div");
+        opt.className = `part-option ${partType}-option`;
+        opt.dataset.id = item.Id;
+        opt.dataset.image = item.ImagePath;
+        opt.dataset.framespecific = frameSpecificTypes.has(partType) ? "1" : "0";
+        opt.innerHTML = `
+        <img src="${item.ThumbnailPath}" alt="${item.Name}">
+        <p class="part-name">${item.Name}</p>
+        <p class="part-description">&pound;${item.Price} | ${item.Weight}g <br> ${item.Description}</p>
+    `;
+        optionsDiv.appendChild(opt);
+    });
+
+    container.appendChild(optionsDiv);
+
+    const selectorBar = document.querySelectorAll(".part-selector-bar")[1];
+    const nextButton = selectorBar.querySelector(".next-button");
+    selectorBar.insertBefore(container, nextButton);
+}
+
+// -------------------------- UPDATE PRICING --------------------------
+function UpdateTotalPrice() {
+    let total = 0;
+    let weight = 0;
+    Object.values(selectedParts).forEach(part => {
+        if (part.Price) total += part.Price;
+        if (part.Weight) weight += part.Weight;
+    });
+
+    const totalDisplay = document.getElementById("total-price");
+    totalDisplay.innerHTML =
+        "Total: &pound;" + total + "<br /><br /> Weight: " + weight + "g";
+}
+
+
+// -------------------------- IMAGE MAPPING --------------------------
+const imageMap = {
+    frame: "frame-img",
+    shock: "shock-img",
+    fork: "fork-img",
+    wheels: "wheels-img",
+    tyres: "tyres-img",
+    drivetrain: "drivetrain-img",
+    "drivetrain-rear": "drivetrain-rear-img",
+    brakes: "brakes-img",
+    pedals: "pedals-img",
+    stem: "stem-img",
+    bars: "bars-img",
+    seatpost: "seatpost-img",
+    saddle: "saddle-img",
+};
 
 let FrameSelected = "";
+const selectedParts = {};
+let allParts = [];
+let partsByType = {};
+let BuildSteps = [];
+let currentStep = 0;
 
-let IsSeatpostSelected = false;
-let IsSaddleSelected = false;
-let IsShockSelected = false;
-let IsBrakesSelected = false;
-let SeatpostSelected = "";
-let SaddleSelected = "";
-let ShockSelected = "";
-let BrakesSelected = "";
+// -------------------------- SELECT PART --------------------------
+const folderMap = {
+    frame: "frames",
+    shock: "frame-specific/shocks",
+    fork: "forks",
+    wheels: "wheels",
+    tyres: "tyres",
+    drivetrain: "drivetrains",
+    brakes: "frame-specific/brakes",
+    pedals: "pedals",
+    stem: "stems",
+    bars: "bars",
+    seatpost: "frame-specific/seatposts",
+    saddle: "frame-specific/saddles",
+};
 
+function SelectPart(part) {
+    if (!part || !part.PartType) return;
 
-document.addEventListener("DOMContentLoaded", () => {
+    const imgId = imageMap[part.PartType];
+    if (!imgId) return;
 
-    // -------------------------- NEXT STEP --------------------------
-    document.getElementById("next-button").addEventListener("click", () => {
+    const base = `images/${BikeType[0].toUpperCase() + BikeType.slice(1)}`;
+    const folder = folderMap[part.PartType];
+    if (!folder) return;
 
-        //hide current step of the build
-        if (StepOfBuild < BuildSteps.length) {
-            const CurrentStep = document.getElementById(BuildSteps[StepOfBuild]);
-            if (CurrentStep) CurrentStep.style.display = "none";
-        }
-        StepOfBuild++;
-        //for showing next step
-        if (StepOfBuild < BuildSteps.length) {
-            const NextStep = document.getElementById(BuildSteps[StepOfBuild]);
-            if (NextStep) NextStep.style.display = "flex";
+    // Helper to build full image path
+    const getSrc = (imageName) => {
+        if (!imageName) return null;
+
+        if (frameSpecificTypes.has(part.PartType)) {
+            const sep = part.Separator || "_";
+            if (!FrameSelected) {
+                console.warn("Frame not yet selected, cannot render frame-specific part:", part.PartType);
+                return null;
+            }
+            return `${base}/${folder}/${imageName}${sep}${FrameSelected}.png`;
         } else {
+            return `${base}/${folder}/${imageName}`;
         }
-        //show back button
-        if (StepOfBuild > 0) {
-            document.querySelector(".back-button").style.display = "flex";
-        }
-        else {
-            document.querySelector(".back-button").style.display = "none";
-        }
-        //show return button
-        if (StepOfBuild > 1) {
-            document.querySelector(".return-button").style.display = "flex";
-        }
-        else {
-            document.querySelector(".return-button").style.display = "none";
-        }
+    };
 
-        // Change next button to finish build
-        if (StepOfBuild == BuildSteps.length -1 ) {
-            document.getElementById("next-button").textContent = "Finish";
-        }
-        //Hide Next Button after complete & return to build button 
-        if (StepOfBuild == BuildSteps.length) {
-            document.getElementById("next-button").style.display = "none";
-            document.getElementById("back-button").textContent = "Return to Build";
-            ShowBuildInfo();
-        }
-
-    });
-
-    document.getElementById(BuildSteps[StepOfBuild]).style.display = "flex";
-
-
-    // -------------------------- BACK BUTTON --------------------------
-    document.getElementById("back-button").addEventListener("click", () => {
-        if (StepOfBuild > 0) {
-            //hide current step only if its within bounds
-            if (StepOfBuild < BuildSteps.length) {
-                const CurrentStep = document.getElementById(BuildSteps[StepOfBuild]);
-                if (CurrentStep) CurrentStep.style.display = "none";
-            }
-
-            StepOfBuild--;
-
-            const PrevStep = document.getElementById(BuildSteps[StepOfBuild]);
-            if (PrevStep) PrevStep.style.display = "flex";
-
-            //update next button text
-            document.getElementById("next-button").textContent = "Next";
-            document.getElementById("next-button").style.display = "flex";
-            document.getElementById("back-button").textContent = "Back" //change back button (for if it is set as "return to build")
-
-            //hide back button if its at the start
-            if (StepOfBuild === 0) {
-                document.querySelector(".back-button").style.display = "none";
-            }
-        }
-    });
-
-    // -------------------------- RETURN BUTTON --------------------------
-    document.getElementById("return-button").addEventListener("click", () => {
-        if (StepOfBuild > 1) {
-            //hide current step only if its within bounds
-            if (StepOfBuild < BuildSteps.length) {
-                const CurrentStep = document.getElementById(BuildSteps[StepOfBuild]);
-                if (CurrentStep) CurrentStep.style.display = "none";
-            }
-
-            StepOfBuild = 0;
-
-            const PrevStep = document.getElementById(BuildSteps[StepOfBuild]);
-            if (PrevStep) PrevStep.style.display = "flex";
-
-            //update next button text
-            document.getElementById("next-button").textContent = "Next";
-            document.getElementById("next-button").style.display = "flex";
-            document.getElementById("back-button").textContent = "Back" //change back button (for if it is set as "return to build")
-
-            document.querySelector(".back-button").style.display = "none";
-            document.querySelector(".return-button").style.display = "none";
-        }
-    });
-
-
-
-    // -------------------------- CLICK EVENTS --------------------------
-    //FRAME
-    document.querySelectorAll(".frame-option").forEach(option => {
-        option.addEventListener("click", () => {
-            const imageName = option.dataset.image;
-            document.getElementById("frame-img").src = `images/${BikeType}/frames/${imageName}`;
-            document.querySelectorAll(".frame-option").forEach(el => el.classList.remove("selected"));
-            option.classList.add("selected");
-            FrameSelected = imageName; //SET FRAME SELECTED TO IMAGE CLICKED ON - SO SADDLES/SEATPOSTS ARE CORRECT
-
-            //Check if both are already selected so if user goes back and changes frame then the saddle and/or seatpost are updated
-            if (IsShockSelected === true) {
-                document.getElementById("shock-img").src = `images/${BikeType}/frame-specific/shocks/${ShockSelected}_${FrameSelected}`;
-
-            }
-            if (IsBrakesSelected === true) {
-                document.getElementById("brakes-img").src = `images/${BikeType}/frame-specific/brakes/${BrakesSelected}_${FrameSelected}`;
-            }
-            if (IsSeatpostSelected === true) {
-                document.getElementById("seatpost-img").src = `images/${BikeType}/frame-specific/seatposts/${SeatpostSelected}-${FrameSelected}`;
-
-            }
-            if (IsSaddleSelected === true) {
-                document.getElementById("saddle-img").src = `images/${BikeType}/frame-specific/saddles/${SaddleSelected}_${FrameSelected}`;
-            }
-            frame = imageName.replace(".png", "");
-
-        });
-    });
-
-    //SHOCKS
-    document.querySelectorAll(".shock-option").forEach(option => {
-        option.addEventListener("click", () => {
-            const imageName = option.dataset.image;
-            document.getElementById("shock-img").src = `images/${BikeType}/frame-specific/shocks/${imageName}_${FrameSelected}`;
-            document.querySelectorAll(".shock-option").forEach(el => el.classList.remove("selected"));
-            option.classList.add("selected");
-            IsShockSelected = true;
-            ShockSelected = null;
-            ShockSelected = imageName;
-            shock = imageName.replace(".png", "");
-        });
-    });
-
-    //FORKS
-    document.querySelectorAll(".fork-option").forEach(option => {
-        option.addEventListener("click", () => {
-            const imageName = option.dataset.image;
-            document.getElementById("fork-img").src = `images/${BikeType}/forks/${imageName}`;
-            document.querySelectorAll(".fork-option, .dh-fork-option").forEach(el => el.classList.remove("selected"));
-            option.classList.add("selected");
-            fork = imageName.replace(".png", "");
-        });
-    });
-
-
-    //WHEELS
-    document.querySelectorAll(".wheels-option").forEach(option => {
-        option.addEventListener("click", () => {
-            const imageName = option.dataset.image;
-            document.getElementById("wheels-img").src = `images/${BikeType}/wheels/${imageName}`;
-            document.querySelectorAll(".wheels-option").forEach(el => el.classList.remove("selected"));
-            option.classList.add("selected");
-            wheels = imageName.replace(".png", "");
-        });
-    });
-    //TYRES
-    document.querySelectorAll(".tyres-option").forEach(option => {
-        option.addEventListener("click", () => {
-            const imageName = option.dataset.image;
-            document.getElementById("tyres-img").src = `images/${BikeType}/tyres/${imageName}`;
-            document.querySelectorAll(".tyres-option").forEach(el => el.classList.remove("selected"));
-            option.classList.add("selected");
-            tyres = imageName.replace(".png", "");
-        });
-    });
-    //DRIVETRAIN
-    document.querySelectorAll(".drivetrain-option").forEach(option => {
-        option.addEventListener("click", () => {
-            const imageName = option.dataset.image;
-            document.getElementById("drivetrain-img").src = `images/${BikeType}/drivetrains/${imageName}.png`;
-            document.getElementById("drivetrain-rear-img").src = `images/${BikeType}/drivetrains/${imageName}-rear.png`;
-            document.querySelectorAll(".drivetrain-option").forEach(el => el.classList.remove("selected"));
-            option.classList.add("selected");
-            drivetrain = imageName.replace(".png", "");
-        });
-    });
-
-    //BRAKES
-    document.querySelectorAll(".brakes-option").forEach(option => {
-        option.addEventListener("click", () => {
-            const imageName = option.dataset.image;
-            document.getElementById("brakes-img").src = `images/${BikeType}/frame-specific/brakes/${imageName}_${FrameSelected}`;
-            document.querySelectorAll(".brakes-option").forEach(el => el.classList.remove("selected"));
-            option.classList.add("selected");
-            IsBrakesSelected = true;
-            BrakesSelected = null;
-            BrakesSelected = imageName;
-            brakes = imageName.replace(".png", "");
-        });
-    });
-
-    //PEDALS
-    document.querySelectorAll(".pedals-option").forEach(option => {
-        option.addEventListener("click", () => {
-            const imageName = option.dataset.image;
-            document.getElementById("pedals-img").src = `images/${BikeType}/pedals/${imageName}`;
-            document.querySelectorAll(".pedals-option").forEach(el => el.classList.remove("selected"));
-            option.classList.add("selected");
-            pedals = imageName.replace(".png", "");
-        });
-    });
-    //STEM
-    document.querySelectorAll(".stem-option").forEach(option => {
-        option.addEventListener("click", () => {
-            const imageName = option.dataset.image;
-            document.getElementById("stem-img").src = `images/${BikeType}/stems/${imageName}`;
-            document.querySelectorAll(".stem-option").forEach(el => el.classList.remove("selected"));
-            option.classList.add("selected");
-            stem = imageName.replace(".png", "");
-        });
-    });
-
-    //BARS
-    document.querySelectorAll(".bars-option").forEach(option => {
-        option.addEventListener("click", () => {
-            const imageName = option.dataset.image;
-            document.getElementById("bars-img").src = `images/${BikeType}/bars/${imageName}`;
-            document.querySelectorAll(".bars-option").forEach(el => el.classList.remove("selected"));
-            option.classList.add("selected");
-            bars = imageName.replace(".png", "");
-        });
-    });
-
-    //SEATPOSTS
-    document.querySelectorAll(".seatpost-option").forEach(option => {
-        option.addEventListener("click", () => {
-            const imageName = option.dataset.image;
-            document.getElementById("seatpost-img").src = `images/${BikeType}/frame-specific/seatposts/${imageName}-${FrameSelected}`;
-            document.querySelectorAll(".seatpost-option").forEach(el => el.classList.remove("selected"));
-            option.classList.add("selected");
-            IsSeatpostSelected = true;
-            SeatpostSelected = null;
-            SeatpostSelected = imageName;
-            seatpost = imageName;
-        });
-    });
-
-    //SADDLES
-    document.querySelectorAll(".saddle-option").forEach(option => {
-        option.addEventListener("click", () => {
-            const imageName = option.dataset.image;
-            document.getElementById("saddle-img").src = `images/${BikeType}/frame-specific/saddles/${imageName}_${FrameSelected}`;
-            document.querySelectorAll(".saddle-option").forEach(el => el.classList.remove("selected"));
-            option.classList.add("selected");
-            IsSaddleSelected = true;
-            SaddleSelected = null;
-            SaddleSelected = imageName;
-            saddle = imageName;
-        });
-    });
-
-
-    // -------------------------- SAVE BUTTON --------------------------
-
-    document.getElementById("save-button").addEventListener("click", () => {
-
-        if (LoggedInAccountID == null) {
-            alert("You are not logged in. Login or signup.")
+    // --------- Special case: drivetrain ---------
+    if (part.PartType === "drivetrain") {
+        if (!part.ImagePath) {
+            console.warn("Drivetrain part has no ImagePath:", part);
             return;
         }
 
-        const data = {
-            AccountId: LoggedInAccountID,
-            biketype: BikeType, //also send bike type so different bikes can be differentiated
-            frame: frame,
-            shock: shock,
-            fork: fork,
-            wheels: wheels,
-            tyres: tyres,
-            drivetrain: drivetrain,
-            brakes: brakes,
-            seatpost: seatpost,
-            saddle: saddle,
-            bars: bars,
-            stem: stem,
-            pedals: pedals
-        };
-        // For if not all bike parts are selected
-        for (let key in data){
-            if (!data[key]) {
-                alert("Not all parts selected. Save failed")
-                return;
+        const frontId = imageMap["drivetrain"];
+        const rearId = imageMap["drivetrain-rear"];
+
+        const frontSrc = getSrc(part.ImagePath + ".png");
+        const rearSrc = getSrc(part.ImagePath + "-rear.png");
+
+        if (frontId && frontSrc) document.getElementById(frontId).src = frontSrc;
+        if (rearId && rearSrc) document.getElementById(rearId).src = rearSrc;
+
+    } else {
+        // --------- Normal parts ---------
+        if (!part.ImagePath) {
+            console.warn("Part has no ImagePath:", part);
+            return;
+        }
+        const src = getSrc(part.ImagePath);
+        if (imgId && src) document.getElementById(imgId).src = src;
+    }
+
+    // Store selected part
+    selectedParts[part.PartType] = part;
+    UpdateTotalPrice();
+
+    // --- Update frame-specific parts if frame changes ---
+    if (part.PartType === "frame") {
+        FrameSelected = part.ImagePath.replace(".png", "");
+
+        Object.entries(selectedParts).forEach(([type, p]) => {
+            if (frameSpecificTypes.has(type) && p.ImagePath) {
+                const id = imageMap[type];
+                if (!id) return;
+                const sep = p.Separator || "_";
+                const folderForType = folderMap[type];
+                const src = `${base}/${folderForType}/${p.ImagePath}${sep}${FrameSelected}.png`;
+                const imgEl = document.getElementById(id);
+                if (imgEl) imgEl.src = src;
             }
+        });
+    }
+}
+
+// -------------------------- STEP NAVIGATION --------------------------
+function ShowStep(index) {
+    BuildSteps.forEach((step, i) => {
+        const el = document.getElementById(`step-${step}`);
+        el.style.display = i === index ? "block" : "none";
+    });
+
+    // Toggle back button
+    document.querySelector(".back-button").style.display =
+        index > 0 ? "block" : "none";
+
+    // Toggle return button
+    document.querySelector(".return-button").style.display =
+        index === 0 ? "block" : "none";
+
+    currentStep = index;
+}
+
+document.getElementById("back-button").addEventListener("click", () => {
+    if (currentStep > 0) ShowStep(currentStep - 1);
+});
+
+document.querySelector(".prev-button").addEventListener("click", () => {
+    if (currentStep > 0) ShowStep(currentStep - 1);
+});
+
+document.querySelector(".next-button").addEventListener("click", () => {
+    if (currentStep < BuildSteps.length - 1) ShowStep(currentStep + 1);
+});
+
+document.getElementById("return-button").addEventListener("click", () => {
+    ShowStep(0);
+});
+
+
+// -------------------------- EVENT HANDLER --------------------------
+document.querySelectorAll(".part-selector-bar")[1].addEventListener("click", (e) => {
+    const opt = e.target.closest(".part-option");
+    if (!opt) return;
+    const id = opt.dataset.id;
+    const part = allParts.find((p) => String(p.Id) === id);
+    if (part) {
+        // Remove 'selected' from all options of this type
+        document.querySelectorAll(`.${part.PartType}-option`).forEach(el => el.classList.remove('selected'));
+        // Add 'selected' to clicked option
+        opt.classList.add('selected');
+
+        SelectPart(part);
+    }
+});
+
+// -------------------------- SAVE BIKE --------------------------
+document.getElementById("save-bike").addEventListener("click", () => {
+    if (LoggedInAccountID == null) {
+        alert("You are not logged in. Login or signup.");
+        return;
+    }
+
+    for (const type of desiredOrder) {
+        if (partsByType[type] && !selectedParts[type]) {
+            alert(`Not all parts selected. Missing: ${type}`);
+            return;
+        }
+    }
+
+    const data = {
+        AccountId: LoggedInAccountID,
+        biketype: BikeType,
+        parts: Object.fromEntries(
+            Object.entries(selectedParts).map(([type, part]) => [type, part.Id])
+        ),
+    };
+
+    fetch("https://localhost:7165/api/bikes/save-bike", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+    })
+        .then((res) =>
+            res.ok
+                ? alert("Bike Configuration Saved!")
+                : alert("Save failed: " + res.status)
+        )
+        .catch((err) => console.error("Error saving bike:", err));
+});
+
+// -------------------------- INIT --------------------------
+async function init() {
+    try {
+        const { parts, byType } = await LoadParts(PartFile);
+        allParts = parts;
+        partsByType = byType;
+
+        BuildSteps = desiredOrder.filter((t) => partsByType[t]);
+        BuildSteps.forEach((t) => RenderPartSection(t, partsByType[t]));
+
+        if (BuildSteps.length > 0) {
+            ShowStep(0);
         }
 
-        fetch("https://localhost:7165/api/bikes/save-bike", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(data)
-        })
-            .then(res => res.ok ? alert("Bike Configuration Saved!") : alert("Save failed" + LoggedInAccountID))
-            .catch(err => console.error("Error saving bike:", err));
-});
+        console.log("Loaded bike parts for", BikeType, partsByType);
+    } catch (err) {
+        console.error("Error initializing builder:", err);
+    }
+}
+
+init();

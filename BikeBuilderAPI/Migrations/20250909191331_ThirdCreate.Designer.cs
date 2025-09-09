@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BikeBuilderAPI.Migrations
 {
     [DbContext(typeof(AccountsContext))]
-    [Migration("20250704131624_AddBikeParts")]
-    partial class AddBikeParts
+    [Migration("20250909191331_ThirdCreate")]
+    partial class ThirdCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -77,6 +77,9 @@ namespace BikeBuilderAPI.Migrations
 
                     b.Property<string>("ThumbnailPath")
                         .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<decimal>("Weight")
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");

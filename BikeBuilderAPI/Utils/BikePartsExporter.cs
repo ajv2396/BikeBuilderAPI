@@ -19,12 +19,13 @@ public static class BikePartsExporter
             b.Description,
             b.ImagePath,
             b.ThumbnailPath,
-            b.Price
+            b.Price,
+            b.Weight
         }).ToList();
 
         var json1 = JsonSerializer.Serialize(SaveItemsEnduro, new JsonSerializerOptions { WriteIndented = true });
 
-        var filePath1 = Path.Combine("wwwroot", "enduro_parts.json");
+        var filePath1 = Path.Combine("wwwroot", "bike-parts", "enduro_parts.json");
         File.WriteAllText(filePath1, json1);
 
         //----------------------------------DH PARTS----------------------------------
@@ -41,12 +42,13 @@ public static class BikePartsExporter
             b.Description,
             b.ImagePath,
             b.ThumbnailPath,
-            b.Price
+            b.Price,
+            b.Weight
         }).ToList();
 
         var json2 = JsonSerializer.Serialize(SaveItemsDH, new JsonSerializerOptions { WriteIndented = true });
 
-        var filePath2 = Path.Combine("wwwroot", "dh_parts.json");
+        var filePath2 = Path.Combine("wwwroot", "bike-parts", "dh_parts.json");
         File.WriteAllText(filePath2, json2);
 
         //----------------------------------DJ PARTS----------------------------------
@@ -63,12 +65,13 @@ public static class BikePartsExporter
             b.Description,
             b.ImagePath,
             b.ThumbnailPath,
-            b.Price
+            b.Price,
+            b.Weight
         }).ToList();
 
         var json3 = JsonSerializer.Serialize(SaveItemsDJ, new JsonSerializerOptions { WriteIndented = true });
 
-        var filePath3 = Path.Combine("wwwroot", "dj_parts.json");
+        var filePath3 = Path.Combine("wwwroot", "bike-parts", "dj_parts.json");
         File.WriteAllText(filePath3, json3);
     }
 }

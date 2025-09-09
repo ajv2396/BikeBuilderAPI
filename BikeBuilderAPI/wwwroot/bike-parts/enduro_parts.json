@@ -7,7 +7,8 @@
     "Description": "Enduro frame with long travel and aggressive geometry.",
     "ImagePath": "frame1.png",
     "ThumbnailPath": "images/Enduro/frames/frame1-thumb.png",
-    "Price": 3299
+    "Price": 3299,
+    "Weight": 3450
   },
   {
     "Id": 24,
@@ -17,7 +18,8 @@
     "Description": "Lightweight carbon enduro frame with ABP suspension.",
     "ImagePath": "frame2.png",
     "ThumbnailPath": "images/Enduro/frames/frame2-thumb.png",
-    "Price": 3199
+    "Price": 3199,
+    "Weight": 4250
   },
   {
     "Id": 25,
@@ -27,7 +29,8 @@
     "Description": "VPP suspension with slack head tube angle.",
     "ImagePath": "frame3.png",
     "ThumbnailPath": "images/Enduro/frames/frame3-thumb.png",
-    "Price": 3399
+    "Price": 3399,
+    "Weight": 3250
   },
   {
     "Id": 26,
@@ -37,7 +40,8 @@
     "Description": "High-performance enduro frame with Switch Infinity.",
     "ImagePath": "frame4.png",
     "ThumbnailPath": "images/Enduro/frames/frame4-thumb.png",
-    "Price": 3499
+    "Price": 3499,
+    "Weight": 3950
   },
   {
     "Id": 27,
@@ -47,7 +51,8 @@
     "Description": "High-pivot enduro frame with exceptional rearward axle path.",
     "ImagePath": "frame5.png",
     "ThumbnailPath": "images/Enduro/frames/frame5-thumb.png",
-    "Price": 3449
+    "Price": 3449,
+    "Weight": 3150
   },
   {
     "Id": 28,
@@ -57,7 +62,8 @@
     "Description": "High-performance air shock with advanced damping.",
     "ImagePath": "shock1",
     "ThumbnailPath": "images/Enduro/frame-specific/shock1-thumb.png",
-    "Price": 699
+    "Price": 699,
+    "Weight": 425
   },
   {
     "Id": 29,
@@ -67,7 +73,8 @@
     "Description": "Coil shock with adjustable compression and rebound.",
     "ImagePath": "shock4",
     "ThumbnailPath": "images/Enduro/frame-specific/shock4-thumb.png",
-    "Price": 749
+    "Price": 749,
+    "Weight": 490
   },
   {
     "Id": 30,
@@ -77,7 +84,8 @@
     "Description": "Heavy-duty coil shock for aggressive riding.",
     "ImagePath": "shock2",
     "ThumbnailPath": "images/Enduro/frame-specific/shock2-thumb.png",
-    "Price": 699
+    "Price": 699,
+    "Weight": 465
   },
   {
     "Id": 31,
@@ -87,7 +95,8 @@
     "Description": "Reliable enduro air shock with piggyback reservoir.",
     "ImagePath": "shock6",
     "ThumbnailPath": "images/Enduro/frame-specific/shock6-thumb.png",
-    "Price": 599
+    "Price": 599,
+    "Weight": 430
   },
   {
     "Id": 32,
@@ -97,7 +106,8 @@
     "Description": "Premium air shock for aggressive descending.",
     "ImagePath": "shock3",
     "ThumbnailPath": "images/Enduro/frame-specific/shock3-thumb.png",
-    "Price": 729
+    "Price": 729,
+    "Weight": 455
   },
   {
     "Id": 33,
@@ -107,47 +117,52 @@
     "Description": "Coil shock with twin-tube damping system.",
     "ImagePath": "shock5",
     "ThumbnailPath": "images/Enduro/frame-specific/shock5-thumb.png",
-    "Price": 779
+    "Price": 779,
+    "Weight": 470
   },
   {
     "Id": 34,
     "BikeTypeId": 1,
     "PartType": "fork",
     "Name": "Fox Factory 38",
-    "Description": "38mm stanchions, GRIP2 damper, 170mm travel.",
+    "Description": "29\u0022, 170mm travel, 44mm offset",
     "ImagePath": "fork1.png",
     "ThumbnailPath": "images/Enduro/forks/fork1-thumb.png",
-    "Price": 1149
+    "Price": 1149,
+    "Weight": 2040
   },
   {
     "Id": 35,
     "BikeTypeId": 1,
     "PartType": "fork",
     "Name": "Rockshox ZEB Ultimate",
-    "Description": "Charger 3 damper, 38mm chassis, 170mm travel.",
+    "Description": "29\u0022, 190mm travel, Charger 3 RC2",
     "ImagePath": "fork2.png",
     "ThumbnailPath": "images/Enduro/forks/fork2-thumb.png",
-    "Price": 1049
+    "Price": 1049,
+    "Weight": 2150
   },
   {
     "Id": 36,
     "BikeTypeId": 1,
     "PartType": "fork",
     "Name": "Ohlins RXF38",
-    "Description": "Robust enduro fork with 38mm stanchions.",
+    "Description": "29\u0022, 170mm travel, M.2 air spring",
     "ImagePath": "fork3.png",
     "ThumbnailPath": "images/Enduro/forks/fork3-thumb.png",
-    "Price": 1199
+    "Price": 1199,
+    "Weight": 2100
   },
   {
     "Id": 37,
     "BikeTypeId": 1,
     "PartType": "fork",
     "Name": "Marzocchi Bomber Z1",
-    "Description": "Performance-focused fork with 170mm travel.",
+    "Description": "29\u0022, 170mm travel",
     "ImagePath": "fork4.png",
     "ThumbnailPath": "images/Enduro/forks/fork4-thumb.png",
-    "Price": 749
+    "Price": 749,
+    "Weight": 2250
   },
   {
     "Id": 38,
@@ -157,7 +172,8 @@
     "Description": "Durable alloy wheelset for hard enduro riding.",
     "ImagePath": "wheels1.png",
     "ThumbnailPath": "images/Enduro/wheels/wheels1-thumb.png",
-    "Price": 699
+    "Price": 699,
+    "Weight": 1920
   },
   {
     "Id": 39,
@@ -167,7 +183,8 @@
     "Description": "All-mountain carbon wheelset, fast engagement.",
     "ImagePath": "wheels2.png",
     "ThumbnailPath": "images/Enduro/wheels/wheels2-thumb.png",
-    "Price": 1199
+    "Price": 1199,
+    "Weight": 1760
   },
   {
     "Id": 40,
@@ -177,7 +194,8 @@
     "Description": "Iconic DH wheels, ultra-tough build.",
     "ImagePath": "wheels3.png",
     "ThumbnailPath": "images/Enduro/wheels/wheels3-thumb.png",
-    "Price": 899
+    "Price": 899,
+    "Weight": 2150
   },
   {
     "Id": 41,
@@ -187,7 +205,8 @@
     "Description": "Enduro-focused tyre with aggressive tread.",
     "ImagePath": "tyres1.png",
     "ThumbnailPath": "images/Enduro/tyres/tyres1-thumb.png",
-    "Price": 89
+    "Price": 89,
+    "Weight": 1350
   },
   {
     "Id": 42,
@@ -197,7 +216,8 @@
     "Description": "All-conditions grip, popular rear tyre.",
     "ImagePath": "tyres2.png",
     "ThumbnailPath": "images/Enduro/tyres/tyres2-thumb.png",
-    "Price": 89
+    "Price": 89,
+    "Weight": 1150
   },
   {
     "Id": 43,
@@ -207,7 +227,8 @@
     "Description": "Top-tier 12-speed drivetrain.",
     "ImagePath": "drivetrain1",
     "ThumbnailPath": "images/Enduro/drivetrains/drivetrain1-thumb.png",
-    "Price": 1599
+    "Price": 1599,
+    "Weight": 1985
   },
   {
     "Id": 44,
@@ -217,7 +238,8 @@
     "Description": "Durable and precise enduro drivetrain.",
     "ImagePath": "drivetrain2",
     "ThumbnailPath": "images/Enduro/drivetrains/drivetrain2-thumb.png",
-    "Price": 1299
+    "Price": 1299,
+    "Weight": 2150
   },
   {
     "Id": 45,
@@ -227,7 +249,8 @@
     "Description": "4-piston hydraulic disc brakes.",
     "ImagePath": "brakes1",
     "ThumbnailPath": "images/Enduro/frame-specific/brakes1_thumb.png",
-    "Price": 499
+    "Price": 499,
+    "Weight": 780
   },
   {
     "Id": 46,
@@ -237,7 +260,8 @@
     "Description": "CNC machined flat pedals.",
     "ImagePath": "pedals1.png",
     "ThumbnailPath": "images/Enduro/pedals/pedals1-thumb.png",
-    "Price": 169
+    "Price": 169,
+    "Weight": 352
   },
   {
     "Id": 47,
@@ -247,7 +271,8 @@
     "Description": "Durable alloy platform pedals.",
     "ImagePath": "pedals2.png",
     "ThumbnailPath": "images/Enduro/pedals/pedals2-thumb.png",
-    "Price": 129
+    "Price": 129,
+    "Weight": 440
   },
   {
     "Id": 48,
@@ -257,7 +282,8 @@
     "Description": "High grip with custom pins.",
     "ImagePath": "pedals2.png",
     "ThumbnailPath": "images/Enduro/pedals/pedals3-thumb.png",
-    "Price": 149
+    "Price": 149,
+    "Weight": 379
   },
   {
     "Id": 49,
@@ -267,7 +293,8 @@
     "Description": "Lightweight and strong MTB stem.",
     "ImagePath": "stem1.png",
     "ThumbnailPath": "images/Enduro/stems/stem1-thumb.png",
-    "Price": 279
+    "Price": 45,
+    "Weight": 240
   },
   {
     "Id": 50,
@@ -277,7 +304,8 @@
     "Description": "Gravity-focused CNC stem.",
     "ImagePath": "stem2.png",
     "ThumbnailPath": "images/Enduro/stems/stem2-thumb.png",
-    "Price": 239
+    "Price": 115,
+    "Weight": 172
   },
   {
     "Id": 51,
@@ -287,7 +315,8 @@
     "Description": "Alloy bars with 35mm clamp.",
     "ImagePath": "bars1.png",
     "ThumbnailPath": "images/Enduro/bars/bars1-thumb.png",
-    "Price": 79
+    "Price": 79,
+    "Weight": 318
   },
   {
     "Id": 52,
@@ -297,7 +326,8 @@
     "Description": "Wider bars for more control.",
     "ImagePath": "bars2.png",
     "ThumbnailPath": "images/Enduro/bars/bars2-thumb.png",
-    "Price": 99
+    "Price": 99,
+    "Weight": 298
   },
   {
     "Id": 53,
@@ -307,7 +337,8 @@
     "Description": "Adjustable travel, lightweight dropper.",
     "ImagePath": "seatpost1",
     "ThumbnailPath": "images/Enduro/frame-specific/seatpost1-thumb.png",
-    "Price": 299
+    "Price": 299,
+    "Weight": 379
   },
   {
     "Id": 54,
@@ -317,7 +348,8 @@
     "Description": "Smooth action dropper post.",
     "ImagePath": "seatpost2",
     "ThumbnailPath": "images/Enduro/frame-specific/seatpost2-thumb.png",
-    "Price": 349
+    "Price": 349,
+    "Weight": 475
   },
   {
     "Id": 55,
@@ -327,7 +359,8 @@
     "Description": "Comfortable and stylish saddle.",
     "ImagePath": "saddle1",
     "ThumbnailPath": "images/Enduro/frame-specific/saddle1-thumb.png",
-    "Price": 109
+    "Price": 109,
+    "Weight": 249
   },
   {
     "Id": 56,
@@ -337,6 +370,7 @@
     "Description": "Park and trail-ready saddle.",
     "ImagePath": "saddle2",
     "ThumbnailPath": "images/Enduro/frame-specific/saddle2-thumb.png",
-    "Price": 99
+    "Price": 99,
+    "Weight": 282
   }
 ]

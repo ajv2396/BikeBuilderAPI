@@ -218,3 +218,15 @@ header {
     .header-button:active {
         transform: translateY(1px);
     }
+
+.part-description {
+    font-size: 0.85rem;
+    color: #909090;
+    margin-top: 4px;
+}
+
+#total-price {
+    color: #ffffff;
+    font-size: 18px;
+}
+

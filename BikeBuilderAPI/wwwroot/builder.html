@@ -1,0 +1,70 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>MTB Builder</title>
+    <link rel="stylesheet" href="styles/builder-styles.css">
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="login-signup">
+            <a href="index.html" class="header-back-button header-button">BACK</a>
+        </div>
+    </header>
+
+    <!-- Bike Display -->
+    <div id="bike-display">
+        <img id="brakes-img" src="" alt="">
+        <img id="tyres-img" src="" alt="">
+        <img id="shock-img" src="" alt="">
+        <img id="wheels-img" src="" alt="">
+        <img id="fork-img" src="" alt="">
+        <img id="saddle-img" src="" alt="">
+        <img id="seatpost-img" src="" alt="">
+        <img id="drivetrain-rear-img" src="" alt="">
+        <img id="frame-img" src="" alt="">
+        <img id="stem-img" src="" alt="">
+        <img id="drivetrain-img" src="" alt="">
+        <img id="bars-img" src="" alt="">
+        <img id="pedals-img" src="" alt="">
+    </div>
+
+    <!-- Control + Selector Area -->
+    <div class="part-selector-bar">
+
+        <!-- Return to Start -->
+        <div class="return-button" style="display:none;">
+            <button id="return-button">Return to Start</button>
+        </div>
+
+        <!-- Back Button -->
+        <div class="back-button" style="display:none;">
+            <button id="back-button">Back</button>
+        </div>
+
+        <!-- Wizard selector bar (JS will insert steps here) -->
+        <div class="part-selector-bar">
+            <!-- Global totals bar -->
+            <div id="total-price" style="margin-top:10px; font-weight:bold;">
+                Total: £0 <br /><br /> Weight: 0g
+            </div>
+
+            <button class="prev-button">Previous</button>
+            <!-- JS inserts steps like step-frame, step-fork, etc. here -->
+            <button class="next-button">Next</button>
+        </div>
+
+
+        <!-- Save -->
+        <div class="save-button">
+            <button id="save-bike">Save Bike</button>
+        </div>
+
+    </div>
+
+    <!-- Script at the end of body -->
+    <script src="js/builder-script.js"></script>
+</body>
+</html>

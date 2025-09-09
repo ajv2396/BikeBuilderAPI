@@ -6,6 +6,7 @@
 - Improve overall UI to match similar style to the checkout? 
 - Ability to share builds/make them public so people can see other peoples builds
 - Add it so that you can load a saved build into the builder
+- Show most popular options on each part section. calculate this by most common part on database or something
 
 
 
