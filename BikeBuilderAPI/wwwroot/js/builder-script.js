@@ -379,5 +379,4 @@ document.addEventListener("DOMContentLoaded", () => {
         })
             .then(res => res.ok ? alert("Bike Configuration Saved!") : alert("Save failed" + LoggedInAccountID))
             .catch(err => console.error("Error saving bike:", err));
-    })
 });
