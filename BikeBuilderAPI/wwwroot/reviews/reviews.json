@@ -1,0 +1,9 @@
+[
+  {
+    "ReviewId": 1,
+    "BikePartID": 1,
+    "Username": "Test Username",
+    "Rating": 5,
+    "Description": "very  good"
+  }
+]

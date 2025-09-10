@@ -12,6 +12,26 @@ fetch("user_session.json")
     })
     .catch((error) => console.error("Error fetching session:", error));
 
+//--------------------------- LOAD REVIEWS -----------------------------
+let AllReviews = [];
+
+async function LoadReviews() {
+    try {
+        const resp = await fetch("reviews.json");
+        if (!resp.ok) throw new Error("Failed to load reviews");
+        AllReviews = await resp.json();
+        console.log("Loaded reviews:", AllReviews);
+
+    } catch (err) {
+        console.error("Error loading reviews:", err);
+    }
+}
+
+
+
+
+
+
 // -------------------------- BIKE TYPE --------------------------
 function GetBikeType() {
     const qs = new URLSearchParams(window.location.search);
@@ -89,6 +109,7 @@ function RenderPartSection(partType, items) {
         <p class="part-name">${item.Name}</p>
         <p class="part-description">&pound;${item.Price} | ${item.Weight}g <br> ${item.Description}</p>
     `;
+
         optionsDiv.appendChild(opt);
     });
 

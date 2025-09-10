@@ -14,6 +14,11 @@ using (var db = new AccountsContext())
     BikePartsExporter.ExportBikePartsToJson(db);
 }
 
+//Export reviews on start up
+using (var db = new AccountsContext())
+{
+    ReviewsExporter.ExportReviewsToJson(db);
+}
 
 var builder = WebApplication.CreateBuilder(args);
 
