@@ -230,3 +230,13 @@ header {
     font-size: 18px;
 }
 
+.part-more-button button {
+    color: black;
+    font-size: 0.6rem;
+    background-color: white; /* dark background so white text is visible */
+    border: none; /* optional */
+    padding: 5px 10px; /* optional styling */
+    cursor: pointer; /* optional */
+}
+
+

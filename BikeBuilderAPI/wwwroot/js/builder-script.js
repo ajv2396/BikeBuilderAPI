@@ -125,13 +125,23 @@ function RenderPartSection(partType, items) {
         opt.className = `part-option ${partType}-option`;
         opt.dataset.id = item.Id;
         opt.dataset.image = item.ImagePath;
+        opt.dataset.BikeTypeId = item.BikeTypeId;
         opt.dataset.framespecific = frameSpecificTypes.has(partType) ? "1" : "0";
         opt.innerHTML = `
         <img src="${item.ThumbnailPath}" alt="${item.Name}">
         <p class="part-name">${item.Name}</p>
         <p class="part-description">&pound;${item.Price} | ${item.Weight}g <br> ${item.Description} <br> <br> ${StarsHtml} (${NumberOfReviews})</p >
+        <p class="part-more-button"><button type="button">More Info</button></p>
 
     `;
+        //more button
+        const MoreInfoButton = opt.querySelector("button");
+        MoreInfoButton.addEventListener("click", () => {
+            const url = `part-details.html?id=${encodeURIComponent(item.Id)}&TypeId=${encodeURIComponent(item.BikeTypeId)}`;
+
+            window.open(url, "_blank"); // _blank for opening in new tab
+        });
+
 
         optionsDiv.appendChild(opt);
     });

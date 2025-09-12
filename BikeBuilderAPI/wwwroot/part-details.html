@@ -1,0 +1,273 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Part Details</title>
+</head>
+<body>
+    <div id="part-details-container">
+        <div id="image-wrapper">
+            <img id="part-image" src="" alt="Part Image" />
+            <button id="write-review">Write Review</button>
+        </div>
+
+        <div id="part-info">
+            <h1 id="part-name"></h1>
+            <p id="part-description"></p>
+            <p id="part-price"></p>
+            <p id="part-weight"></p>
+
+            <div id="part-reviews">
+                <h2>Reviews</h2>
+                <p id="average-rating"></p>
+                <ul id="reviews-list"></ul>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <script>
+        //------------------------GET ID FROM URL------------------------
+        const qs = new URLSearchParams(window.location.search);
+        const PartId = parseInt(qs.get("id"));
+        const BikeTypeId = parseInt(qs.get("TypeId"));
+        document.title = `Part ${PartId},${BikeTypeId} Details`;
+        //set part file
+        let PartFile = "";
+        if (BikeTypeId == 1) {
+            PartFile = "bike-parts/enduro_parts.json";
+
+        } else if (BikeTypeId == 2) {
+            PartFile = "bike-parts/dh_parts.json";
+
+        } else if (BikeTypeId == 3) {
+            PartFile = "bike-parts/dj_parts.json";
+
+        } else {
+            alert("Could not determine bike type.")
+        }
+
+        LoadPartInfo(PartFile, PartId);
+
+        //-----------------GET PART INFO-----------------------
+        async function LoadPartInfo(file, PartId) {
+            try {
+                const resp = await fetch(file);
+                const parts = await resp.json();
+
+                const part = parts.find(p => p.Id === PartId);
+
+                if (!part) {
+                    alert("Part not found.");
+                    return;
+                }
+
+                const { Name, Description, ThumbnailPath, Price, Weight, PartType } = part;
+
+                document.getElementById("part-name").textContent = Name;
+                document.getElementById("part-image").src = ThumbnailPath;
+                document.getElementById("part-image").alt = Name;
+                document.getElementById("part-description").textContent = Description;
+                document.getElementById("part-price").textContent = `Price: £${Price}`;
+                document.getElementById("part-weight").textContent = `Weight: ${Weight} g`;
+
+            } catch (error) {
+                console.error("Error loading part info:", error);
+            }
+
+        }
+
+        //------------------LOAD REVIEWS------------------------
+        let AllReviews = [];
+
+        async function LoadReviews() {
+            try {
+                const resp = await fetch("reviews/reviews.json");
+                if (!resp.ok) throw new Error("Failed to load reviews");
+                AllReviews = await resp.json();
+
+                const PartReviews = AllReviews.filter(r => r.BikePartID === PartId);
+
+                const ReviewsList = document.getElementById("reviews-list");
+                ReviewsList.innerHTML = "";
+
+                if (PartReviews.length === 0) {
+                    reviewsList.innerHTML = "<li>No reviews yet.</li>";
+                    return;
+                }
+
+                //average reviews
+                const TotalRating = PartReviews.reduce((sum, r) => sum + r.Rating, 0);
+                const AverageRating = (TotalRating / PartReviews.length).toFixed(1);
+
+                const AverageElement = document.getElementById("average-rating");
+                AverageElement.textContent = `Average Rating: ${AverageRating} / 5`;
+                document.getElementById("part-reviews").prepend(AverageElement);
+
+                //add each review
+                PartReviews.forEach(r => {
+                    const listitem = document.createElement("li");
+                    listitem.innerHTML = `<strong>${r.Username}</strong> (Rating: ${r.Rating}/5): ${r.Description}`;
+                    ReviewsList.appendChild(listitem);
+                });
+
+            } catch (err) {
+                console.error("Error loading reviews:", err);
+            }
+        }
+
+
+        LoadReviews();
+
+    </script>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            font-weight: 200;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0; 
+            flex-direction: column;
+            background: #767676;
+        }
+        #image-wrapper {
+            display: flex;
+            flex-direction: column; /* stack children vertically */
+            align-items: center; /* center horizontally */
+            gap: 15px; /* spacing between image and button */
+        }
+
+        #write-review {
+            display: inline-block;
+            padding: 15px 30px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            color: white;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            border: none; 
+            outline: none; 
+        }
+
+            #write-review:hover {
+                background-color: rgba(255, 255, 255, 0.2);
+                transform: translateY(-3px);
+                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            }
+
+            #write-review:active {
+                transform: translateY(1px);
+            }
+
+        #part-details-container {
+            max-width: 1800px;
+            width: 100%;
+            align-content: center;
+            padding: 30px;
+            background-color: rgba(0, 0, 0, 0.6);
+            border-radius: 15px;
+            color: #ffffff;
+            display: flex;
+            flex-direction: row;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+
+            #part-details-container img {
+                width: 400px; /* fixed smaller width */
+                height: 400px; /* maintain square aspect ratio */
+                object-fit: contain; /* ensures the image fits nicely */
+                border-radius: 10px;
+                border: 2px solid #005cc1;
+            }
+
+            #part-details-container img:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            }
+
+            .part-details-container img:active {
+                transform: translateY(1px);
+            }
+
+        #part-info {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+        }
+
+        #part-name {
+            font-size: 42px;
+            margin-bottom: 10px;
+            color: #005cc1;
+            text-shadow: 1px 1px 3px #000;
+        }
+
+        #part-description {
+            font-size: 1rem;
+            color: #ddd;
+            margin-bottom: 15px;
+        }
+
+        #part-price, #part-weight {
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+        }
+
+        #part-reviews {
+            margin-top: 30px;
+            width: 100%;
+        }
+
+            #part-reviews h2 {
+                color: #005cc1;
+                margin-bottom: 10px;
+            }
+
+        #reviews-list {
+            list-style: none;
+            padding: 0;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+            #reviews-list li {
+                background-color: rgba(255, 255, 255, 0.1);
+                margin-bottom: 10px;
+                padding: 10px;
+                border-radius: 8px;
+            }
+                #reviews-list li strong {
+                    color: #005cc1;
+                }
+
+        #reviews-list li:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .reviews-list li:active {
+            transform: translateY(1px);
+        }
+
+        #average-rating {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #005cc1;
+        }
+
+
+    </style>
+</body>
+</html>
