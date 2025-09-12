@@ -1,4 +1,4 @@
-let LoggedInAccountID = null;
+﻿let LoggedInAccountID = null;
 
 // -------------------------- LOAD SESSION --------------------------
 fetch("user_session.json")
@@ -17,17 +17,27 @@ let AllReviews = [];
 
 async function LoadReviews() {
     try {
-        const resp = await fetch("reviews.json");
+        const resp = await fetch("reviews/reviews.json");
         if (!resp.ok) throw new Error("Failed to load reviews");
         AllReviews = await resp.json();
-        console.log("Loaded reviews:", AllReviews);
 
     } catch (err) {
         console.error("Error loading reviews:", err);
     }
 }
-
-
+function RenderStars(rating) {
+    let stars = "";
+    for (let i = 1; i <= 5; i++) {
+        if (rating >= i) {
+            stars += `<i class="fas fa-star"></i>`; //full star
+        } else if (rating >= i - 0.5) {
+            stars += `<i class="fas fa-star-half-alt"></i>`; //half star 
+        } else {
+            stars += `<i class="far fa-star"></i>`; //empty star
+        }
+    }
+    return stars;
+}
 
 
 
@@ -93,12 +103,24 @@ function RenderPartSection(partType, items) {
         "Choose " + partType[0].toUpperCase() + partType.slice(1) + ":";
     container.appendChild(label);
 
-
-
     const optionsDiv = document.createElement("div");
     optionsDiv.className = `${partType}-options`;
 
     items.forEach((item) => {
+        //Reviews
+        const PartReviews = AllReviews.filter(r => r.BikePartID === item.Id);
+
+        let NumberOfReviews = "0";
+        let avg = 0;
+        let StarsHtml = "";
+        NumberOfReviews = PartReviews.length;
+
+
+        if (PartReviews.length > 0) {
+            avg = PartReviews.reduce((a, r) => a + r.Rating, 0) / PartReviews.length;
+        }
+        StarsHtml = `<span class="stars">${RenderStars(avg)}</span>`;
+
         const opt = document.createElement("div");
         opt.className = `part-option ${partType}-option`;
         opt.dataset.id = item.Id;
@@ -107,7 +129,8 @@ function RenderPartSection(partType, items) {
         opt.innerHTML = `
         <img src="${item.ThumbnailPath}" alt="${item.Name}">
         <p class="part-name">${item.Name}</p>
-        <p class="part-description">&pound;${item.Price} | ${item.Weight}g <br> ${item.Description}</p>
+        <p class="part-description">&pound;${item.Price} | ${item.Weight}g <br> ${item.Description} <br> <br> ${StarsHtml} (${NumberOfReviews})</p >
+
     `;
 
         optionsDiv.appendChild(opt);
@@ -341,6 +364,8 @@ async function init() {
         const { parts, byType } = await LoadParts(PartFile);
         allParts = parts;
         partsByType = byType;
+
+        await LoadReviews();
 
         BuildSteps = desiredOrder.filter((t) => partsByType[t]);
         BuildSteps.forEach((t) => RenderPartSection(t, partsByType[t]));
