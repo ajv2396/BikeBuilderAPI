@@ -2,7 +2,7 @@
 
 namespace BikeBuilderAPI.Models
 {
-    public class Reviews
+    public class Review
     {
         public int ReviewId { get; set; }
         public int BikePartID { get; set; }
