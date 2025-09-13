@@ -347,13 +347,27 @@ document.getElementById("save-bike").addEventListener("click", () => {
         }
     }
 
+    const BikeTypeMap = {enduro: 1, dh: 2, dj: 3}
+
     const data = {
         AccountId: LoggedInAccountID,
-        biketype: BikeType,
-        parts: Object.fromEntries(
-            Object.entries(selectedParts).map(([type, part]) => [type, part.Id])
-        ),
+        BikeType: BikeTypeMap[BikeType] || 1,
+        Frame: selectedParts.frame?.Id || 0,
+        Shock: selectedParts.shock?.Id || 0,
+        Fork: selectedParts.fork?.Id || 0,
+        Wheels: selectedParts.wheels?.Id || 0,
+        Tyres: selectedParts.tyres?.Id || 0,
+        Drivetrain: selectedParts.drivetrain?.Id || 0,
+        Brakes: selectedParts.brakes?.Id || 0,
+        Seatpost: selectedParts.seatpost?.Id || 0,
+        Saddle: selectedParts.saddle?.Id || 0,
+        Bars: selectedParts.bars?.Id || 0,
+        Stem: selectedParts.stem?.Id || 0,
+        Pedals: selectedParts.pedals?.Id || 0
     };
+
+
+
 
     fetch("https://localhost:7165/api/bikes/save-bike", {
         method: "POST",

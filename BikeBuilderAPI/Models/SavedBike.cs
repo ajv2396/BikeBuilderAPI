@@ -6,19 +6,19 @@ namespace BikeBuilderAPI.Models
     {
         public int Id { get; set; }
 
-        public string BikeType { get; set; }
-        public string Frame { get; set; }
-        public string Shock { get; set; }
-        public string Fork { get; set; }
-        public string Wheels { get; set; }
-        public string Tyres { get; set; }
-        public string Drivetrain { get; set; }
-        public string Brakes { get; set; }
-        public string Seatpost { get; set; }
-        public string Saddle { get; set; }
-        public string Bars { get; set; }
-        public string Stem { get; set; }
-        public string Pedals { get; set; }
+        public int BikeType { get; set; }
+        public int Frame { get; set; }
+        public int Shock { get; set; }
+        public int Fork { get; set; }
+        public int Wheels { get; set; }
+        public int Tyres { get; set; }
+        public int Drivetrain { get; set; }
+        public int Brakes { get; set; }
+        public int Seatpost { get; set; }
+        public int Saddle { get; set; }
+        public int Bars { get; set; }
+        public int Stem { get; set; }
+        public int Pedals { get; set; }
 
         public DateTime SavedAt { get; set; } = DateTime.UtcNow;
 
