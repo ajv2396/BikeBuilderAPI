@@ -23,9 +23,19 @@ fetch('user_session.json')
         console.error('Error fetching JSON:', error);
     })
 
+//---------------------LOAD BIKE PARTS----------------------
+async function LoadParts(file) {
+    const resp = await fetch(file);
+    const parts = await resp.json();
 
+    const byType = parts.reduce((acc, p) => {
+        (acc[p.PartType] = acc[p.PartType] || []).push(p);
+        return acc;
+    }, {});
+    return { parts, byType };
+}
 
-//Get details from user_saves.json
+//---------------Get details from user_saves.json-----------
 fetch('user_saves.json')
     .then(response => {
         if (!response.ok) {
@@ -43,7 +53,30 @@ fetch('user_saves.json')
             return;
         }
 
+
+        LoadParts();
+
+
+
+        //-------PUT INTO HTML CARDS------
         data.forEach((bike, index) => {
+            let BikeType;
+            //-------GET IMAGE PATHS AND VARIABLE NAMES------------
+            switch (bike.BikeType) {
+                case 1:
+                    BikeType = "Enduro";
+                    break;
+                case 2:
+                    BikeType = "Downhill";
+                    break;
+                case 3:
+                    BikeType = "Dirt Jumper";
+                    break;
+                default:
+                    BikeType = "Unknown";
+            }
+
+            //-------REST OF ADDING TO HTML---------------
             const BikeCard = document.createElement('div');
             BikeCard.classList.add('bike-card');
 
@@ -83,7 +116,7 @@ fetch('user_saves.json')
                     <img class="pedals-img" />
                 </div>
                 <div class="bike-display-data">
-                    <p><strong>Type:</strong> ${bike.BikeType}</p>
+                    <p><strong>Type:</strong> ${BikeType}</p>
                     <p><strong>Frame:</strong> ${bike.Frame}</p>
                     <p><strong>Fork:</strong> ${bike.Fork}</p>
                     <p><strong>Shock:</strong> ${bike.Shock}</p>
@@ -132,14 +165,14 @@ document.getElementById('SavedBikesContainer').addEventListener('click', functio
         if (SelectedBikeCard) {
             const bikeId = event.target.dataset.bikeId; //get the bikes id thats being deleted from the card
 
-            const data = {
+            const DeleteData = {
                 BikeID: bikeId
             };
 
             fetch("https://localhost:7165/api/bikes/delete-bike", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(data)
+                body: JSON.stringify(DeleteData)
             })
                 .then(res => {
                     if (res.ok) {
