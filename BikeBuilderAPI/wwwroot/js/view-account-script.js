@@ -1,4 +1,4 @@
-﻿//Get details from user_session.json
+//Get details from user_session.json
 fetch('user_session.json')
     .then(response => {
         if (!response.ok) {
