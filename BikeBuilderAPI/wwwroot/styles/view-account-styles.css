@@ -109,6 +109,7 @@ header {
     justify-content: start;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     transition: height 0.8s ease, transform 0.5s ease;
+
 }
     .bike-card:hover {
         transform: translateY(-5px);
@@ -129,7 +130,7 @@ header {
     transition: all 0.5s ease;
     height: auto;
     margin-top: 10px;
-    line-height: 0.1;
+    line-height: 1.0;
 }
 
 .bike-card:hover .bike-display-data {
