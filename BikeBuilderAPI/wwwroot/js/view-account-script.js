@@ -51,7 +51,7 @@ fetch('user_saves.json')
         const PartsCache = {};
 
         for (const [index, bike] of data.entries()) {
-            // Determine bike type string
+
             let BikeType;
             let BikeImgPath;
             switch (bike.BikeType) {
@@ -68,7 +68,7 @@ fetch('user_saves.json')
                 default: BikeType = "Unknown";
             }
 
-            // Determine parts file path
+
             let FilePath;
             switch (bike.BikeType) {
                 case 1: FilePath = "bike-parts/enduro_parts.json"; break;
@@ -81,16 +81,14 @@ fetch('user_saves.json')
                 continue;
             }
 
-            // Load parts (cached)
             if (!PartsCache[bike.BikeType]) {
                 PartsCache[bike.BikeType] = await LoadParts(FilePath);
             }
             const parts = PartsCache[bike.BikeType].parts;
 
-            // Helper to find part info by ID
             const findPart = (id) => parts.find(p => p.Id === id) || {};
 
-            // Find each part's info
+            //get info about each part from database
             const FramePart = findPart(bike.Frame);
             const ForkPart = findPart(bike.Fork);
             const ShockPart = findPart(bike.Shock);
@@ -106,24 +104,22 @@ fetch('user_saves.json')
 
             const FrameSelected = FramePart.ImagePath.slice(0, -4);
 
-            // Prepare your BikeCard element
             const BikeCard = document.createElement('div');
             BikeCard.classList.add('bike-card');
 
-            // Get today's date
+            //todays date
             const today = new Date();
             const day = String(today.getDate()).padStart(2, '0');
             const month = String(today.getMonth() + 1).padStart(2, '0');
             const year = today.getFullYear();
             const TodaysDate = `${year}-${month}-${day}`;
 
-            // Format saved date
+            //format saved date
             let BikeSaveDate = bike.SavedAt.substring(0, 10);
             if (TodaysDate === BikeSaveDate) {
                 BikeSaveDate = bike.SavedAt.substring(11, 16);
             }
 
-            // Insert HTML with part names from your part info (fallback to IDs if missing)
             BikeCard.innerHTML = `
         <h3>Bike #${index + 1}</h3>
         <br/>
