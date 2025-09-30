@@ -8,11 +8,17 @@
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 <body>
-    <!-- Header -->
     <header>
-        <div class="login-signup">
-            
+        <div class="back-button">
+            <a href="index.html" class="back-button header-button">
+                BACK
+            </a>
         </div>
+
+        <div class="basket">
+            <i class="fas fa-shopping-basket"></i>
+        </div>
+
     </header>
 
     <!-- Bike Display -->
@@ -32,25 +38,7 @@
         <img id="pedals-img" src="" alt="">
     </div>
 
-    <!-- Control + Selector Area -->
     <div class="part-selector-bar">
-
-        <!-- Return to Start -->
-        <div class="return-button">
-            <a href="index.html" class="return-button">BACK</a>
-        </div>
-
-        <!-- Wizard selector bar (JS will insert steps here) -->
-        <div class="part-selector-bar">
-            <!-- Global totals bar -->
-            <div id="total-price" style="margin-top:10px; font-weight:bold;">
-                Total: £0 <br /><br /> Weight: 0g
-            </div>
-
-            <button class="prev-button">Previous</button>
-            <!-- JS inserts steps like step-frame, step-fork, etc. here -->
-            <button class="next-button">Next</button>
-        </div>
 
 
         <!-- Save -->
@@ -58,9 +46,25 @@
             <button id="save-bike">Save Bike</button>
         </div>
 
+        <div class="part-selector-bar">
+            <!-- totals bar -->
+            <div id="total-price" style="margin-top:10px; font-weight:bold;">
+                Total: £0 <br /><br /> Weight: 0g
+            </div>
+
+            <button class="prev-button">Previous</button>
+            <!-- builder-script inserts steps -->
+            <button class="next-button">Next</button>
+        </div>
+
+
+        <!-- add to basket -->
+        <div class="save-button">
+            <button id="add-to-basket">Add to Basket</button>
+        </div>
+
     </div>
 
-    <!-- Script at the end of body -->
     <script src="js/builder-script.js"></script>
 </body>
 </html>

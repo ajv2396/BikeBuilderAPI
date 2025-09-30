@@ -1,4 +1,6 @@
 ﻿let LoggedInAccountID = null;
+const BikeTypeMap = { enduro: 1, dh: 2, dj: 3 };
+
 
 // -------------------------- LOAD SESSION --------------------------
 fetch("user_session.json")
@@ -318,6 +320,55 @@ document.querySelectorAll(".part-selector-bar")[1].addEventListener("click", (e)
     }
 });
 
+// -------------------------- BASKET REDIRECT --------------------
+document.querySelector('.basket').addEventListener('click', () => {
+    window.location.href = 'basket.html';  
+});
+
+// ----------------------- ADD TO BASKET --------------------------
+document.getElementById("add-to-basket").addEventListener("click", () => {
+    if (LoggedInAccountID == null) {
+        alert("You are not logged in. Login or signup.");
+        return;
+    }
+
+    for (const type of desiredOrder) {
+        if (partsByType[type] && !selectedParts[type]) {
+            alert(`Not all parts selected. Missing: ${type}`);
+            return;
+        }
+    }
+
+    const BasketData = {
+        AccountId: LoggedInAccountID,
+        Bike: {
+            BikeType: BikeTypeMap[BikeType] || 1,
+            Frame: selectedParts.frame?.Id || 0,
+            Shock: selectedParts.shock?.Id || 0,
+            Fork: selectedParts.fork?.Id || 0,
+            Wheels: selectedParts.wheels?.Id || 0,
+            Tyres: selectedParts.tyres?.Id || 0,
+            Drivetrain: selectedParts.drivetrain?.Id || 0,
+            Brakes: selectedParts.brakes?.Id || 0,
+            Seatpost: selectedParts.seatpost?.Id || 0,
+            Saddle: selectedParts.saddle?.Id || 0,
+            Bars: selectedParts.bars?.Id || 0,
+            Stem: selectedParts.stem?.Id || 0,
+            Pedals: selectedParts.pedals?.Id || 0
+        }
+    };
+
+    fetch("https://localhost:7165/api/basket/add", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(BasketData)
+    })
+        .then(res => res.ok ? alert("Bike added to basket!") : alert("Failed to add: " + res.status))
+        .catch(err => console.error("Error adding to basket:", err));
+});
+
+
+
 // -------------------------- SAVE BIKE --------------------------
 document.getElementById("save-bike").addEventListener("click", () => {
     if (LoggedInAccountID == null) {
@@ -331,8 +382,6 @@ document.getElementById("save-bike").addEventListener("click", () => {
             return;
         }
     }
-
-    const BikeTypeMap = {enduro: 1, dh: 2, dj: 3}
 
     const data = {
         AccountId: LoggedInAccountID,

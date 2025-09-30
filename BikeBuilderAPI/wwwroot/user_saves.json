@@ -49,5 +49,22 @@
     "Stem": 97,
     "Pedals": 95,
     "SavedAt": "2025-09-13T22:31:11.9356561"
+  },
+  {
+    "Id": 4,
+    "BikeType": 1,
+    "Frame": 1,
+    "Shock": 30,
+    "Fork": 35,
+    "Wheels": 39,
+    "Tyres": 41,
+    "Drivetrain": 43,
+    "Brakes": 45,
+    "Seatpost": 53,
+    "Saddle": 55,
+    "Bars": 52,
+    "Stem": 50,
+    "Pedals": 47,
+    "SavedAt": "2025-09-29T09:56:40.5727327"
   }
 ]

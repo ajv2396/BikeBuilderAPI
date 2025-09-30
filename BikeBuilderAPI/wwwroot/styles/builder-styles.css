@@ -187,13 +187,16 @@ select {
 header {
     position: fixed;
     top: 0;
-    width: 100%;
+    left: 0;
+    right: 0; 
     background-color: #000;
     display: flex;
-    justify-content: left;
+    justify-content: space-between;
     align-items: center;
+    padding: 0 40px; 
     z-index: 1000;
     height: 70px;
+    box-sizing: border-box;
 }
 
 .part-description {
@@ -210,10 +213,25 @@ header {
 .part-more-button button {
     color: black;
     font-size: 0.6rem;
-    background-color: white; /* dark background so white text is visible */
-    border: none; /* optional */
-    padding: 5px 10px; /* optional styling */
-    cursor: pointer; /* optional */
+    background-color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer; 
 }
+
+.basket {
+  font-size: 1.5em;
+  color: #fff;
+  cursor: pointer;
+  position: relative;
+  transition: 0.5s all;
+}
+
+    .basket:hover {
+        color: #c4c4c4;
+        transform: translateY(-5px);
+    }
+
+
 
 
