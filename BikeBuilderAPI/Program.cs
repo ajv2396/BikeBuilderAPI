@@ -20,6 +20,12 @@ using (var db = new AccountsContext())
     ReviewsExporter.ExportReviewsToJson(db);
 }
 
+//Export all user saves on start up
+using (var db = new AccountsContext())
+{
+    UserSaveExporter.ExportAllUserSavesToJson(db);
+}
+
 var builder = WebApplication.CreateBuilder(args);
 
 
