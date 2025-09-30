@@ -166,7 +166,7 @@ fetch('user_saves.json')
       `;
 
             BikeCard.querySelector('.frame-img').src = `images/${BikeImgPath}/frames/${FramePart.ImagePath}`;
-            if (bike.BikeType != "Dirt Jumper") { //if bike doesnt equal dirt jumper then display shock. so if it is a dirt jumper, the shocks arent displayed
+            if (bike.BikeType !== 3) { //if bike doesnt equal dirt jumper then display shock. so if it is a dirt jumper, the shocks arent displayed
                 BikeCard.querySelector('.shock-img').src = `images/${BikeImgPath}/frame-specific/shocks/${ShockPart.ImagePath}_${FrameSelected}.png`;
             }
             BikeCard.querySelector('.fork-img').src = `images/${BikeImgPath}/forks/${ForkPart.ImagePath}`;
