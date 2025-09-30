@@ -132,7 +132,7 @@ h1 {
     color: #ffffff;
 }
 
-.return-button button {
+.return-button{
     height: 75px;
     width: 200px;
     border-color: #2e2e2e;
@@ -195,29 +195,6 @@ header {
     z-index: 1000;
     height: 70px;
 }
-
-.header-button {
-    display: inline-block;
-    padding: 15px 30px;
-    font-size: 1.0rem;
-    font-weight: bold;
-    text-decoration: none;
-    color: #000000;
-    border-radius: 5px;
-    transition: all 0.3s ease;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-}
-
-    .header-button:hover {
-        background-color: rgba(255, 255, 255, 0.2);
-        transform: translateY(-2px);
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-    }
-
-    .header-button:active {
-        transform: translateY(1px);
-    }
 
 .part-description {
     font-size: 0.85rem;

@@ -289,20 +289,9 @@ function ShowStep(index) {
         el.style.display = i === index ? "block" : "none";
     });
 
-    // Toggle back button
-    document.querySelector(".back-button").style.display =
-        index > 0 ? "block" : "none";
-
-    // Toggle return button
-    document.querySelector(".return-button").style.display =
-        index === 0 ? "block" : "none";
-
     currentStep = index;
 }
 
-document.getElementById("back-button").addEventListener("click", () => {
-    if (currentStep > 0) ShowStep(currentStep - 1);
-});
 
 document.querySelector(".prev-button").addEventListener("click", () => {
     if (currentStep > 0) ShowStep(currentStep - 1);
@@ -310,10 +299,6 @@ document.querySelector(".prev-button").addEventListener("click", () => {
 
 document.querySelector(".next-button").addEventListener("click", () => {
     if (currentStep < BuildSteps.length - 1) ShowStep(currentStep + 1);
-});
-
-document.getElementById("return-button").addEventListener("click", () => {
-    ShowStep(0);
 });
 
 

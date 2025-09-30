@@ -1,4 +1,4 @@
-﻿//Get details from user_session.json
+//Get details from user_session.json
 fetch('user_session.json')
     .then(response => {
         if (!response.ok) {
@@ -102,6 +102,10 @@ fetch('user_saves.json')
             const StemPart = findPart(bike.Stem);
             const PedalsPart = findPart(bike.Pedals);
 
+            if (bike.BikeType == "Dirt Jumper") {
+                ShockPart.Name= "No shock"
+            }
+
             const FrameSelected = FramePart.ImagePath.slice(0, -4);
 
             const BikeCard = document.createElement('div');
@@ -140,7 +144,7 @@ fetch('user_saves.json')
         </div>
         <div class="bike-display-data">
           <p><strong>Type:</strong> ${BikeType}</p>
-          <p><strong>Frame:</strong> ${FramePart.Name || bike.Frame}</p>
+          <p><strong>Frame:</strong> ${FramePart.Name}</p>
           <p><strong>Fork:</strong> ${ForkPart.Name || bike.Fork}</p>
           <p><strong>Shock:</strong> ${ShockPart.Name || bike.Shock}</p>
           <p><strong>Wheels:</strong> ${WheelsPart.Name || bike.Wheels}</p>
@@ -162,7 +166,9 @@ fetch('user_saves.json')
       `;
 
             BikeCard.querySelector('.frame-img').src = `images/${BikeImgPath}/frames/${FramePart.ImagePath}`;
-            BikeCard.querySelector('.shock-img').src = `images/${BikeImgPath}/frame-specific/shocks/${ShockPart.ImagePath}_${FrameSelected}.png`;
+            if (bike.BikeType != "Dirt Jumper") { //if bike doesnt equal dirt jumper then display shock. so if it is a dirt jumper, the shocks arent displayed
+                BikeCard.querySelector('.shock-img').src = `images/${BikeImgPath}/frame-specific/shocks/${ShockPart.ImagePath}_${FrameSelected}.png`;
+            }
             BikeCard.querySelector('.fork-img').src = `images/${BikeImgPath}/forks/${ForkPart.ImagePath}`;
             BikeCard.querySelector('.wheels-img').src = `images/${BikeImgPath}/wheels/${WheelsPart.ImagePath}`;
             BikeCard.querySelector('.tyres-img').src = `images/${BikeImgPath}/tyres/${TyresPart.ImagePath}`;
