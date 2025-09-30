@@ -501,15 +501,14 @@
             const container = document.getElementById("SavedBikesContainer");
             if (!container) return;
 
-            // Duplicate content for seamless looping
             container.innerHTML += container.innerHTML;
 
-            let scrollSpeed = 0.5; 
+            let scrollSpeed = 1; 
 
             function step() {
                 container.scrollLeft += scrollSpeed;
                 if (container.scrollLeft >= container.scrollWidth / 2) {
-                    container.scrollLeft = 0;
+                    container.scrollLeft -= container.scrollWidth / 2;
                 }
 
                 requestAnimationFrame(step);
