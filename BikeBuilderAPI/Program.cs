@@ -39,8 +39,8 @@ var app = builder.Build();
 
 
 
-app.UseDefaultFiles();   // Automatically serve index.html from wwwroot
-app.UseStaticFiles();    // Allow serving HTML, JS, CSS, images
+app.UseDefaultFiles(); 
+app.UseStaticFiles();  
 
 app.UseCors(policy =>
     policy.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader()
