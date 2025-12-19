@@ -48,33 +48,31 @@ namespace BikeBuilderAPI.Controllers
             {
                 List<BikeItem> basket = new List<BikeItem>();
 
-                //read existing file if it exists
                 if (System.IO.File.Exists(BasketFile))
                 {
                     string json = System.IO.File.ReadAllText(BasketFile);
+
                     if (!string.IsNullOrWhiteSpace(json))
                     {
-                        basket = JsonSerializer.Deserialize<List<BikeItem>>(json);
+                        basket = JsonSerializer.Deserialize<List<BikeItem>>(json)
+                                 ?? new List<BikeItem>();
                     }
                 }
 
-                //make the next id
-                int nextId = 1;
-                if (basket.Count > 0)
-                {
-                    nextId = basket[^1].Id + 1;
-                }
+                int nextId = basket.Count > 0 ? basket[^1].Id + 1 : 1;
 
                 newItem.Id = nextId;
                 basket.Add(newItem);
 
                 var options = new JsonSerializerOptions { WriteIndented = true };
-                string updatedJson = JsonSerializer.Serialize(basket, options);
-                System.IO.File.WriteAllText(BasketFile, updatedJson);
+                System.IO.File.WriteAllText(
+                    BasketFile,
+                    JsonSerializer.Serialize(basket, options)
+                );
 
                 return Ok(new { message = "Bike added to basket!", Id = newItem.Id });
             }
-            catch (System.Exception ex)
+            catch (Exception ex)
             {
                 return StatusCode(500, new { error = ex.Message });
             }
