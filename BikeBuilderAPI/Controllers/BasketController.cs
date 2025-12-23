@@ -40,6 +40,10 @@ namespace BikeBuilderAPI.Controllers
             public int Stem { get; set; }
             public int Pedals { get; set; }
         }
+        public class RemoveBasketItemRequest
+        {
+            public int Id { get; set; }
+        }
 
         [HttpPost("add")]
         public IActionResult AddToBasket([FromBody] BikeItem newItem)
@@ -48,34 +52,72 @@ namespace BikeBuilderAPI.Controllers
             {
                 List<BikeItem> basket = new List<BikeItem>();
 
+                //read existing file if it exists
                 if (System.IO.File.Exists(BasketFile))
                 {
                     string json = System.IO.File.ReadAllText(BasketFile);
-
                     if (!string.IsNullOrWhiteSpace(json))
                     {
-                        basket = JsonSerializer.Deserialize<List<BikeItem>>(json)
-                                 ?? new List<BikeItem>();
+                        basket = JsonSerializer.Deserialize<List<BikeItem>>(json);
                     }
                 }
 
-                int nextId = basket.Count > 0 ? basket[^1].Id + 1 : 1;
+                //make the next id
+                int nextId = 1;
+                if (basket.Count > 0)
+                {
+                    nextId = basket[^1].Id + 1;
+                }
 
                 newItem.Id = nextId;
                 basket.Add(newItem);
 
                 var options = new JsonSerializerOptions { WriteIndented = true };
-                System.IO.File.WriteAllText(
-                    BasketFile,
-                    JsonSerializer.Serialize(basket, options)
-                );
+                string updatedJson = JsonSerializer.Serialize(basket, options);
+                System.IO.File.WriteAllText(BasketFile, updatedJson);
 
                 return Ok(new { message = "Bike added to basket!", Id = newItem.Id });
             }
-            catch (Exception ex)
+            catch (System.Exception ex)
             {
                 return StatusCode(500, new { error = ex.Message });
             }
         }
+
+        [HttpPost("delete")]
+        public IActionResult RemoveFromBasket([FromBody] RemoveBasketItemRequest request)
+        {
+            try
+            {
+                if (!System.IO.File.Exists(BasketFile))
+                {
+                    return NotFound("Basket file not found");
+                }
+
+                string json = System.IO.File.ReadAllText(BasketFile);
+                var basket = JsonSerializer.Deserialize<List<BikeItem>>(json)
+                             ?? new List<BikeItem>();
+
+                var itemToRemove = basket.Find(b => b.Id == request.Id);
+
+                if (itemToRemove == null)
+                {
+                    return NotFound("Basket item not found");
+                }
+
+                basket.Remove(itemToRemove);
+
+                var options = new JsonSerializerOptions { WriteIndented = true };
+                string updatedJson = JsonSerializer.Serialize(basket, options);
+                System.IO.File.WriteAllText(BasketFile, updatedJson);
+
+                return Ok(new { message = "Item removed from basket" });
+            }
+            catch (System.Exception ex)
+            {
+                return StatusCode(500, new { error = ex.Message });
+            }
+        }
+
     }
 }

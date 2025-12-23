@@ -7,6 +7,7 @@ using System.Security.Principal;
 //Clear json files
 ClearUserSaves.Clear();
 ClearUserSession.Clear();
+ClearUserBasket.Clear();
 
 //Export bike parts on start up
 using (var db = new AccountsContext())

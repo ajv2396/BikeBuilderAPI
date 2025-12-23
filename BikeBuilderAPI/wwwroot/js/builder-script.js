@@ -322,7 +322,7 @@ document.querySelectorAll(".part-selector-bar")[1].addEventListener("click", (e)
 
 // -------------------------- BASKET REDIRECT --------------------
 document.querySelector('.basket').addEventListener('click', () => {
-    window.location.href = 'basket.html';  
+    window.location.href = 'basket.html';
 });
 
 // ----------------------- ADD TO BASKET --------------------------
