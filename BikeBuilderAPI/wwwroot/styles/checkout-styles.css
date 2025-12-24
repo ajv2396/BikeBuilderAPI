@@ -133,6 +133,28 @@ body {
     align-items: center;
 }
 
+.confirmation {
+    font-size: 14px;
+}
+
+.confirmation p {
+    margin: 4px 0;
+    line-height: 1.2;
+}
+
+    .confirmation h3 {
+        margin: 14px 0 6px; 
+    }
+
+    .confirmation h2 {
+        margin-bottom: 20px;
+    }
+
+.confirmation-section {
+    margin-bottom: 12px;
+}
+
+
 .card-logos {
     display: flex;
     width: 150px;

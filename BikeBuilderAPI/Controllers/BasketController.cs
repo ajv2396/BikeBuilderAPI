@@ -39,6 +39,7 @@ namespace BikeBuilderAPI.Controllers
             public int Bars { get; set; }
             public int Stem { get; set; }
             public int Pedals { get; set; }
+            public int Total { get; set; }
         }
         public class RemoveBasketItemRequest
         {

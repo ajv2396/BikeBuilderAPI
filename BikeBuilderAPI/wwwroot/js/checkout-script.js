@@ -51,6 +51,7 @@ document.querySelectorAll('.next-btn').forEach(btn => {
         }
 
         if (currentStep === panels.length - 1 && NextBtn.textContent === "Finish") {
+            localStorage.removeItem("checkoutSummary");
             window.location.href = "index.html";
             return;
         }
@@ -100,7 +101,13 @@ document.querySelectorAll('.back-btn').forEach(btn => {
 });
 
 //----------------------------------SAVING DATA ENTERED----------------------------------
+const checkoutSummary = JSON.parse(localStorage.getItem("checkoutSummary") || "{}");
+
 const formData = {};
+
+formData.totalprice = checkoutSummary.totalPrice || 0;
+formData.itemsnumber = checkoutSummary.itemsCount || 0;
+
 function CollectFormData() {
     formData.firstname = document.getElementById('firstname').value;
     formData.lastname = document.getElementById('lastname').value;
@@ -143,6 +150,12 @@ function FillConfirmation() {
                 <p><strong>Method:</strong> ${formData.paymentMethod}</p>
                 <p><strong>Cardholder:</strong> ${formData.cardholder}</p>
                 <p><strong>Card Number:</strong> ${ShortCardNumber}</p>
+                <br/>
+                <h3>Delivery</h3>
+                <p><strong>Delivery Method</strong> Express Delivery: Free</p>
+                <br/>
+                <h3>Total Price</h3>
+                <p><strong>Total Price of ${formData.itemsnumber} item(s): </strong> £${formData.totalprice}.00 </p>
             </div>
         `;
 }

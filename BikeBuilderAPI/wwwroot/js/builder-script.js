@@ -1,4 +1,5 @@
 ﻿let LoggedInAccountID = null;
+let total;
 const BikeTypeMap = { enduro: 1, dh: 2, dj: 3 };
 
 
@@ -157,7 +158,7 @@ function RenderPartSection(partType, items) {
 
 // -------------------------- UPDATE PRICING --------------------------
 function UpdateTotalPrice() {
-    let total = 0;
+    total = 0;
     let weight = 0;
     Object.values(selectedParts).forEach(part => {
         if (part.Price) total += part.Price;
@@ -325,6 +326,16 @@ document.querySelector('.basket').addEventListener('click', () => {
     window.location.href = 'basket.html';
 });
 
+// ----------------------CALCULATE TOTAL FOR BASKET -------------------
+function CalculateTotal() {
+    let sum = 0;
+    Object.values(selectedParts).forEach(part => {
+        if (part.Price) sum += part.Price;
+    });
+    return sum;
+}
+
+
 // ----------------------- ADD TO BASKET --------------------------
 document.getElementById("add-to-basket").addEventListener("click", () => {
     if (LoggedInAccountID == null) {
@@ -354,7 +365,8 @@ document.getElementById("add-to-basket").addEventListener("click", () => {
             Saddle: selectedParts.saddle?.Id || 0,
             Bars: selectedParts.bars?.Id || 0,
             Stem: selectedParts.stem?.Id || 0,
-            Pedals: selectedParts.pedals?.Id || 0
+            Pedals: selectedParts.pedals?.Id || 0,
+            Total: CalculateTotal()
         }
     };
 

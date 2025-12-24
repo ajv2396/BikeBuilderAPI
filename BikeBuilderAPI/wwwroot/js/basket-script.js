@@ -47,6 +47,21 @@ fetch('basket/user-basket.json')
 
         UserBasket = data.filter(item => item.AccountId === LoggedInAccountID);
 
+        let basketTotal = 0;
+
+        UserBasket.forEach(item => {
+            if (item.Bike && item.Bike.Total) {
+                basketTotal += item.Bike.Total;
+            }
+        });
+
+        const TotalElement = document.getElementById("BasketTotal");
+        if (TotalElement) {
+            TotalElement.textContent = `Total: £${basketTotal}.00`;
+        }
+
+
+
         // If the basket is empty then display this and go no further
         if (!UserBasket || UserBasket.length === 0) {
             container.innerHTML = `<p class="bike-type">Basket is Empty.</p>`;
@@ -135,7 +150,7 @@ fetch('basket/user-basket.json')
                 </div>
 
                 <div class="bike-display-data">
-                    <h3 class="bike-title">Bike ${index + 1}</h3>
+                    <h3 class="bike-title">Bike ${index + 1} : £${bike.Total}.00</h3>
                     <p class="bike-type"><strong>Type:</strong> ${BikeType}</p>
                     <p><strong>Frame:</strong> ${FramePart.Name}</p>
                     <p><strong>Fork:</strong> ${ForkPart.Name}</p>
@@ -212,5 +227,15 @@ document.getElementById('checkout-btn').addEventListener('click', () => {
         alert("Basket is empty.");
         return; // stop redirect
     }
+
+    //calculate totals
+    const totalPrice = UserBasket.reduce((sum, item) => sum + (item.Bike.Total || 0), 0);
+    const itemsCount = UserBasket.length;
+
+    // save for checkout page
+    localStorage.setItem("checkoutSummary", JSON.stringify({
+        totalPrice,
+        itemsCount
+    }));
     window.location.href = "checkout.html";
 });

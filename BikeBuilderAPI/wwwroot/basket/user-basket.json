@@ -1,1 +1,42 @@
-[]
+[
+  {
+    "Id": 1,
+    "AccountId": 16,
+    "Bike": {
+      "BikeType": 1,
+      "Frame": 26,
+      "Shock": 33,
+      "Fork": 36,
+      "Wheels": 40,
+      "Tyres": 42,
+      "Drivetrain": 44,
+      "Brakes": 45,
+      "Seatpost": 53,
+      "Saddle": 55,
+      "Bars": 52,
+      "Stem": 50,
+      "Pedals": 48,
+      "Total": 9034
+    }
+  },
+  {
+    "Id": 2,
+    "AccountId": 16,
+    "Bike": {
+      "BikeType": 3,
+      "Frame": 82,
+      "Shock": 0,
+      "Fork": 87,
+      "Wheels": 89,
+      "Tyres": 91,
+      "Drivetrain": 92,
+      "Brakes": 93,
+      "Seatpost": 101,
+      "Saddle": 103,
+      "Bars": 98,
+      "Stem": 97,
+      "Pedals": 95,
+      "Total": 2645
+    }
+  }
+]
