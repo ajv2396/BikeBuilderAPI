@@ -10,7 +10,7 @@
         <div id="image-wrapper">
             <img id="part-image" src="" alt="Part Image" />
 
-
+            <br />
             <button id="write-review">Write Review</button>
 
             <div class="popup" id="popup">
@@ -248,220 +248,185 @@
     </script>
 
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            font-weight: 200;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            margin: 0; 
-            flex-direction: column;
-            background: #767676;
-        }
-        #image-wrapper {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 15px; 
+        :root {
+            --bg-main: #f5f5f5;
+            --bg-panel: #ffffff;
+            --border-light: #e0e0e0;
+            --text-main: #111;
+            --text-muted: #666;
+            --accent: #1859c9;
         }
 
-        #write-review {
-            display: inline-block;
-            padding: 15px 30px;
-            font-size: 0.9rem;
-            font-weight: bold;
-            color: white;
-            background-color: rgba(255, 255, 255, 0.1);
-            border-radius: 10px;
-            transition: all 0.3s ease;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            cursor: pointer;
-            border: none; 
-            outline: none; 
-        }
-
-            #write-review:hover {
-                background-color: rgba(255, 255, 255, 0.2);
-                transform: translateY(-3px);
-                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-            }
-
-            #write-review:active {
-                transform: translateY(1px);
-            }
-
-        #part-details-container {
-            max-width: 1800px;
-            width: 100%;
-            align-content: center;
-            padding: 30px;
-            background-color: rgba(0, 0, 0, 0.6);
-            border-radius: 15px;
-            color: #ffffff;
-            display: flex;
-            flex-direction: row;
-            gap: 40px;
-            flex-wrap: wrap;
-        }
-
-            #part-details-container img {
-                width: 400px; /* fixed smaller width */
-                height: 400px; /* maintain square aspect ratio */
-                object-fit: contain; /* ensures the image fits nicely */
-                border-radius: 10px;
-                border: 2px solid #005cc1;
-            }
-
-            #part-details-container img:hover {
-                transform: translateY(-2px);
-                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-            }
-
-            .part-details-container img:active {
-                transform: translateY(1px);
-            }
-
-        #part-info {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-start;
-        }
-
-        #part-name {
-            font-size: 42px;
-            margin-bottom: 10px;
-            color: #005cc1;
-            text-shadow: 1px 1px 3px #000;
-        }
-
-        #part-description {
-            font-size: 1rem;
-            color: #ddd;
-            margin-bottom: 15px;
-        }
-
-        #part-price, #part-weight {
-            font-size: 1.1rem;
-            margin-bottom: 10px;
-        }
-
-        #part-reviews {
-            margin-top: 30px;
-            width: 100%;
-        }
-
-            #part-reviews h2 {
-                color: #005cc1;
-                margin-bottom: 10px;
-            }
-
-        #reviews-list {
-            list-style: none;
-            padding: 0;
-            max-height: 300px;
-            overflow-y: auto;
-        }
-
-            #reviews-list li {
-                background-color: rgba(255, 255, 255, 0.1);
-                margin-bottom: 10px;
-                padding: 10px;
-                border-radius: 8px;
-            }
-                #reviews-list li strong {
-                    color: #005cc1;
-                }
-
-        #reviews-list li:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-        }
-
-        .reviews-list li:active {
-            transform: translateY(1px);
-        }
-
-        #average-rating {
-            font-size: 1.2rem;
-            font-weight: bold;
-            margin-bottom: 10px;
-            color: #005cc1;
-        }
-
+        /* ---------- BASE ---------- */
         * {
             box-sizing: border-box;
         }
 
-        .popup{
-            background-color: rgba(0,0,0,0.4);
-            opacity:0;
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            transition: all 0.3s ease-in-out;
-            z-index: -1;
-            font-size: 1.2rem;
+        body {
+            font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+            margin: 0;
+            background: var(--bg-main);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            padding: 60px 24px;
+        }
 
+        /* ---------- MAIN CONTAINER ---------- */
+        #part-details-container {
+            max-width: 1400px;
+            width: 100%;
+            background: var(--bg-panel);
+            border-radius: 12px;
+            padding: 40px;
+            display: flex;
+            gap: 48px;
+            border: 1px solid var(--border-light);
+            flex-wrap: wrap;
+        }
+
+            /* ---------- IMAGE ---------- */
+            #part-details-container img {
+                width: 420px;
+                height: 420px;
+                object-fit: contain;
+                border-radius: 10px;
+                border: 1px solid var(--border-light);
+            }
+
+        /* ---------- INFO ---------- */
+        #part-info {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        #part-name {
+            font-size: 2.5rem;
+            margin-bottom: 12px;
+            color: var(--accent);
+        }
+
+        #part-description {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            margin-bottom: 20px;
+        }
+
+        #part-price,
+        #part-weight {
+            font-size: 1rem;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        /* ---------- REVIEW BUTTON ---------- */
+        #write-review {
+            margin-top: 20px;
+            padding: 12px 22px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #fff;
+            background: var(--accent);
+            border-radius: 6px;
+            border: none;
+            cursor: pointer;
+        }
+
+            #write-review:hover {
+                background: #154aa5;
+            }
+
+        /* ---------- REVIEWS ---------- */
+        #part-reviews {
+            width: 100%;
+            margin-top: 50px;
+        }
+
+            #part-reviews h2 {
+                color: var(--accent);
+                margin-bottom: 16px;
+            }
+
+        #average-rating {
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        #reviews-list {
+            list-style: none;
+            padding: 0;
+            max-height: 320px;
+            overflow-y: auto;
+        }
+
+            #reviews-list li {
+                background: #f9f9f9;
+                border: 1px solid var(--border-light);
+                padding: 14px;
+                border-radius: 8px;
+                margin-bottom: 10px;
+                font-size: 0.85rem;
+            }
+
+                #reviews-list li strong {
+                    color: var(--accent);
+                }
+
+        /* ---------- POPUP ---------- */
+        .popup {
+            background-color: rgba(0,0,0,0.4);
+            opacity: 0;
+            position: fixed;
+            inset: 0;
+            transition: 0.3s ease;
+            z-index: -1;
             display: flex;
             align-items: center;
             justify-content: center;
         }
 
-        .popup.open{
-            opacity: 1;
-            z-index: 999;
-        }
+            .popup.open {
+                opacity: 1;
+                z-index: 999;
+            }
 
-        .popup-inner{
-            background-color: rgba(0, 0, 0, 0.6);
-            border-radius: 5px;
-            box-shadow: 0 1px 4px rgba(0,0,0, 0.3);
-            padding: 15px 25px;
-            text-align: center;
+        .popup-inner {
+            background: #ffffff;
+            border-radius: 10px;
+            padding: 24px 28px;
             width: 500px;
+            border: 1px solid var(--border-light);
         }
 
-        .popup-inner h2{
-            margin: 0;
+            .popup-inner h2 {
+                margin-top: 0;
+            }
+
+        /* ---------- FORM ---------- */
+        .FormBox {
+            width: 100%;
+            padding: 8px;
+            font-size: 0.9rem;
+            border-radius: 6px;
+            border: 1px solid var(--border-light);
         }
 
-        .popup-innter p {
-            line-height: 24px;
-            margin: 10px 0px;
-        }
-
+        /* ---------- GENERIC BUTTON ---------- */
         button {
-            padding: 8px 16px;
-            font-size: 14px;
-            background-color: #007bff;
+            padding: 10px 18px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            background-color: var(--accent);
             color: white;
             border: none;
-            border-radius: 4px;
+            border-radius: 6px;
             cursor: pointer;
         }
 
             button:hover {
-                background-color: #0056b3;
+                background-color: #154aa5;
             }
-
-            button:active {
-                background-color: #004085;
-            }
-
-
-        .FormBox {
-            width: 100%; 
-            padding: 7px;
-            font-size: 1rem;
-            border-radius: 6px;
-            border: 1px solid #ccc;
-            resize: vertical;
-        }
 
     </style>
 </body>

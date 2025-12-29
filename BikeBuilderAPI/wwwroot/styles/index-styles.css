@@ -1,210 +1,210 @@
-﻿body {
-    font-family: 'Arial', sans-serif;
+﻿/* =========================================================
+   ROOT DESIGN TOKENS 
+========================================================= */
+:root {
+    --bg-main: #f5f5f5;
+    --bg-panel: #ffffff;
+    --text-main: #111111;
+    --text-muted: #666666;
+    --border-light: #e0e0e0;
+    --accent: #1859c9;
+    --danger: #c62828;
+}
+
+/* =========================================================
+   BASE
+========================================================= */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
     margin: 0;
-    padding: 0;
-    background: linear-gradient(135deg, #ffffff, #767676);
-    background-size: 400% 400%;
-    animation: gradient 10s ease infinite;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    text-align: center;
+    min-height: 100vh;
+    background-color: var(--bg-main);
+    color: var(--text-main);
     overflow-x: hidden;
 }
 
-@keyframes gradient {
-    0% {
-        background-position: 0% 50%;
-    }
-
-    50% {
-        background-position: 100% 50%;
-    }
-
-    100% {
-        background-position: 0% 50%;
-    }
-}
-
+/* =========================================================
+   HEADER
+========================================================= */
 header {
     position: fixed;
     top: 0;
-    width: 100%;
-    background-color: #000;
-    padding: 10px 30px;
+    inset-inline: 0;
+    height: 64px;
+    background-color: #ffffff;
+    border-bottom: 1px solid var(--border-light);
     display: flex;
-    justify-content: right;
+    justify-content: flex-end;
     align-items: center;
-    z-index: 1000;
+    padding: 0 40px;
+    z-index: 10;
 }
-
 
 .login-signup {
     display: flex;
-    align-items: center;
-    justify-content: right;
-    max-width: 600px;
-    width: 90%;
+    gap: 12px;
 }
 
-
+/* =========================================================
+   MAIN SELECTION PANEL (foreground)
+========================================================= */
 .selection-container {
-    background-color: rgba(0, 0, 0, 0.7);
-    padding: 40px;
-    border-radius: 15px;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
-    max-width: 600px;
+    position: relative;
+    z-index: 5;
+    margin: 140px auto 0;
+    padding: 48px;
+    max-width: 740px;
     width: 90%;
-    margin-top: 50px;
+    background-color: var(--bg-panel);
+    border: 1px solid var(--border-light);
+    border-radius: 8px;
+    text-align: center;
 }
 
+/* =========================================================
+   TEXT
+========================================================= */
 h1 {
-    font-size: 3rem;
-    margin-bottom: 30px;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    font-size: 2.4rem;
+    font-weight: 600;
+    margin: 0 0 12px;
 }
 
 .subtitle {
-    font-size: 1.2rem;
+    font-size: 1rem;
+    color: var(--text-muted);
     margin-bottom: 40px;
-    opacity: 0.9;
 }
 
+/* =========================================================
+   BUTTONS
+========================================================= */
 .button-container {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 14px;
 }
 
-.loginsignup-button {
-    display: inline-block;
-    padding: 15px 30px;
-    font-size: 1.0rem;
-    font-weight: bold;
-    text-decoration: none;
-    color: white;
-    /*background-color: rgba(255, 255, 255, 0.1);*/
-    /*border: 2px solid white;*/
-    border-radius: 5px;
-    transition: all 0.3s ease;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-}
-
-    .loginsignup-button:hover {
-        background-color: rgba(255, 255, 255, 0.2);
-        transform: translateY(-2px);
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-        cursor: pointer;
-    }
-
-    .loginsignup-button:active {
-        transform: translateY(1px);
-    }
-
-.login-button {
-    background-color: #1859c9;
-    color: #ffffff;
-}
-
-.signup-button {
-    background-color: #e9ecf0;
-    color: #000000;
-}
-
-.view-account-button {
-    background-color: #e9ecf0;
-    color: #000000;
-    display: none;
-}
-
-.log-out-button {
-    background-color: #a50000;
-    color: #ffffff;
-    display: none;
-}
-
+.loginsignup-button,
 .bike-button {
-    display: inline-block;
-    padding: 15px 30px;
-    font-size: 1.2rem;
-    font-weight: bold;
+    padding: 14px 24px;
+    font-size: 0.95rem;
+    font-weight: 600;
     text-decoration: none;
-    color: white;
-    background-color: rgba(255, 255, 255, 0.1);
-    border: 2px solid white;
-    border-radius: 50px;
-    transition: all 0.3s ease;
     text-transform: uppercase;
-    letter-spacing: 1px;
+    letter-spacing: 0.5px;
+    border-radius: 6px;
+    border: 1px solid var(--border-light);
+    background-color: #ffffff;
+    color: var(--text-main);
+    cursor: pointer;
+    transition: transform 0.15s ease, border-color 0.15s ease;
 }
 
+    .loginsignup-button:hover,
     .bike-button:hover {
-        background-color: rgba(255, 255, 255, 0.2);
-        transform: translateY(-2px);
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        transform: translateY(-1px);
+        border-color: var(--accent);
     }
 
-    .bike-button:active {
-        transform: translateY(1px);
+/* Primary */
+.login-button {
+    background-color: var(--accent);
+    border-color: var(--accent);
+    color: #ffffff;
+}
+
+    .login-button:hover {
+        background-color: #154aa5;
     }
 
-.dh-button {
-    border-color: #2e2e2e;
+/* Secondary */
+.signup-button,
+.view-account-button {
+    background-color: #ffffff;
+}
+
+/* Danger */
+.log-out-button {
+    background-color: var(--danger);
+    border-color: var(--danger);
     color: #ffffff;
 }
 
-.enduro-button {
-    border-color: #2e2e2e;
-    color: #ffffff;
+/* =========================================================
+   VISIBILITY (controlled by JS)
+========================================================= */
+.login-button,
+.signup-button {
+    display: inline-flex;
 }
 
-.dj-button {
-    border-color: #2e2e2e;
-    color: #ffffff;
+.view-account-button,
+.log-out-button {
+    display: none;
 }
 
-.bike-cards-container {
-    display: flex;
-    gap: 20px;
-    overflow-x: hidden;
-    scroll-behavior: smooth;
-    width: 100%;
-    max-width: 70%;
-    margin: 30px auto 0 auto;
-    margin-top: 30px;
-    position: relative;
-    background-color: rgba(255, 255, 255, 0.2);
-    border-radius: 25px;
+/* =========================================================
+   BACKGROUND BIKE GALLERY
+========================================================= */
+.bike-background {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    overflow: hidden;
+    background-color: var(--bg-main);
 }
 
+/* ---------- BACKGROUND BIKE GRID ---------- */
+.bike-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+    gap: 48px 40px;
+    padding: 120px 60px 60px;
+    opacity: 0.22;
+    filter: grayscale(35%);
+    pointer-events: none;
+}
 
+/* Uniform cards */
 .bike-card {
-    min-width: 300px;
-    flex-shrink: 0;
-    transition: transform 0.5s ease;
-}
-
-#bike-display {
-    position: relative;
-    width: 350px;
-    height: 300px;
-    margin-top: 10px;
+    width: 320px;
+    height: 260px;
     display: flex;
     justify-content: center;
     align-items: center;
-    transition: top 0.8s ease;
 }
 
 
-    #bike-display img {
+/* =========================================================
+   BIKE IMAGE STACK
+========================================================= */
+.bike-display {
+    position: relative;
+    width: 320px;
+    height: 220px;
+}
+
+    .bike-display img {
         position: absolute;
+        inset: 50% auto auto 50%;
         width: 100%;
-        top: 50%;
-        left: 50%;
         transform: translate(-50%, -55%);
         pointer-events: none;
     }
+
+/* =========================================================
+   SOFT FADE AT BOTTOM (depth effect)
+========================================================= */
+.bike-background::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient( to bottom, rgba(245, 245, 245, 0) 55%, rgba(245, 245, 245, 1) 100% );
+}

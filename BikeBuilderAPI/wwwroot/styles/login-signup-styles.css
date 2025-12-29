@@ -1,142 +1,148 @@
-﻿body {
-    font-family: 'Arial', sans-serif;
-    font-size: 1.0rem;
-    font-weight: normal;
+﻿/* ---------- ROOT DESIGN TOKENS ---------- */
+:root {
+    --bg-main: #f5f5f5;
+    --bg-panel: #ffffff;
+    --text-main: #111111;
+    --text-muted: #666666;
+    --border-light: #e0e0e0;
+    --accent: #1859c9;
+}
+
+/* ---------- BASE ---------- */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
     margin: 0;
-    padding: 0;
-    background: linear-gradient(135deg, #ffffff, #767676);
-    background-size: 400% 400%;
-    animation: gradient 10s ease infinite;
-    height: 100vh;
+    background-color: var(--bg-main);
+    color: var(--text-main);
+    min-height: 100vh;
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
-    color: white;
-    text-align: left;
 }
 
-@keyframes gradient {
-    0% {
-        background-position: 0% 50%;
+/* ---------- HEADER ---------- */
+header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 64px;
+    background-color: #ffffff;
+    border-bottom: 1px solid var(--border-light);
+    display: flex;
+    align-items: center;
+    padding: 0 32px;
+    z-index: 1000;
+}
+
+.header-button {
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-decoration: none;
+    color: var(--text-main);
+    padding: 8px 16px;
+    border-radius: 4px;
+    transition: background-color 0.15s ease;
+}
+
+    .header-button:hover {
+        background-color: rgba(0, 0, 0, 0.05);
     }
 
-    50% {
-        background-position: 100% 50%;
-    }
-
-    100% {
-        background-position: 0% 50%;
-    }
+/* ---------- MAIN CONTAINER ---------- */
+.main-container {
+    background-color: var(--bg-panel);
+    padding: 48px;
+    border-radius: 8px;
+    border: 1px solid var(--border-light);
+    max-width: 560px;
+    width: 90%;
+    margin-top: 64px;
 }
 
-.FormBox {
-    background-color: #2e2e2e;
-    color: white;
-    border: 0px #2e2e2e;
-    border-radius: 5px;
-    height: 35px;
-    width: 500px;
-    font-size: 1.1rem;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-}
-
-.FormBoxName {
-    background-color: #2e2e2e;
-    color: white;
-    border: 0px #2e2e2e;
-    border-radius: 10px;
-    height: 30px;
-    width: 238px;
-    font-size: 1.1rem;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-}
-
+/* ---------- FORM STRUCTURE ---------- */
 .NameContainer {
     display: flex;
-    gap: 20px;
+    gap: 16px;
 }
 
 .NameField {
     display: flex;
     flex-direction: column;
+    flex: 1;
 }
 
-.SubmitButton {
-    display: inline-block;
-    font-size: 1.0rem;
-    font-weight: bold;
-    text-decoration: none;
-    color: black;
+/* ---------- INPUTS ---------- */
+.FormBox,
+.FormBoxName {
+    width: 100%;
+    height: 44px;
+    padding: 0 12px;
+    font-size: 0.95rem;
+    border-radius: 4px;
+    border: 1px solid var(--border-light);
     background-color: #ffffff;
-    border: 0px #ffffff;
-    border-radius: 5px;
-    transition: all 0.3s ease;
+    color: var(--text-main);
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+    .FormBox:focus,
+    .FormBoxName:focus {
+        outline: none;
+        border-color: var(--accent);
+        box-shadow: 0 0 0 2px rgba(24, 89, 201, 0.15);
+    }
+
+/* ---------- BUTTON ---------- */
+.SubmitButton {
+    margin-top: 24px;
+    height: 44px;
+    min-width: 140px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.8px;
     text-transform: uppercase;
-    letter-spacing: 1px;
-    height: 30px;
-    width: 130px;
-    justify-content: center;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    background-color: var(--accent);
+    color: #ffffff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.15s ease, transform 0.1s ease;
 }
 
     .SubmitButton:hover {
-        background-color: rgb(174 174 174);
-        color: white;
-        transform: translateY(-2px);
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        background-color: #154aa5;
     }
 
     .SubmitButton:active {
         transform: translateY(1px);
     }
 
-.main-container {
-    background-color: rgba(0, 0, 0, 0.7);
-    padding: 40px;
-    border-radius: 15px;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
-    max-width: 600px;
-    width: 90%;
-    justify-content: center;
-}
-
-header {
-    position: fixed;
-    top: 0;
-    width: 100%;
-    background-color: #000;
-    display: flex;
-    justify-content: left;
-    align-items: center;
-    z-index: 1000;
-    height: 70px;
-}
-
-.header-button {
-    display: inline-block;
-    padding: 15px 30px;
-    font-size: 1.0rem;
-    font-weight: bold;
-    text-decoration: none;
-    color: white;
-    border-radius: 5px;
-    transition: all 0.3s ease;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-}
-
-    .header-button:hover {
-        background-color: rgba(255, 255, 255, 0.2);
-        transform: translateY(-2px);
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-    }
-
-    .header-button:active {
-        transform: translateY(1px);
-    }
-
 .back-button {
-    background-color: #e9ecf0;
-    color: #000000;
+    background-color: transparent;
+    color: var(--text-main);
+    border: 1px solid var(--border-light);
+}
+
+    .back-button:hover {
+        background-color: rgba(0, 0, 0, 0.05);
+    }
+
+
+
+/* ---------- TEXT ---------- */
+label {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin-bottom: 6px;
+}
+
+/* ---------- RESPONSIVE ---------- */
+@media (max-width: 520px) {
+    .NameContainer {
+        flex-direction: column;
+    }
 }

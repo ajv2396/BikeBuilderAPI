@@ -38,7 +38,7 @@ fetch('user_session.json')
         const LoggedInName = data.FirstName + " " + data.LastName;
         const LoggedInAccountID = data.AccountId;
 
-        document.getElementById('LoggedInName').textContent = LoggedInName + " | ID: " + LoggedInAccountID;
+        document.getElementById('LoggedInName').textContent = "Logged in as: " + LoggedInName + " | ID: " + LoggedInAccountID;
 
         const Email = data.Email;
 
@@ -50,7 +50,6 @@ fetch('user_session.json')
     .catch(error => {
         console.error('Error fetching JSON:', error);
     })
-
 
 //---------------------------------------BELOW FOR LOADING CAROSEL/BIKE PARTS-----------------------------------------
 
@@ -156,7 +155,7 @@ fetch('all-saves.json')
 
             if (bike.BikeType !== 3) {
                 BikeCard.innerHTML = `
-                            <div id="bike-display">
+                            <div class="bike-display">
                                 <img class="brakes-img" />
                                 <img class="tyres-img" />
                                 <img class="shock-img" />
@@ -174,7 +173,7 @@ fetch('all-saves.json')
                             `;
             } else {
                 BikeCard.innerHTML = `
-                            <div id="bike-display">
+                            <div class="bike-display">
                                 <img class="brakes-img" />
                                 <img class="tyres-img" />
                                 <img class="shock-img" />
@@ -211,37 +210,22 @@ fetch('all-saves.json')
             container.appendChild(BikeCard);
         }
 
-        if (container.querySelector(".bike-card")) {
-            StartCarousel();
+        // ---------- FILL BACKGROUND WITH REPEATED BIKES ----------
+        const MIN_BIKES = 30; // more/less density
+
+        const cards = Array.from(container.children);
+        let i = 0;
+
+        while (container.children.length < MIN_BIKES && cards.length > 0) {
+            const clone = cards[i % cards.length].cloneNode(true);
+            container.appendChild(clone);
+            i++;
         }
+
     })
     .catch(error => {
         console.error('Error fetching JSON:', error);
     });
-
-
-
-
-
-function StartCarousel() {
-    const container = document.getElementById("SavedBikesContainer");
-    if (!container) return;
-
-    container.innerHTML += container.innerHTML;
-
-    let scrollSpeed = 1;
-
-    function step() {
-        container.scrollLeft += scrollSpeed;
-        if (container.scrollLeft >= container.scrollWidth / 2) {
-            container.scrollLeft -= container.scrollWidth / 2;
-        }
-
-        requestAnimationFrame(step);
-    }
-
-    requestAnimationFrame(step);
-}
 
 
 

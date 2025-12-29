@@ -131,12 +131,22 @@ function RenderPartSection(partType, items) {
         opt.dataset.BikeTypeId = item.BikeTypeId;
         opt.dataset.framespecific = frameSpecificTypes.has(partType) ? "1" : "0";
         opt.innerHTML = `
-        <img src="${item.ThumbnailPath}" alt="${item.Name}">
-        <p class="part-name">${item.Name}</p>
-        <p class="part-description">&pound;${item.Price} | ${item.Weight}g <br> ${item.Description} <br> <br> ${StarsHtml} (${NumberOfReviews})</p >
-        <p class="part-more-button"><button type="button">More Info</button></p>
-
-    `;
+            <img src="${item.ThumbnailPath}" alt="${item.Name}">
+            <p class="part-name">${item.Name}</p>
+            <p class="part-meta">
+                &pound;${item.Price} | ${item.Weight}g
+            </p>
+            <p class="part-description">
+                ${item.Description}
+            </p>
+            <div class="part-rating">
+                ${StarsHtml}
+                <span class="review-count">(${NumberOfReviews})</span>
+            </div>
+            <p class="part-more-button">
+                <button type="button">More Info</button>
+            </p>
+        `;
         //more button
         const MoreInfoButton = opt.querySelector("button");
         MoreInfoButton.addEventListener("click", () => {
