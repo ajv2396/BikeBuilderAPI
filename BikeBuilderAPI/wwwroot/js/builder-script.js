@@ -42,9 +42,6 @@ function RenderStars(rating) {
     return stars;
 }
 
-
-
-
 // -------------------------- BIKE TYPE --------------------------
 function GetBikeType() {
     const qs = new URLSearchParams(window.location.search);
@@ -56,12 +53,79 @@ function GetBikeType() {
 }
 
 const BikeType = GetBikeType();
+const BikeTypeIdentification = BikeTypeMap[BikeType] || 1;
 const fileMap = {
     enduro: "bike-parts/enduro_parts.json",
     dh: "bike-parts/dh_parts.json",
     dj: "bike-parts/dj_parts.json",
 };
 const PartFile = fileMap[BikeType];
+
+// ---------- CHANGE ORDER OF DISPLAY FOR DIFFERENT TYPES ---------
+const bikeLayerOrders = {
+    // ENDURO
+    1: [
+        "brakes",
+        "tyres",
+        "shock",
+        "wheels",
+        "fork",
+        "saddle",
+        "seatpost",
+        "drivetrain-rear",
+        "frame",
+        "stem",
+        "drivetrain",
+        "bars",
+        "pedals"
+    ],
+
+    // DOWNHILL (forks in front of frame)
+    2: [
+        "brakes",
+        "tyres",
+        "shock",
+        "wheels",
+        "saddle",
+        "seatpost",
+        "drivetrain-rear",
+        "frame",
+        "fork", 
+        "stem",
+        "drivetrain",
+        "bars",
+        "pedals"
+    ],
+
+    // DIRT JUMPER (no shock)
+    3: [
+        "brakes",
+        "tyres",
+        "wheels",
+        "fork",
+        "saddle",
+        "seatpost",
+        "drivetrain-rear",
+        "frame",
+        "stem",
+        "drivetrain",
+        "bars",
+        "pedals"
+    ]
+};
+
+const bikeDisplay = document.getElementById("bike-display");
+bikeDisplay.innerHTML = "";
+
+const layerOrder = bikeLayerOrders[BikeTypeIdentification] || bikeLayerOrders[1];
+
+layerOrder.forEach(part => {
+    const img = document.createElement("img");
+    img.id = `${part}-img`;
+    img.alt = part;
+    bikeDisplay.appendChild(img);
+});
+
 
 // -------------------------- LOAD PARTS --------------------------
 async function LoadParts(file) {
