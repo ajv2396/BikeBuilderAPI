@@ -1,0 +1,39 @@
+﻿:root {
+    --header-height: 64px;
+}
+
+/* GLOBAL HEADER */
+header {
+    position: fixed;
+    top: 0;
+    inset-inline: 0;
+    height: var(--header-height);
+    background-color: #ffffff;
+    border-bottom: 1px solid var(--border-light);
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 0 40px;
+    z-index: 1000;
+}
+
+/* CENTER LOGO */
+.header-logo {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    height: 56px;
+    pointer-events: none;
+}
+
+/* RIGHT SIDE BUTTONS */
+.login-signup {
+    display: flex;
+    gap: 12px;
+}
+
+/* LEFT BACK BUTTON SUPPORT */
+.header-left {
+    margin-right: auto;
+}

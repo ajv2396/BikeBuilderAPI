@@ -4,50 +4,42 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MTB Builder - Home</title>
-    <link rel="stylesheet" href="styles/index-styles.css">
 
+    <link rel="stylesheet" href="styles/header.css">
+    <link rel="stylesheet" href="styles/index-styles.css">
 </head>
 
-<header>
-    <!--Login/Sign Up-->
-    <div class="is-logged-in">
-        <span id="LoggedInName"></span>
-    </div>
-    <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
-    <div class="login-signup">
-        <a class="loginsignup-button view-account-button" id="view-account-button">
-            VIEW ACCOUNT
-        </a>
-        <a class="loginsignup-button log-out-button" id="log-out-button">
-            LOG OUT
-        </a>
-        <a href="login.html" class="loginsignup-button login-button">
-            LOGIN
-        </a>
-        <a href="signup.html" class="loginsignup-button signup-button">
-            SIGN UP
-        </a>
-        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
-    </div>
-</header>
 <body>
-    <!--Middle Selection Container-->
-    <div class="selection-container">
-        <h1>MTB BUILDER</h1>
-        <p class="subtitle">Select Bike Type:</p>
 
-        <div class="button-container">
-            <a href="builder.html?bike=enduro" class="bike-button enduro-button">
-                Build Enduro Bike
-            </a>
+    <header>
+        <!-- Logo -->
+        <img src="images/Logos/main-logo.png" alt="MTB Builder" class="header-logo">
 
-            <a href="builder.html?bike=dh" class="bike-button dh-button">
-                Build Downhill Bike
-            </a>
+        <!-- Logged in name -->
+        <div class="is-logged-in">
+            <span id="LoggedInName"></span>
+        </div>
 
-            <a href="builder.html?bike=dj" class="bike-button dj-button">
-                Build Dirt Jumper
-            </a>
+        <!-- Login / Signup -->
+        <div class="login-signup">
+            <a class="loginsignup-button view-account-button" id="view-account-button">VIEW ACCOUNT</a>
+            <a class="loginsignup-button log-out-button" id="log-out-button">LOG OUT</a>
+            <a href="login.html" class="loginsignup-button login-button">LOGIN</a>
+            <a href="signup.html" class="loginsignup-button signup-button">SIGN UP</a>
+        </div>
+    </header>
+
+    <!-- Middle Selection Container -->
+    <div class="page-wrapper">
+        <div class="selection-container">
+            <h2>Select Type to Begin</h2>
+            <p class="subtitle">Select Bike Type:</p>
+
+            <div class="button-container">
+                <a href="builder.html?bike=enduro" class="bike-button enduro-button">Build Enduro Bike</a>
+                <a href="builder.html?bike=dh" class="bike-button dh-button">Build Downhill Bike</a>
+                <a href="builder.html?bike=dj" class="bike-button dj-button">Build Dirt Jumper</a>
+            </div>
         </div>
     </div>
 
@@ -56,10 +48,10 @@
         <div class="bike-grid" id="SavedBikesContainer"></div>
     </div>
 
-
-
-
+    <footer>
+        © 2025 MTB Builder · Computer Science NEA
+    </footer>
 
     <script src="js/index-script.js"></script>
 </body>
-    </html>
+</html>

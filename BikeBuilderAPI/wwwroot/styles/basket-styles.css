@@ -49,6 +49,10 @@ header {
     border-radius: 6px;
 }
 
+header .back-button {
+    margin-right: auto;
+}
+
 /* ---------- BASKET CONTAINER ---------- */
 .basket-container {
     background: var(--bg-panel);

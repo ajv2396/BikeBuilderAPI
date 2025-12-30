@@ -9,6 +9,9 @@
     --border-light: #e0e0e0;
     --accent: #1859c9;
     --danger: #c62828;
+
+    --header-height: 64px;
+    --footer-height: 64px;
 }
 
 /* =========================================================
@@ -23,33 +26,45 @@
 body {
     font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
     margin: 0;
-    min-height: 100vh;
+    height: 100vh;
+    overflow: hidden;
     background-color: var(--bg-main);
     color: var(--text-main);
     overflow-x: hidden;
+}
+.page-wrapper {
+    height: calc(100vh - var(--header-height) - var(--footer-height));
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 /* =========================================================
    HEADER
 ========================================================= */
-header {
-    position: fixed;
-    top: 0;
-    inset-inline: 0;
-    height: 64px;
-    background-color: #ffffff;
-    border-bottom: 1px solid var(--border-light);
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    padding: 0 40px;
-    z-index: 10;
+
+.is-logged-in {
+    margin-right: 20px;
+    font-size: 0.9rem;
+    color: #333;
 }
 
-.login-signup {
-    display: flex;
-    gap: 12px;
+/* =========================================================
+   FOOTER
+========================================================= */
+
+footer {
+    position: fixed;
+    bottom: 12px;
+    width: 100%;
+    text-align: center;
+    font-size: 0.75rem;
+    color: #999;
+    pointer-events: none;
+    height: var(--footer-height);
+    line-height: var(--footer-height);
 }
+
 
 /* =========================================================
    MAIN SELECTION PANEL (foreground)
@@ -159,7 +174,13 @@ h1 {
     z-index: 0;
     overflow: hidden;
     background-color: var(--bg-main);
+    opacity: 0;
+    transition: opacity 0.6s ease;
 }
+
+    .bike-background.loaded {
+        opacity: 1;
+    }
 
 /* ---------- BACKGROUND BIKE GRID ---------- */
 .bike-grid {

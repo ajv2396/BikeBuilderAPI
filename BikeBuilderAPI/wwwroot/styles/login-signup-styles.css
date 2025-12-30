@@ -52,6 +52,11 @@ header {
         background-color: rgba(0, 0, 0, 0.05);
     }
 
+header .back-button {
+    margin-right: auto;
+}
+
+
 /* ---------- MAIN CONTAINER ---------- */
 .main-container {
     background-color: var(--bg-panel);

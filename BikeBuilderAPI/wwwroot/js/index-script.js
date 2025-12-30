@@ -222,6 +222,29 @@ fetch('all-saves.json')
             i++;
         }
 
+        //FADING FOR BACKGROUND LOAD
+        const bg = document.querySelector('.bike-background');
+        const images = bg.querySelectorAll('img');
+
+        let loaded = 0;
+
+        images.forEach(img => {
+            if (img.complete) {
+                loaded++;
+            } else {
+                img.addEventListener('load', () => {
+                    loaded++;
+                    if (loaded === images.length) {
+                        bg.classList.add('loaded');
+                    }
+                });
+            }
+        });
+
+        if (loaded === images.length) {
+            bg.classList.add('loaded');
+        }
+
     })
     .catch(error => {
         console.error('Error fetching JSON:', error);
