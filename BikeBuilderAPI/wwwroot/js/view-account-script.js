@@ -187,8 +187,8 @@ fetch('user_saves.json')
                         <img class="drivetrain-rear-img" />
                         <img class="stem-img" />
                         <img class="bars-img" />
-                        <img class="frame-img" />
                         <img class="fork-img" />
+                        <img class="frame-img" />
                         <img class="drivetrain-img" />
                         <img class="pedals-img" />
                         `;

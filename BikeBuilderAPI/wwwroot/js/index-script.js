@@ -154,43 +154,68 @@ fetch('all-saves.json')
                 BikeSaveDate = bike.SavedAt.substring(11, 16);
             }
 
-            if (bike.BikeType !== 3) {
-                BikeCard.innerHTML = `
-                            <div class="bike-display">
-                                <img class="brakes-img" />
-                                <img class="tyres-img" />
-                                <img class="shock-img" />
-                                <img class="wheels-img" />
-                                <img class="fork-img" />
-                                <img class="saddle-img" />
-                                <img class="seatpost-img" />
-                                <img class="drivetrain-rear-img" />
-                                <img class="frame-img" />
-                                <img class="stem-img" />
-                                <img class="drivetrain-img" />
-                                <img class="bars-img" />
-                                <img class="pedals-img" />
-                            </div>
-                            `;
-            } else {
-                BikeCard.innerHTML = `
-                            <div class="bike-display">
-                                <img class="brakes-img" />
-                                <img class="tyres-img" />
-                                <img class="shock-img" />
-                                <img class="wheels-img" />
-                                <img class="fork-img" />
-                                <img class="saddle-img" />
-                                <img class="seatpost-img" />
-                                <img class="drivetrain-rear-img" />
-                                <img class="frame-img" />
-                                <img class="stem-img" />
-                                <img class="drivetrain-img" />
-                                <img class="bars-img" />
-                                <img class="pedals-img" />
-                            </div>
-                            `;
+            let BikeDisplayHTML = "";
+
+            switch (bike.BikeType) {
+                case 1: // Enduro
+                    BikeDisplayHTML = `
+                        <img class="brakes-img" />
+                        <img class="tyres-img" />
+                        <img class="shock-img" />
+                        <img class="wheels-img" />
+                        <img class="fork-img" />
+                        <img class="saddle-img" />
+                        <img class="seatpost-img" />
+                        <img class="drivetrain-rear-img" />
+                        <img class="frame-img" />
+                        <img class="stem-img" />
+                        <img class="drivetrain-img" />
+                        <img class="bars-img" />
+                        <img class="pedals-img" />
+                    `;
+                    break;
+
+                case 2: // Downhill
+                    BikeDisplayHTML = `
+                        <img class="brakes-img" />
+                        <img class="tyres-img" />
+                        <img class="shock-img" />
+                        <img class="wheels-img" />
+                        <img class="saddle-img" />
+                        <img class="seatpost-img" />
+                        <img class="drivetrain-rear-img" />
+                        <img class="stem-img" />
+                        <img class="bars-img" />
+                        <img class="frame-img" />
+                        <img class="fork-img" />
+                        <img class="drivetrain-img" />
+                        <img class="pedals-img" />
+                    <`;
+                    break;
+
+                case 3: // Dirt Jumper
+                    BikeDisplayHTML = `
+                        <img class="brakes-img" />
+                        <img class="tyres-img" />
+                        <img class="wheels-img" />
+                        <img class="seatpost-img" />
+                        <img class="saddle-img" />
+                        <img class="drivetrain-rear-img" />
+                        <img class="stem-img" />
+                        <img class="bars-img" />
+                        <img class="fork-img" />
+                        <img class="frame-img" />
+                        <img class="drivetrain-img" />
+                        <img class="pedals-img" />
+                        `;
+                    break;
             }
+
+            BikeCard.innerHTML = `
+            <div class="bike-display">
+               ${BikeDisplayHTML}
+            </div>
+          `;
 
             BikeCard.querySelector('.frame-img').src = `images/${BikeImgPath}/frames/${FramePart.ImagePath}`;
             if (bike.BikeType !== 3) { //if bike doesnt equal dirt jumper then display shock. so if it is a dirt jumper, the shocks arent displayed

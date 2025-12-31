@@ -132,25 +132,70 @@ fetch('basket/user-basket.json')
             const BikeCard = document.createElement('div');
             BikeCard.className = 'basket-item';
 
-            BikeCard.innerHTML = `
-                <div class="bike-preview">
-                    <img class="brakes-img" />
-                    <img class="tyres-img" />
-                    <img class="shock-img" />
-                    <img class="wheels-img" />
-                    <img class="fork-img" />
-                    <img class="saddle-img" />
-                    <img class="seatpost-img" />
-                    <img class="drivetrain-rear-img" />
-                    <img class="frame-img" />
-                    <img class="stem-img" />
-                    <img class="drivetrain-img" />
-                    <img class="bars-img" />
-                    <img class="pedals-img" />
-                </div>
 
+            switch (bike.BikeType) {
+                case 1: // Enduro
+                    BikeDisplayHTML = `
+                        <img class="brakes-img" />
+                        <img class="tyres-img" />
+                        <img class="shock-img" />
+                        <img class="wheels-img" />
+                        <img class="fork-img" />
+                        <img class="saddle-img" />
+                        <img class="seatpost-img" />
+                        <img class="drivetrain-rear-img" />
+                        <img class="frame-img" />
+                        <img class="stem-img" />
+                        <img class="drivetrain-img" />
+                        <img class="bars-img" />
+                        <img class="pedals-img" />
+                    `;
+                    break;
+
+                case 2: // Downhill
+                    BikeDisplayHTML = `
+                        <img class="brakes-img" />
+                        <img class="tyres-img" />
+                        <img class="shock-img" />
+                        <img class="wheels-img" />
+                        <img class="saddle-img" />
+                        <img class="seatpost-img" />
+                        <img class="drivetrain-rear-img" />
+                        <img class="stem-img" />
+                        <img class="bars-img" />
+                        <img class="frame-img" />
+                        <img class="fork-img" />
+                        <img class="drivetrain-img" />
+                        <img class="pedals-img" />
+                    `;
+                    break;
+
+                case 3: // Dirt Jumper
+                    BikeDisplayHTML = `
+                        <img class="brakes-img" />
+                        <img class="tyres-img" />
+                        <img class="wheels-img" />
+                        <img class="seatpost-img" />
+                        <img class="saddle-img" />
+                        <img class="drivetrain-rear-img" />
+                        <img class="stem-img" />
+                        <img class="bars-img" />
+                        <img class="fork-img" />
+                        <img class="frame-img" />
+                        <img class="drivetrain-img" />
+                        <img class="pedals-img" />
+                        `;
+                    break;
+            }
+
+            BikeCard.innerHTML = `
+            <div class="bike-preview">
+               ${BikeDisplayHTML}
+            </div>
+            <br/>
                 <div class="bike-display-data">
                     <h3 class="bike-title">Bike ${index + 1} : £${bike.Total}.00</h3>
+                    <p> </p>
                     <p class="bike-type"><strong>Type:</strong> ${BikeType}</p>
                     <p><strong>Frame:</strong> ${FramePart.Name}</p>
                     <p><strong>Fork:</strong> ${ForkPart.Name}</p>
@@ -164,7 +209,7 @@ fetch('basket/user-basket.json')
                     <p><strong>Bars:</strong> ${BarsPart.Name}</p>
                     <p><strong>Stem:</strong> ${StemPart.Name}</p>
                     <p><strong>Pedals:</strong> ${PedalsPart.Name}</p>
-
+                    <p> </p>
                     <button class="remove-btn" data-id="${basketItem.Id}">
                         Remove from basket
                     </button>
