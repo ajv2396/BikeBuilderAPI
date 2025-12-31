@@ -38,6 +38,7 @@ fetch('user_session.json')
         const LoggedInName = data.FirstName + " " + data.LastName;
         const LoggedInAccountID = data.AccountId;
 
+        document.getElementById('LoggedInName').textContent = "";
         document.getElementById('LoggedInName').textContent = "Logged in as: " + LoggedInName + " | ID: " + LoggedInAccountID;
 
         const Email = data.Email;

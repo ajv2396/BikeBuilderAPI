@@ -38,7 +38,6 @@ header {
     background-color: #ffffff;
     border-bottom: 1px solid var(--border-light);
     display: flex;
-    justify-content: flex-start;
     align-items: center;
     padding: 0 32px;
     z-index: 1000;
@@ -76,6 +75,32 @@ header {
     .back-button:hover {
         background-color: rgba(0, 0, 0, 0.05);
     }
+
+.basket {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--text-main);
+    text-decoration: none;
+    cursor: pointer;
+    transition: opacity 0.15s ease;
+}
+
+    .basket:hover {
+        opacity: 0.7;
+    }
+
+    .basket i {
+        font-size: 1.4rem;
+    }
+
+.basket-text {
+    font-size: 1rem;
+    color: var(--text-muted);
+}
 
 
 

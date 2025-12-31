@@ -1,3 +1,6 @@
+let LoggedInAccountID = null;
+
+
 //Get details from user_session.json
 fetch('user_session.json')
     .then(response => {
@@ -11,7 +14,7 @@ fetch('user_session.json')
 
         const FirstName = data.FirstName;
         const LastName = data.LastName;
-        const LoggedInAccountID = data.AccountId;
+        LoggedInAccountID = data.AccountId;
         const Email = data.Email;
 
         document.getElementById('FirstName').textContent = FirstName;
@@ -33,6 +36,15 @@ async function LoadParts(file) {
         return acc;
     }, {});
     return { parts, byType };
+}
+
+//--------------------CALCULATE TOTAL-----------------------
+function CalculateBikeTotal(parts) {
+    let total = 0;
+    Object.values(parts).forEach(p => {
+        if (p && p.Price) total += p.Price;
+    });
+    return total;
 }
 
 //---------------Get details from user_saves.json-----------
@@ -111,6 +123,8 @@ fetch('user_saves.json')
             const BikeCard = document.createElement('div');
             BikeCard.classList.add('bike-card');
 
+            BikeCard.dataset.bike = JSON.stringify(bike);
+
             //todays date
             const today = new Date();
             const day = String(today.getDate()).padStart(2, '0');
@@ -124,48 +138,93 @@ fetch('user_saves.json')
                 BikeSaveDate = bike.SavedAt.substring(11, 16);
             }
 
+            let BikeDisplayHTML = "";
+
+            switch (bike.BikeType) {
+                case 1: // Enduro
+                    BikeDisplayHTML = `
+                        <img class="brakes-img" />
+                        <img class="tyres-img" />
+                        <img class="shock-img" />
+                        <img class="wheels-img" />
+                        <img class="fork-img" />
+                        <img class="saddle-img" />
+                        <img class="seatpost-img" />
+                        <img class="drivetrain-rear-img" />
+                        <img class="frame-img" />
+                        <img class="stem-img" />
+                        <img class="drivetrain-img" />
+                        <img class="bars-img" />
+                        <img class="pedals-img" />
+                    `;
+                    break;
+
+                case 2: // Downhill
+                    BikeDisplayHTML = `
+                        <img class="brakes-img" />
+                        <img class="tyres-img" />
+                        <img class="shock-img" />
+                        <img class="wheels-img" />
+                        <img class="saddle-img" />
+                        <img class="seatpost-img" />
+                        <img class="drivetrain-rear-img" />
+                        <img class="stem-img" />
+                        <img class="bars-img" />
+                        <img class="frame-img" />
+                        <img class="fork-img" />
+                        <img class="drivetrain-img" />
+                        <img class="pedals-img" />
+                    <`;
+                    break;
+
+                case 3: // Dirt Jumper
+                    BikeDisplayHTML = `
+                        <img class="brakes-img" />
+                        <img class="tyres-img" />
+                        <img class="wheels-img" />
+                        <img class="seatpost-img" />
+                        <img class="saddle-img" />
+                        <img class="drivetrain-rear-img" />
+                        <img class="stem-img" />
+                        <img class="bars-img" />
+                        <img class="frame-img" />
+                        <img class="fork-img" />
+                        <img class="drivetrain-img" />
+                        <img class="pedals-img" />
+                        `;
+                    break;
+            }
+
             BikeCard.innerHTML = `
-        <h3>Bike #${index + 1}</h3>
-        <br/>
-        <div id="bike-display">
-          <img class="brakes-img" />
-          <img class="tyres-img" />
-          <img class="shock-img" />
-          <img class="wheels-img" />
-          <img class="fork-img" />
-          <img class="saddle-img" />
-          <img class="seatpost-img" />
-          <img class="drivetrain-rear-img" />
-          <img class="frame-img" />
-          <img class="stem-img" />
-          <img class="drivetrain-img" />
-          <img class="bars-img" />
-          <img class="pedals-img" />
-        </div>
-        <div class="bike-display-data">
-          <p><strong>Type:</strong> ${BikeType}</p>
-          <p><strong>Frame:</strong> ${FramePart.Name}</p>
-          <p><strong>Fork:</strong> ${ForkPart.Name || bike.Fork}</p>
-          <p><strong>Shock:</strong> ${ShockPart.Name || bike.Shock}</p>
-          <p><strong>Wheels:</strong> ${WheelsPart.Name || bike.Wheels}</p>
-          <p><strong>Tyres:</strong> ${TyresPart.Name || bike.Tyres}</p>
-          <p><strong>Drivetrain:</strong> ${DrivetrainPart.Name || bike.Drivetrain}</p>
-          <p><strong>Brakes:</strong> ${BrakesPart.Name || bike.Brakes}</p>
-          <p><strong>Seatpost:</strong> ${SeatpostPart.Name || bike.Seatpost}</p>
-          <p><strong>Saddle:</strong> ${SaddlePart.Name || bike.Saddle}</p>
-          <p><strong>Bars:</strong> ${BarsPart.Name || bike.Bars}</p>
-          <p><strong>Stem:</strong> ${StemPart.Name || bike.Stem}</p>
-          <p><strong>Pedals:</strong> ${PedalsPart.Name || bike.Pedals}</p>
-          <p><strong>Bike ID:</strong> ${bike.Id}</p>
-          <p><strong>Created At:</strong> ${BikeSaveDate}</p>
-          <br>
-          <div class="button-container">
-            <button class="delete-button" data-bike-id="${bike.Id}">Delete</button>
-            <button class="add-to-basket-button" data-bike-id="${bike.Id}">Add to Basket</button>
-            <button class="edit-button" data-bike-id="${bike.Id}">Edit</button>
-          </div>
-        </div>
-      `;
+            <h3>Bike #${index + 1}</h3>
+            <br/>
+            <div id="bike-display">
+               ${BikeDisplayHTML}
+            </div>
+            <div class="bike-display-data">
+              <p><strong>Type:</strong> ${BikeType}</p>
+              <p><strong>Frame:</strong> ${FramePart.Name}</p>
+              <p><strong>Fork:</strong> ${ForkPart.Name || bike.Fork}</p>
+              <p><strong>Shock:</strong> ${ShockPart.Name || bike.Shock}</p>
+              <p><strong>Wheels:</strong> ${WheelsPart.Name || bike.Wheels}</p>
+              <p><strong>Tyres:</strong> ${TyresPart.Name || bike.Tyres}</p>
+              <p><strong>Drivetrain:</strong> ${DrivetrainPart.Name || bike.Drivetrain}</p>
+              <p><strong>Brakes:</strong> ${BrakesPart.Name || bike.Brakes}</p>
+              <p><strong>Seatpost:</strong> ${SeatpostPart.Name || bike.Seatpost}</p>
+              <p><strong>Saddle:</strong> ${SaddlePart.Name || bike.Saddle}</p>
+              <p><strong>Bars:</strong> ${BarsPart.Name || bike.Bars}</p>
+              <p><strong>Stem:</strong> ${StemPart.Name || bike.Stem}</p>
+              <p><strong>Pedals:</strong> ${PedalsPart.Name || bike.Pedals}</p>
+              <p><strong>Bike ID:</strong> ${bike.Id}</p>
+              <p><strong>Created At:</strong> ${BikeSaveDate}</p>
+              <br>
+              <div class="button-container">
+                <button class="delete-button" data-bike-id="${bike.Id}">Delete</button>
+                <button class="add-to-basket-button" data-bike-id="${bike.Id}">Add to Basket</button>
+                <button class="edit-button" data-bike-id="${bike.Id}">Edit</button>
+              </div>
+            </div>
+          `;
 
             BikeCard.querySelector('.frame-img').src = `images/${BikeImgPath}/frames/${FramePart.ImagePath}`;
             if (bike.BikeType !== 3) { //if bike doesnt equal dirt jumper then display shock. so if it is a dirt jumper, the shocks arent displayed
@@ -189,7 +248,7 @@ fetch('user_saves.json')
     .catch(error => {
         console.error('Error fetching JSON:', error);
     });
-
+// ----------------------- DELETE BIKE FROM USERS SAVED BIKES --------------------------
 document.getElementById('SavedBikesContainer').addEventListener('click', function (event) {
     if (event.target && event.target.classList.contains('delete-button')) {
         const SelectedBikeCard = event.target.closest('.bike-card');
@@ -223,3 +282,75 @@ document.getElementById('SavedBikesContainer').addEventListener('click', functio
         }
     }
 });
+
+// ----------------------- ADD TO BASKET --------------------------
+document
+    .getElementById('SavedBikesContainer')
+    .addEventListener('click', async (event) => {
+
+        if (!event.target.classList.contains('add-to-basket-button')) return;
+
+        const card = event.target.closest('.bike-card');
+        if (!card) return;
+
+        const bike = JSON.parse(card.dataset.bike);
+
+        // Load correct parts file
+        const fileMap = {
+            1: "bike-parts/enduro_parts.json",
+            2: "bike-parts/dh_parts.json",
+            3: "bike-parts/dj_parts.json"
+        };
+
+        const { parts } = await LoadParts(fileMap[bike.BikeType]);
+
+        const find = (id) => parts.find(p => p.Id === id) || {};
+
+        const ResolvedParts = {
+            frame: find(bike.Frame),
+            shock: find(bike.Shock),
+            fork: find(bike.Fork),
+            wheels: find(bike.Wheels),
+            tyres: find(bike.Tyres),
+            drivetrain: find(bike.Drivetrain),
+            brakes: find(bike.Brakes),
+            seatpost: find(bike.Seatpost),
+            saddle: find(bike.Saddle),
+            bars: find(bike.Bars),
+            stem: find(bike.Stem),
+            pedals: find(bike.Pedals),
+        };
+
+        const total = CalculateBikeTotal(ResolvedParts);
+
+        const BasketData = {
+            AccountId: LoggedInAccountID,
+            Bike: {
+                BikeType: bike.BikeType,
+                Frame: bike.Frame,
+                Shock: bike.Shock,
+                Fork: bike.Fork,
+                Wheels: bike.Wheels,
+                Tyres: bike.Tyres,
+                Drivetrain: bike.Drivetrain,
+                Brakes: bike.Brakes,
+                Seatpost: bike.Seatpost,
+                Saddle: bike.Saddle,
+                Bars: bike.Bars,
+                Stem: bike.Stem,
+                Pedals: bike.Pedals,
+                Total: total
+            }
+        };
+
+        fetch("https://localhost:7165/api/basket/add", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(BasketData)
+        })
+            .then(res => res.ok
+                ? alert("Bike added to basket!")
+                : alert("Failed to add bike")
+            )
+            .catch(err => console.error("Basket error:", err));
+    });
