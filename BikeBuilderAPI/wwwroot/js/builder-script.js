@@ -89,11 +89,11 @@ const bikeLayerOrders = {
         "saddle",
         "seatpost",
         "drivetrain-rear",
+        "stem",
+        "bars",
         "frame",
         "fork", 
-        "stem",
         "drivetrain",
-        "bars",
         "pedals"
     ],
 
@@ -103,8 +103,8 @@ const bikeLayerOrders = {
         "tyres",
         "wheels",
         "fork",
-        "saddle",
         "seatpost",
+        "saddle",
         "drivetrain-rear",
         "frame",
         "stem",
@@ -122,7 +122,6 @@ const layerOrder = bikeLayerOrders[BikeTypeIdentification] || bikeLayerOrders[1]
 layerOrder.forEach(part => {
     const img = document.createElement("img");
     img.id = `${part}-img`;
-    img.alt = part;
     bikeDisplay.appendChild(img);
 });
 

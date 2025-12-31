@@ -32,14 +32,49 @@
     <!-- Middle Selection Container -->
     <div class="page-wrapper">
         <div class="selection-container">
+            <p class="intro-text">
+                Design your perfect mountain bike from frame to pedals.
+            </p>
             <h2>Select Type to Begin</h2>
-            <p class="subtitle">Select Bike Type:</p>
 
             <div class="button-container">
-                <a href="builder.html?bike=enduro" class="bike-button enduro-button">Build Enduro Bike</a>
-                <a href="builder.html?bike=dh" class="bike-button dh-button">Build Downhill Bike</a>
-                <a href="builder.html?bike=dj" class="bike-button dj-button">Build Dirt Jumper</a>
+                <!-- ENDURO -->
+                <a href="builder.html?bike=enduro"
+                   class="bike-button preview-button"
+                   data-bike="enduro">
+                    <div class="bike-preview">
+                        <img class="preview-img active" src="images/HomePage/Enduro/1.png">
+                        <img class="preview-img" src="">
+                    </div>
+                    <span class="bike-label">Build Enduro Bike</span>
+                    <span class="bike-desc">Built for fast, technical descents and efficient climbing.</span>
+                </a>
+
+                <!-- DOWNHILL -->
+                <a href="builder.html?bike=dh"
+                   class="bike-button preview-button"
+                   data-bike="dh">
+                    <div class="bike-preview">
+                        <img class="preview-img active" src="images/HomePage/DH/1.png">
+                        <img class="preview-img" src="">
+                    </div>
+                    <span class="bike-label">Build Downhill Bike</span>
+                    <span class="bike-desc">Made for descending steep, technical terrain at high speeds.</span>
+                </a>
+
+                <!-- DIRT JUMPER -->
+                <a href="builder.html?bike=dj"
+                   class="bike-button preview-button"
+                   data-bike="dj">
+                    <div class="bike-preview">
+                        <img class="preview-img active" src="images/HomePage/DJ/1.png">
+                        <img class="preview-img" src="">
+                    </div>
+                    <span class="bike-label">Build Dirt Jumper</span>
+                    <span class="bike-desc">Designed for jumps and tricks on pump tracks and skate parks.</span>
+                </a>
             </div>
+
         </div>
     </div>
 

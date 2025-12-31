@@ -159,8 +159,10 @@ fetch('user_saves.json')
           <p><strong>Bike ID:</strong> ${bike.Id}</p>
           <p><strong>Created At:</strong> ${BikeSaveDate}</p>
           <br>
-          <div class="delete-container">
+          <div class="button-container">
             <button class="delete-button" data-bike-id="${bike.Id}">Delete</button>
+            <button class="add-to-basket-button" data-bike-id="${bike.Id}">Add to Basket</button>
+            <button class="edit-button" data-bike-id="${bike.Id}">Edit</button>
           </div>
         </div>
       `;

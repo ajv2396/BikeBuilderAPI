@@ -250,5 +250,67 @@ fetch('all-saves.json')
         console.error('Error fetching JSON:', error);
     });
 
+// ----------------- BUTTON IMAGES ------------------------
+const previewData = {
+    enduro: [
+        "images/HomePage/Enduro/1.png",
+        "images/HomePage/Enduro/2.png",
+        "images/HomePage/Enduro/3.png",
+        "images/HomePage/Enduro/4.png"
+    ],
+    dh: [
+        "images/HomePage/DH/1.png",
+        "images/HomePage/DH/2.png",
+        "images/HomePage/DH/3.png",
+        "images/HomePage/DH/4.png"
+    ],
+    dj: [
+        "images/HomePage/DJ/1.png",
+        "images/HomePage/DJ/2.png",
+        "images/HomePage/DJ/3.png",
+        "images/HomePage/DJ/4.png"
+    ]
+};
+
+document.querySelectorAll(".preview-button").forEach(button => {
+    const bikeType = button.dataset.bike;
+    const images = previewData[bikeType];
+    if (!images) return;
+
+    const preview = button.querySelector(".bike-preview");
+    const imgs = preview.querySelectorAll(".preview-img");
+
+    let index = 0;
+    let timer = null;
+    let front = 0;
+
+    button.addEventListener("mouseenter", () => {
+        timer = setInterval(() => {
+            const next = (index + 1) % images.length;
+            const back = 1 - front;
+
+            imgs[back].src = images[next];
+            imgs[back].classList.add("active");
+            imgs[front].classList.remove("active");
+
+            front = back;
+            index = next;
+        }, 500);
+    });
+
+    button.addEventListener("mouseleave", () => {
+        clearInterval(timer);
+        timer = null;
+
+        // Reset to first image
+        imgs[0].src = images[0];
+        imgs[0].classList.add("active");
+        imgs[1].classList.remove("active");
+        front = 0;
+        index = 0;
+    });
+});
+
+
 
 

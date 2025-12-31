@@ -7,6 +7,7 @@
     --text-muted: #666666;
     --accent: #1859c9;
     --danger: #c62828;
+    --green: #24bf30;
 }
 
 /* ---------- BASE ---------- */
@@ -204,5 +205,43 @@ header {
 
     .delete-button:hover {
         transform: translateY(-1px);
-        background-color: #b71c1c;
+        background-color: #7c0000;
+    }
+
+/* ---------- ADD TO BASKET BUTTON ---------- */
+.add-to-basket-button {
+    margin-top: 10px;
+    padding: 6px 12px;
+    background-color: var(--accent);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.75rem;
+    font-weight: 600;
+    transition: all 0.15s ease;
+}
+
+    .add-to-basket-button:hover {
+        transform: translateY(-1px);
+        background-color: #002c94;
+    }
+
+/* ---------- EDIT BUTTON ---------- */
+.edit-button {
+    margin-top: 10px;
+    padding: 6px 12px;
+    background-color: var(--green);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.75rem;
+    font-weight: 600;
+    transition: all 0.15s ease;
+}
+
+    .edit-button:hover {
+        transform: translateY(-1px);
+        background-color: #007025;
     }
