@@ -443,6 +443,35 @@ document.querySelectorAll(".part-selector-bar")[1].addEventListener("click", (e)
     }
 });
 
+// ---------------- BIKE SIZE CONTROLS ----------------
+let bikeImageSize = 800; //default size
+const SIZE_STEP = 50;
+const MIN_SIZE = 250;
+const MAX_SIZE = 1050;
+
+function UpdateBikeSize() {
+    document
+        .querySelectorAll("#bike-display img")
+        .forEach(img => {
+            img.style.width = bikeImageSize + "px";
+        });
+}
+
+document.getElementById("zoom-in").addEventListener("click", () => {
+    if (bikeImageSize < MAX_SIZE) {
+        bikeImageSize += SIZE_STEP;
+        UpdateBikeSize();
+    }
+});
+
+document.getElementById("zoom-out").addEventListener("click", () => {
+    if (bikeImageSize > MIN_SIZE) {
+        bikeImageSize -= SIZE_STEP;
+        UpdateBikeSize();
+    }
+});
+
+
 // -------------------------- BASKET REDIRECT --------------------
 document.querySelector('.basket').addEventListener('click', () => {
     window.location.href = 'basket.html';
