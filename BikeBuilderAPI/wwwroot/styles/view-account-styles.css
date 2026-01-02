@@ -149,7 +149,6 @@ header {
     align-items: center;
     justify-content: flex-start;
     box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
-    /* IMPORTANT: unchanged animation */
     transition: height 0.8s ease, transform 0.5s ease;
 }
 
@@ -165,7 +164,7 @@ header {
         font-weight: 600;
     }
 
-/* ---------- BIKE DETAILS (HIDDEN UNTIL HOVER) ---------- */
+/* ---------- BIKE DETAILS ---------- */
 .bike-display-data {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -185,9 +184,10 @@ header {
 
 .bike-card:hover .bike-display-data {
     opacity: 1;
+    transform: translateY(+20px);
 }
 
-/* ---------- BIKE IMAGE (DO NOT TOUCH ANIMATION) ---------- */
+/* ---------- BIKE IMAGE ---------- */
 #bike-display {
     position: relative;
     top: 100px;
@@ -197,7 +197,6 @@ header {
     display: flex;
     justify-content: center;
     align-items: center;
-    /* IMPORTANT: unchanged */
     transition: top 0.8s ease;
 }
 
@@ -216,7 +215,7 @@ header {
 
 /* ---------- DELETE BUTTON ---------- */
 .delete-button {
-    margin-top: 10px;
+    margin-top: 5px;
     padding: 6px 12px;
     background-color: var(--danger);
     color: white;
@@ -235,7 +234,7 @@ header {
 
 /* ---------- ADD TO BASKET BUTTON ---------- */
 .add-to-basket-button {
-    margin-top: 10px;
+    margin-top: 5px;
     padding: 6px 12px;
     background-color: var(--accent);
     color: white;
@@ -254,7 +253,8 @@ header {
 
 /* ---------- EDIT BUTTON ---------- */
 .edit-button {
-    margin-top: 10px;
+    margin-top: 5px;
+    margin-bottom: 15px;
     padding: 6px 12px;
     background-color: var(--green);
     color: white;
