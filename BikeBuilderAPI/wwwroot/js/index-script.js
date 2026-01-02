@@ -45,6 +45,7 @@ fetch('user_session.json')
 
         document.querySelector(".view-account-button").style.display = "flex";
         document.querySelector(".log-out-button").style.display = "flex";
+        document.querySelector(".basket").style.display = "flex";
         document.querySelector(".login-button").style.display = "none";
         document.querySelector(".signup-button").style.display = "none";
     })
