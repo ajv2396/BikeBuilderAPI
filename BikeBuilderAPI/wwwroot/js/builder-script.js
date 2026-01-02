@@ -415,7 +415,30 @@ function ShowStep(index) {
     });
 
     currentStep = index;
+
+    const prevBtn = document.querySelector(".prev-button");
+    const nextBtn = document.querySelector(".next-button");
+
+    // Prev button
+    if (currentStep === 0) {
+        prevBtn.style.opacity = "0";
+        prevBtn.style.pointerEvents = "none";
+    } else {
+        prevBtn.style.opacity = "1";
+        prevBtn.style.pointerEvents = "auto";
+    }
+
+    // Next button
+    if (currentStep === BuildSteps.length - 1) {
+        nextBtn.style.opacity = "0";
+        nextBtn.style.pointerEvents = "none";
+    } else {
+        nextBtn.style.opacity = "1";
+        nextBtn.style.pointerEvents = "auto";
+    }
 }
+
+
 
 
 document.querySelector(".prev-button").addEventListener("click", () => {
@@ -425,7 +448,6 @@ document.querySelector(".prev-button").addEventListener("click", () => {
 document.querySelector(".next-button").addEventListener("click", () => {
     if (currentStep < BuildSteps.length - 1) ShowStep(currentStep + 1);
 });
-
 
 // -------------------------- EVENT HANDLER --------------------------
 document.querySelectorAll(".part-selector-bar")[1].addEventListener("click", (e) => {
