@@ -15,6 +15,18 @@ if (isFromSave) {
     }
 }
 
+//---------------DETECT IF USER COMES FROM BASKET-------------------
+const isFromBasket = qs.get("frombasket") === "true";
+
+let RedirectBike = null;
+
+if (isFromBasket) {
+    const raw = localStorage.getItem("RedirectBike");
+    if (raw) {
+        RedirectBike = JSON.parse(raw);
+    }
+}
+
 // -------------------------- LOAD SESSION --------------------------
 fetch("user_session.json")
     .then((response) => {
@@ -184,6 +196,42 @@ function LoadSavedBuild() {
 
     //remove the edit bike from local storage
     localStorage.removeItem("editBike");
+}
+
+// ------------------LOAD PARTS FROM REDIRECT BUILD------------------
+function LoadRedirectBuild() {
+    if (!RedirectBike) return;
+
+    const RedirectIDMap = {
+        frame: RedirectBike.Frame,
+        shock: RedirectBike.Shock,
+        fork: RedirectBike.Fork,
+        wheels: RedirectBike.Wheels,
+        tyres: RedirectBike.Tyres,
+        drivetrain: RedirectBike.Drivetrain,
+        brakes: RedirectBike.Brakes,
+        seatpost: RedirectBike.Seatpost,
+        saddle: RedirectBike.Saddle,
+        bars: RedirectBike.Bars,
+        stem: RedirectBike.Stem,
+        pedals: RedirectBike.Pedals
+    };
+
+    // Select frame 
+    if (RedirectIDMap.frame) {
+        const frame = allParts.find(p => p.Id === RedirectIDMap.frame);
+        if (frame) SelectPart(frame);
+    }
+
+    // Select remaining parts
+    Object.entries(RedirectIDMap).forEach(([type, id]) => {
+        if (!id || type === "frame") return;
+        const part = allParts.find(p => p.Id === id);
+        if (part) SelectPart(part);
+    });
+
+    //remove the edit bike from local storage
+    localStorage.removeItem("RedirectBike");
 }
 
 
@@ -601,6 +649,30 @@ document.getElementById("save-bike").addEventListener("click", () => {
         .catch((err) => console.error("Error saving bike:", err));
 });
 
+
+// -------------------- BASKET BUTTON ---------------------------
+document.querySelector('.basket').addEventListener('click', () => {
+
+    localStorage.setItem("RedirectBike", JSON.stringify({
+        BikeType: BikeTypeMap[BikeType] || 1,
+        Frame: selectedParts.frame?.Id || 0,
+        Shock: selectedParts.shock?.Id || 0,
+        Fork: selectedParts.fork?.Id || 0,
+        Wheels: selectedParts.wheels?.Id || 0,
+        Tyres: selectedParts.tyres?.Id || 0,
+        Drivetrain: selectedParts.drivetrain?.Id || 0,
+        Brakes: selectedParts.brakes?.Id || 0,
+        Seatpost: selectedParts.seatpost?.Id || 0,
+        Saddle: selectedParts.saddle?.Id || 0,
+        Bars: selectedParts.bars?.Id || 0,
+        Stem: selectedParts.stem?.Id || 0,
+        Pedals: selectedParts.pedals?.Id || 0
+    }));
+
+    window.location.href = "basket.html?originator=builder.html";
+});
+
+
 // -------------------------- INIT --------------------------
 async function init() {
     try {
@@ -620,6 +692,10 @@ async function init() {
         // load saved bike
         if (isFromSave) {
             LoadSavedBuild();
+        }
+        // load redirect build
+        if (isFromBasket) {
+            LoadRedirectBuild();
         }
 
     } catch (err) {

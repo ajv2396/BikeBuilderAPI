@@ -355,7 +355,7 @@ document
             .catch(err => console.error("Basket error:", err));
     });
 
-// ----------------------- ADD TO BASKET --------------------------
+// ----------------------- EDIT BIKE --------------------------
 document
     .getElementById('SavedBikesContainer')
     .addEventListener('click', (event) => {

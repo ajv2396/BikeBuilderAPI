@@ -1,4 +1,9 @@
 ﻿let UserBasket;
+let PageRedirect;
+
+//--------------------GET WHERE REDIRECT IS FROM------------------
+const qs = new URLSearchParams(window.location.search);
+PageRedirect = qs.get("originator")
 
 //---------------------GET USER SESSION----------------------
 let LoggedInAccountID = null;
@@ -283,4 +288,19 @@ document.getElementById('checkout-btn').addEventListener('click', () => {
         itemsCount
     }));
     window.location.href = "checkout.html";
+});
+
+//-------------------BACK BUTTON---------------------
+document.getElementById('back-btn').addEventListener('click', () => {
+    if (PageRedirect != null) {
+        if (PageRedirect == "builder.html") {
+            window.location.href = PageRedirect + "?frombasket=true";
+        }
+        else {
+            window.location.href = PageRedirect;
+        }
+    }
+    else {
+        window.location.href = "index.html"; //default to index.html if pageredirect does not exist
+    }
 });
