@@ -27,6 +27,13 @@ if (isFromBasket) {
     }
 }
 
+const BikeTypeIdToKey = {
+    1: "enduro",
+    2: "dh",
+    3: "dj"
+};
+
+
 // -------------------------- LOAD SESSION --------------------------
 fetch("user_session.json")
     .then((response) => {
@@ -68,13 +75,20 @@ function RenderStars(rating) {
 
 // -------------------------- BIKE TYPE --------------------------
 function GetBikeType() {
+    if (RedirectBike?.BikeType) {
+        return BikeTypeIdToKey[RedirectBike.BikeType] || "enduro";
+    }
+
     const qs = new URLSearchParams(window.location.search);
-    return (
-        qs.get("bike") ||
-        localStorage.getItem("bikeType") ||
-        "enduro"
-    ).toLowerCase();
+    const urlBike = qs.get("bike");
+    if (urlBike) return urlBike.toLowerCase();
+
+    const storedBike = localStorage.getItem("bikeType");
+    if (storedBike) return storedBike.toLowerCase();
+
+    return "enduro";
 }
+
 
 const BikeType = GetBikeType();
 const BikeTypeIdentification = BikeTypeMap[BikeType] || 1;
@@ -229,9 +243,6 @@ function LoadRedirectBuild() {
         const part = allParts.find(p => p.Id === id);
         if (part) SelectPart(part);
     });
-
-    //remove the edit bike from local storage
-    localStorage.removeItem("RedirectBike");
 }
 
 
@@ -696,6 +707,7 @@ async function init() {
         // load redirect build
         if (isFromBasket) {
             LoadRedirectBuild();
+            localStorage.removeItem("RedirectBike");
         }
 
     } catch (err) {
