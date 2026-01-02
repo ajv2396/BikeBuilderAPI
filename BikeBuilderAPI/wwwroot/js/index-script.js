@@ -321,7 +321,7 @@ document.querySelectorAll(".preview-button").forEach(button => {
 
             front = back;
             index = next;
-        }, 500);
+        }, 400);
     });
 
     button.addEventListener("mouseleave", () => {

@@ -354,3 +354,38 @@ document
             )
             .catch(err => console.error("Basket error:", err));
     });
+
+// ----------------------- ADD TO BASKET --------------------------
+document
+    .getElementById('SavedBikesContainer')
+    .addEventListener('click', (event) => {
+
+        if (!event.target.classList.contains('edit-button')) return;
+
+        const card = event.target.closest('.bike-card');
+        if (!card) return;
+
+        const bike = JSON.parse(card.dataset.bike);
+
+        //save bike config for builder
+        localStorage.setItem("editBike", JSON.stringify({
+            BikeType: bike.BikeType,
+            Frame: bike.Frame,
+            Shock: bike.Shock,
+            Fork: bike.Fork,
+            Wheels: bike.Wheels,
+            Tyres: bike.Tyres,
+            Drivetrain: bike.Drivetrain,
+            Brakes: bike.Brakes,
+            Seatpost: bike.Seatpost,
+            Saddle: bike.Saddle,
+            Bars: bike.Bars,
+            Stem: bike.Stem,
+            Pedals: bike.Pedals
+        }));
+
+        const typeMap = { 1: "enduro", 2: "dh", 3: "dj" };
+
+        window.location.href =
+            `builder.html?bike=${typeMap[bike.BikeType]}&fromsave=true`;
+    });

@@ -2,6 +2,18 @@
 let total;
 const BikeTypeMap = { enduro: 1, dh: 2, dj: 3 };
 
+//------------------DETECT IF USER COMES FROM EDIT MODE--------------
+const qs = new URLSearchParams(window.location.search);
+const isFromSave = qs.get("fromsave") === "true";
+
+let savedBike = null;
+
+if (isFromSave) {
+    const raw = localStorage.getItem("editBike");
+    if (raw) {
+        savedBike = JSON.parse(raw);
+    }
+}
 
 // -------------------------- LOAD SESSION --------------------------
 fetch("user_session.json")
@@ -137,6 +149,43 @@ async function LoadParts(file) {
     }, {});
     return { parts, byType };
 }
+
+// ------------------LOAD PARTS FROM SAVED BUILD------------------
+function LoadSavedBuild() {
+    if (!savedBike) return;
+
+    const idMap = {
+        frame: savedBike.Frame,
+        shock: savedBike.Shock,
+        fork: savedBike.Fork,
+        wheels: savedBike.Wheels,
+        tyres: savedBike.Tyres,
+        drivetrain: savedBike.Drivetrain,
+        brakes: savedBike.Brakes,
+        seatpost: savedBike.Seatpost,
+        saddle: savedBike.Saddle,
+        bars: savedBike.Bars,
+        stem: savedBike.Stem,
+        pedals: savedBike.Pedals
+    };
+
+    // Select frame 
+    if (idMap.frame) {
+        const frame = allParts.find(p => p.Id === idMap.frame);
+        if (frame) SelectPart(frame);
+    }
+
+    // Select remaining parts
+    Object.entries(idMap).forEach(([type, id]) => {
+        if (!id || type === "frame") return;
+        const part = allParts.find(p => p.Id === id);
+        if (part) SelectPart(part);
+    });
+
+    //remove the edit bike from local storage
+    localStorage.removeItem("editBike");
+}
+
 
 // -------------------------- UI ORDER --------------------------
 const desiredOrder = [
@@ -510,14 +559,18 @@ async function init() {
 
         await LoadReviews();
 
-        BuildSteps = desiredOrder.filter((t) => partsByType[t]);
-        BuildSteps.forEach((t) => RenderPartSection(t, partsByType[t]));
+        BuildSteps = desiredOrder.filter(t => partsByType[t]);
+        BuildSteps.forEach(t => RenderPartSection(t, partsByType[t]));
 
         if (BuildSteps.length > 0) {
             ShowStep(0);
         }
 
-        console.log("Loaded bike parts for", BikeType, partsByType);
+        // load saved bike
+        if (isFromSave) {
+            LoadSavedBuild();
+        }
+
     } catch (err) {
         console.error("Error initializing builder:", err);
     }
