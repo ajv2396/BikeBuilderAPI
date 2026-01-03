@@ -1468,5 +1468,26 @@
     "Username": "Mason Williams",
     "Rating": 5,
     "Description": "Great "
+  },
+  {
+    "ReviewId": 211,
+    "BikePartID": 105,
+    "Username": "Joe Young",
+    "Rating": 5,
+    "Description": "Good brakes for the price"
+  },
+  {
+    "ReviewId": 212,
+    "BikePartID": 104,
+    "Username": "Ben Scott",
+    "Rating": 5,
+    "Description": "Really good brakes"
+  },
+  {
+    "ReviewId": 213,
+    "BikePartID": 105,
+    "Username": "Mark Allen",
+    "Rating": 3,
+    "Description": "Not the best braking power but decent for price"
   }
 ]

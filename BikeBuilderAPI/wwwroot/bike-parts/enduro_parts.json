@@ -372,5 +372,27 @@
     "ThumbnailPath": "images/Enduro/frame-specific/saddle2-thumb.png",
     "Price": 99,
     "Weight": 282
+  },
+  {
+    "Id": 104,
+    "BikeTypeId": 1,
+    "PartType": "brakes",
+    "Name": "TRP EVO Pro",
+    "Description": "Race-level 4-piston disc brakes.",
+    "ImagePath": "brakes2",
+    "ThumbnailPath": "images/Enduro/frame-specific/brakes2_thumb.png",
+    "Price": 579,
+    "Weight": 740
+  },
+  {
+    "Id": 105,
+    "BikeTypeId": 1,
+    "PartType": "brakes",
+    "Name": "MAGURA MT5 Pro",
+    "Description": "Affordable 4-piston disc brakes.",
+    "ImagePath": "brakes3",
+    "ThumbnailPath": "images/Enduro/frame-specific/brakes3_thumb.png",
+    "Price": 410,
+    "Weight": 675
   }
 ]
