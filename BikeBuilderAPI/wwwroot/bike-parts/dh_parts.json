@@ -273,5 +273,27 @@
     "ThumbnailPath": "images/DH/frame-specific/saddle2-thumb.png",
     "Price": 95,
     "Weight": 282
+  },
+  {
+    "Id": 106,
+    "BikeTypeId": 2,
+    "PartType": "frame",
+    "Name": "Transition TR11",
+    "Description": "Alloy frame, 200mm rear travel",
+    "ImagePath": "frame4.png",
+    "ThumbnailPath": "images/DH/frames/frame4-thumb.png",
+    "Price": 2500,
+    "Weight": 4200
+  },
+  {
+    "Id": 107,
+    "BikeTypeId": 2,
+    "PartType": "brakes",
+    "Name": "TRP EVO Pro",
+    "Description": "Race-level 4-piston disc brakes.",
+    "ImagePath": "brakes2",
+    "ThumbnailPath": "images/DH/frame-specific/brakes2-thumb.png",
+    "Price": 579,
+    "Weight": 740
   }
 ]
