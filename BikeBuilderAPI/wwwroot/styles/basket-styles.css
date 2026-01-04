@@ -146,6 +146,7 @@ header .back-button {
     background-color: transparent;
     color: var(--text-main);
     border: 1px solid var(--border-light);
+    cursor: pointer;
 }
 
     .back-button:hover {
