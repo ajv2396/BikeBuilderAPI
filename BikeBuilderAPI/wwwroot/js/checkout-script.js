@@ -160,7 +160,7 @@ function FillConfirmation() {
         `;
 }
 
-//--------------------------FILL CONFIRMAITON PAGE WITH GATHERED DATA--------------------------
+//--------------------------PROCESS PAYMENT--------------------------
 function ProcessPayment() {
     const step3 = document.getElementById('step-3');
 
