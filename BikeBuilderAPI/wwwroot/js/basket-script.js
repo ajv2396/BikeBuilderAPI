@@ -33,7 +33,8 @@ async function LoadParts(file) {
 }
 
 //---------------------LOAD BASKET----------------------
-fetch('basket/user-basket.json')
+fetch('basket/user-basket.json', { cache: "no-store" })
+
     .then(async (response) => {
         if (!response.ok) throw new Error('Response was not ok');
         return response.json();
