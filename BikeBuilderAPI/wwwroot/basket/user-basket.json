@@ -1,1 +1,82 @@
-[]
+[
+  {
+    "Id": 1,
+    "AccountId": 16,
+    "Bike": {
+      "BikeType": 1,
+      "Frame": 24,
+      "Shock": 31,
+      "Fork": 35,
+      "Wheels": 38,
+      "Tyres": 41,
+      "Drivetrain": 44,
+      "Brakes": 45,
+      "Seatpost": 53,
+      "Saddle": 55,
+      "Bars": 51,
+      "Stem": 50,
+      "Pedals": 48,
+      "Total": 8184
+    }
+  },
+  {
+    "Id": 2,
+    "AccountId": 18,
+    "Bike": {
+      "BikeType": 1,
+      "Frame": 27,
+      "Shock": 33,
+      "Fork": 34,
+      "Wheels": 39,
+      "Tyres": 41,
+      "Drivetrain": 43,
+      "Brakes": 45,
+      "Seatpost": 54,
+      "Saddle": 55,
+      "Bars": 52,
+      "Stem": 50,
+      "Pedals": 46,
+      "Total": 9604
+    }
+  },
+  {
+    "Id": 3,
+    "AccountId": 18,
+    "Bike": {
+      "BikeType": 2,
+      "Frame": 58,
+      "Shock": 61,
+      "Fork": 63,
+      "Wheels": 67,
+      "Tyres": 68,
+      "Drivetrain": 69,
+      "Brakes": 71,
+      "Seatpost": 79,
+      "Saddle": 80,
+      "Bars": 78,
+      "Stem": 76,
+      "Pedals": 72,
+      "Total": 8869
+    }
+  },
+  {
+    "Id": 4,
+    "AccountId": 18,
+    "Bike": {
+      "BikeType": 3,
+      "Frame": 83,
+      "Shock": 0,
+      "Fork": 86,
+      "Wheels": 89,
+      "Tyres": 90,
+      "Drivetrain": 92,
+      "Brakes": 93,
+      "Seatpost": 101,
+      "Saddle": 103,
+      "Bars": 100,
+      "Stem": 97,
+      "Pedals": 94,
+      "Total": 2855
+    }
+  }
+]

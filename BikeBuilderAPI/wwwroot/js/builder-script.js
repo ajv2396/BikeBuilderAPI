@@ -607,8 +607,25 @@ document.getElementById("add-to-basket").addEventListener("click", () => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(BasketData)
     })
-        .then(res => res.ok ? alert("Bike added to basket!") : alert("Failed to add: " + res.status))
-        .catch(err => console.error("Error adding to basket:", err));
+        .then(res => {
+            if (!res.ok) throw new Error("Add failed");
+
+            const basketBtn = document.getElementById("add-to-basket");
+            const originalText = basketBtn.textContent;
+
+            basketBtn.textContent = "Added!";
+
+            setTimeout(() => {
+                basketBtn.textContent = originalText;
+            }, 1000);
+
+            LoadBasket();
+        })
+
+        .catch(err => {
+            console.error(err);
+            alert("Error adding to basket");
+        });
 });
 
 

@@ -164,30 +164,63 @@ function FillConfirmation() {
 function ProcessPayment() {
     const step3 = document.getElementById('step-3');
 
+    // Show processing UI
     step3.innerHTML = `
         <h2 class="title">Checkout</h2>
         <div class="progress-bar">
             <div class="step active"></div>
             <div class="step active"></div>
-            <div class="step "></div>
+            <div class="step"></div>
             <div class="step"></div>
         </div>
         <div class="confirmation">
-            <p><strong>Processing Payment...</strong></p>
+            <p><strong>Processing payment...</strong></p>
         </div>
-        <div class="loader" style="margin: 20px auto; width: 50px; height: 50px; border: 5px solid #ccc; border-top: 5px solid #333; border-radius: 50%; animation: spin 1s linear infinite;"></div>
+        <div class="loader" style="
+            margin: 20px auto;
+            width: 50px;
+            height: 50px;
+            border: 5px solid #ccc;
+            border-top: 5px solid #333;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;">
+        </div>
     `;
 
-    // Delay for 2 seconds
-    setTimeout(() => {
-        panels[currentStep].style.display = 'none';
-        currentStep++;
-        panels[currentStep].style.display = 'block';
+    // Build order payload
+    const orderData = {
+        accountID: LoggedInAccountID,   // from session
+        totalPrice: formData.totalprice
+    };
 
-        document.querySelector(".next-btn").textContent = "Finish";
-        document.querySelector(".back-btn").style.display = "none";
-        document.querySelector(".panel-footer").style.justifyContent = "flex-end";
-    }, 2000);
+    fetch("https://localhost:7165/api/orders/create", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(orderData)
+    })
+        .then(res => {
+            if (!res.ok) throw new Error("Order creation failed");
+            return res.json();
+        })
+        .then(data => {
+            console.log("Order created:", data);
+
+            // Clear basket + checkout cache
+            localStorage.removeItem("checkoutSummary");
+
+            // Move to Order Complete step
+            panels[currentStep].style.display = 'none';
+            currentStep++;
+            panels[currentStep].style.display = 'block';
+
+            document.querySelector(".next-btn").textContent = "Finish";
+            document.querySelector(".back-btn").style.display = "none";
+            document.querySelector(".panel-footer").style.justifyContent = "flex-end";
+        })
+        .catch(err => {
+            console.error(err);
+            alert("Payment failed. Please try again.");
+        });
 }
 
 

@@ -9,6 +9,7 @@ namespace BikeBuilderAPI.Model
         public DbSet<SavedBike> SavedBikes { get; set; }
         public DbSet<BikeParts> BikeParts { get; set; }
         public DbSet<Review> Reviews { get; set; }
+        public DbSet<Order> Orders { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder options)
             => options.UseSqlite(@"Data Source = MTB-Builder.db");

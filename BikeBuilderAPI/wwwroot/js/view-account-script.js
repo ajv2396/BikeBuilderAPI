@@ -348,12 +348,16 @@ document
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(BasketData)
         })
-            .then(res => res.ok
-                ? alert("Bike added to basket!")
-                : alert("Failed to add bike")
-            )
-            .catch(err => console.error("Basket error:", err));
+            .then(res => {
+                if (!res.ok) throw new Error("Add failed");
+                LoadBasket();
+            })
+            .catch(err => {
+                console.error(err);
+                alert("Error adding to basket");
+            });
     });
+
 
 // ----------------------- EDIT BIKE --------------------------
 document

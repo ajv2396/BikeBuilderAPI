@@ -1,1 +1,53 @@
-{}
+[
+  {
+    "Id": 13,
+    "BikeType": 1,
+    "Frame": 27,
+    "Shock": 33,
+    "Fork": 34,
+    "Wheels": 39,
+    "Tyres": 41,
+    "Drivetrain": 43,
+    "Brakes": 45,
+    "Seatpost": 54,
+    "Saddle": 55,
+    "Bars": 52,
+    "Stem": 50,
+    "Pedals": 46,
+    "SavedAt": "2025-12-31T19:19:45.7704854"
+  },
+  {
+    "Id": 14,
+    "BikeType": 2,
+    "Frame": 58,
+    "Shock": 61,
+    "Fork": 63,
+    "Wheels": 67,
+    "Tyres": 68,
+    "Drivetrain": 69,
+    "Brakes": 71,
+    "Seatpost": 79,
+    "Saddle": 80,
+    "Bars": 78,
+    "Stem": 76,
+    "Pedals": 72,
+    "SavedAt": "2025-12-31T19:20:55.549861"
+  },
+  {
+    "Id": 15,
+    "BikeType": 3,
+    "Frame": 83,
+    "Shock": 0,
+    "Fork": 86,
+    "Wheels": 89,
+    "Tyres": 90,
+    "Drivetrain": 92,
+    "Brakes": 93,
+    "Seatpost": 101,
+    "Saddle": 103,
+    "Bars": 100,
+    "Stem": 97,
+    "Pedals": 94,
+    "SavedAt": "2025-12-31T19:21:29.1848559"
+  }
+]
