@@ -1,4 +1,22 @@
-﻿
+﻿//--------------------------GET ACCOUNT ID ---------------------
+let LoggedInAccountID = null;
+let sessionLoaded = false;
+
+fetch("user_session.json")
+    .then(res => {
+        if (!res.ok) throw new Error("Failed to load session");
+        return res.json();
+    })
+    .then(data => {
+        LoggedInAccountID = data.AccountId;
+        sessionLoaded = true;
+    })
+    .catch(err => console.error("Session error:", err));
+
+
+
+
+
 //-------------------------------------STEPS MANAGEMENT-------------------------------------
 const panels = document.querySelectorAll('.step-panel');
 const NextBtn = document.querySelector(".next-btn");
@@ -162,6 +180,7 @@ function FillConfirmation() {
 
 //--------------------------PROCESS PAYMENT--------------------------
 function ProcessPayment() {
+
     const step3 = document.getElementById('step-3');
 
     // Show processing UI
@@ -186,6 +205,16 @@ function ProcessPayment() {
             animation: spin 1s linear infinite;">
         </div>
     `;
+
+    if (!sessionLoaded) {
+        alert("Please wait, loading user session...");
+        return;
+    }
+
+    if (!LoggedInAccountID) {
+        alert("User not logged in");
+        return;
+    }
 
     // Build order payload
     const orderData = {
