@@ -38,6 +38,7 @@ namespace BikeBuilderAPI.Controllers
                 {
                     SaveUserSession(account);
                     UserSaveExporter.ExportUserSavesToJson(account.AccountId, db);
+                    UserOrderExporter.ExportOrdersToJson(account.AccountId, db);
                     return Ok(new { sucess = true, message = "Login sucessful" });
                 }
                 else

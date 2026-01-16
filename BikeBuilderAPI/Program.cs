@@ -8,6 +8,7 @@ using System.Security.Principal;
 ClearUserSaves.Clear();
 ClearUserSession.Clear();
 ClearUserBasket.Clear();
+ClearUserOrders.Clear();
 
 //Export bike parts on start up
 using (var db = new AccountsContext())
