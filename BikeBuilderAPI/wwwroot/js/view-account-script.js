@@ -21,10 +21,71 @@ fetch('user_session.json')
         document.getElementById('LastName').textContent = LastName;
         document.getElementById('Email').textContent = Email;
         document.getElementById('ID').textContent = LoggedInAccountID;
+        LoadUserOrders();
     })
     .catch(error => {
         console.error('Error fetching JSON:', error);
     })
+
+//---------------------LOAD ORDERS-------------------------
+function LoadUserOrders() {
+    fetch('user_orders.json')
+        .then(res => {
+            if (!res.ok) throw new Error("Failed to load orders");
+            return res.json();
+        })
+        .then(orders => {
+            const container = document.getElementById('OrdersContainer');
+            container.innerHTML = "";
+
+            if (!Array.isArray(orders)) {
+                container.innerHTML = "<p>No orders found.</p>";
+                return;
+            }
+
+            //make sure only loading user logged in orders
+            const userOrders = orders.filter(
+                o => o.AccountID === LoggedInAccountID
+            );
+
+            if (userOrders.length === 0) {
+                container.innerHTML = "<p>You have no orders yet.</p>";
+                return;
+            }
+
+            userOrders.forEach(order => {
+                container.appendChild(CreateOrderCard(order));
+            });
+        })
+        .catch(err => {
+            console.error("Order load error:", err);
+        });
+}
+function CreateOrderCard(order) {
+    const card = document.createElement("div");
+    card.classList.add("order-card");
+
+    const createdDate = new Date(order.CreatedAt);
+    const deliveryDate = new Date(order.EstimatedDeliveryDate);
+    const today = new Date();
+
+    const delivered = today >= deliveryDate;
+
+    const statusText = delivered
+        ? `<span class="delivered">Delivered</span>`
+        : `<span class="in-transit">
+            Estimated delivery: ${deliveryDate.toLocaleDateString()}
+          </span>`;
+
+    card.innerHTML = `
+        <h3>Order ${order.OrderNumber}</h3>
+        <p><strong>Total:</strong> &pound;${order.TotalPrice}.00</p>
+        <p><strong>Placed:</strong> ${createdDate.toLocaleDateString()}</p>
+        <p><strong>Status:</strong> ${statusText}</p>
+    `;
+
+    return card;
+}
 
 //---------------------LOAD BIKE PARTS----------------------
 async function LoadParts(file) {
