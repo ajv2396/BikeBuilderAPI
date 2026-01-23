@@ -245,6 +245,7 @@ function ProcessPayment() {
             document.querySelector(".next-btn").textContent = "Finish";
             document.querySelector(".back-btn").style.display = "none";
             document.querySelector(".panel-footer").style.justifyContent = "flex-end";
+
         })
         .catch(err => {
             console.error(err);

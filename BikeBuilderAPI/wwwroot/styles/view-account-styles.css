@@ -300,4 +300,23 @@ header {
     font-weight: bold;
 }
 
- 
+.delete-order-btn {
+    padding: 8px 14px;
+    background-color: #c62828;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.15s ease;
+}
+
+    .delete-order-btn:hover {
+        background-color: #b71c1c;
+        transform: translateY(-1px);
+    }
+
+    .delete-order-btn:active {
+        transform: scale(0.97);
+    }
+
