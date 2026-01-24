@@ -1,6 +1,7 @@
 ﻿using BikeBuilderAPI.Model;
 using BikeBuilderAPI.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace BikeBuilderAPI.Controllers
 {
@@ -14,6 +15,12 @@ namespace BikeBuilderAPI.Controllers
         {
             _db = db;
         }
+        public class DeleteOrderRequest
+        {
+            public int OrderID { get; set; }
+        }
+
+
 
         [HttpPost("create")]
         public async Task<IActionResult> CreateOrder([FromBody] Order order)
@@ -40,6 +47,31 @@ namespace BikeBuilderAPI.Controllers
         {
             return $"MTB-{DateTime.UtcNow.Year}-{Guid.NewGuid().ToString("N")[..6].ToUpper()}";
         }
+
+        [HttpPost("delete")]
+        public async Task<IActionResult> DeleteOrder([FromBody] DeleteOrderRequest req)
+        {
+            var order = await _db.Orders.FindAsync(req.OrderID);
+
+            if (order == null)
+                return NotFound();
+
+            if (DateTime.UtcNow < order.EstimatedDeliveryDate)
+                return BadRequest("Order not delivered yet");
+
+            _db.Orders.Remove(order);
+            await _db.SaveChangesAsync();
+
+            return Ok();
+        }
+
+        [HttpPost("export")]
+        public IActionResult ExportUserOrders([FromBody] int accountId)
+        {
+            UserOrderExporter.ExportOrdersToJson(accountId, _db);
+            return Ok();
+        }
+
     }
 
 

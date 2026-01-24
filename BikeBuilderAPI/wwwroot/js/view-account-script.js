@@ -71,21 +71,26 @@ function CreateOrderCard(order) {
 
     const delivered = today >= deliveryDate;
 
-    const statusText = delivered
+    const statusHTML = delivered
         ? `<span class="delivered">Delivered</span>`
-        : `<span class="in-transit">
-            Estimated delivery: ${deliveryDate.toLocaleDateString()}
-          </span>`;
+        : `<span class="in-transit">Estimated delivery: ${deliveryDate.toLocaleDateString()}</span>`;
 
     card.innerHTML = `
         <h3>Order ${order.OrderNumber}</h3>
         <p><strong>Total:</strong> &pound;${order.TotalPrice}.00</p>
         <p><strong>Placed:</strong> ${createdDate.toLocaleDateString()}</p>
-        <p><strong>Status:</strong> ${statusText}</p>
+        <p><strong>Status:</strong> ${statusHTML}</p>
+
+        ${delivered ? `
+            <button class="delete-order-btn" data-order-id="${order.OrderID}">
+                Delete Order
+            </button>
+        ` : ""}
     `;
 
     return card;
 }
+
 
 //---------------------LOAD BIKE PARTS----------------------
 async function LoadParts(file) {
@@ -454,3 +459,41 @@ document
         window.location.href =
             `builder.html?bike=${typeMap[bike.BikeType]}&fromsave=true`;
     });
+
+//---------------- REMOVE ORDER -------------------
+document.getElementById("OrdersContainer").addEventListener("click", function (event) {
+    if (!event.target.classList.contains("delete-order-btn")) return;
+
+    const orderId = parseInt(event.target.dataset.orderId);
+
+    if (!confirm("Delete this delivered order?")) return;
+
+    fetch("https://localhost:7165/api/orders/delete", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ OrderID: orderId })
+    })
+
+        .then(res => {
+            if (!res.ok) throw new Error("Delete failed");
+
+            // refresh user orders
+            return fetch("https://localhost:7165/api/orders/export", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(LoggedInAccountID)
+
+            });
+        })
+        .then(res => {
+            if (!res.ok) throw new Error("Export failed");
+
+            alert("Order deleted");
+            window.location.reload();
+        })
+        .catch(err => {
+            console.error(err);
+            alert("Error deleting order");
+        });
+});
+
