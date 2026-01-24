@@ -1,18 +1,1 @@
-[
-  {
-    "OrderID": 1,
-    "AccountID": 16,
-    "OrderNumber": "MTB-2026-0BC933",
-    "TotalPrice": 8009,
-    "CreatedAt": "2026-01-16T11:46:27.2244034",
-    "EstimatedDeliveryDate": "2026-01-23T11:46:27.2244617"
-  },
-  {
-    "OrderID": 2,
-    "AccountID": 16,
-    "OrderNumber": "MTB-2026-CEDF9C",
-    "TotalPrice": 2780,
-    "CreatedAt": "2026-01-18T12:30:46.9074199",
-    "EstimatedDeliveryDate": "2026-01-25T12:30:46.907496"
-  }
-]
+{}

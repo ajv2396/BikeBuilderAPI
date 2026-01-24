@@ -1,8 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Collections.Generic;
 using System.IO;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using System.Collections.Generic;
+using BikeBuilderAPI.Utils;
+using Microsoft.AspNetCore.Mvc;
 
 namespace BikeBuilderAPI.Controllers
 {
@@ -120,5 +121,11 @@ namespace BikeBuilderAPI.Controllers
             }
         }
 
+        [HttpPost("clear")]
+        public IActionResult ClearBasket()
+        {
+            ClearUserBasket.Clear();
+            return Ok();
+        }
     }
 }

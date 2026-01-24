@@ -234,10 +234,28 @@ function ProcessPayment() {
         .then(data => {
             console.log("Order created:", data);
 
-            // Clear basket + checkout cache
+            // export updated orders
+            return fetch("https://localhost:7165/api/orders/export", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(LoggedInAccountID)
+            });
+        })
+        .then(res => {
+            if (!res.ok) throw new Error("Order export failed");
+
+            // clear user basket (server-side JSON)
+            return fetch("https://localhost:7165/api/basket/clear", {
+                method: "POST"
+            });
+        })
+        .then(res => {
+            if (!res.ok) throw new Error("Basket clear failed");
+
+            // clear client-side cache
             localStorage.removeItem("checkoutSummary");
 
-            // Move to Order Complete step
+            // move to confirmation step
             panels[currentStep].style.display = 'none';
             currentStep++;
             panels[currentStep].style.display = 'block';
@@ -245,12 +263,12 @@ function ProcessPayment() {
             document.querySelector(".next-btn").textContent = "Finish";
             document.querySelector(".back-btn").style.display = "none";
             document.querySelector(".panel-footer").style.justifyContent = "flex-end";
-
         })
         .catch(err => {
             console.error(err);
             alert("Payment failed. Please try again.");
         });
+
 }
 
 
