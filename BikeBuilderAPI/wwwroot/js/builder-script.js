@@ -669,12 +669,25 @@ document.getElementById("save-bike").addEventListener("click", () => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
     })
-        .then((res) =>
-            res.ok
-                ? alert("Bike Configuration Saved!")
-                : alert("Save failed: " + res.status)
-        )
-        .catch((err) => console.error("Error saving bike:", err));
+        .then(res => {
+            if (!res.ok) throw new Error("Save failed");
+
+            const saveBtn = document.getElementById("save-bike");
+            const originalSaveText = saveBtn.textContent;
+
+            saveBtn.textContent = "Saved!";
+
+            setTimeout(() => {
+                saveBtn.textContent = originalSaveText;
+            }, 1000);
+
+            LoadBasket();
+        })
+
+        .catch(err => {
+            console.error(err);
+            alert("Error saving bike");
+        });
 });
 
 
