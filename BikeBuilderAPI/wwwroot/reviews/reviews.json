@@ -1489,5 +1489,33 @@
     "Username": "Mark Allen",
     "Rating": 3,
     "Description": "Not the best braking power but decent for price"
+  },
+  {
+    "ReviewId": 214,
+    "BikePartID": 27,
+    "Username": "Bob Smith",
+    "Rating": 5,
+    "Description": "Great frame!"
+  },
+  {
+    "ReviewId": 215,
+    "BikePartID": 30,
+    "Username": "Bob Smith",
+    "Rating": 5,
+    "Description": "Great shock!"
+  },
+  {
+    "ReviewId": 216,
+    "BikePartID": 57,
+    "Username": "Bob Smith",
+    "Rating": 5,
+    "Description": "Great Frame!"
+  },
+  {
+    "ReviewId": 217,
+    "BikePartID": 106,
+    "Username": "Bob Smith",
+    "Rating": 5,
+    "Description": "Great frame!"
   }
 ]
