@@ -3,62 +3,72 @@
 <head>
     <meta charset="UTF-8">
     <title>MTB Builder</title>
+    <!-- Shared header/nav bar styles -->
     <link rel="stylesheet" href="styles/header.css">
+    <!-- Builder page specific styles -->
     <link rel="stylesheet" href="styles/builder-styles.css">
+    <!-- Font Awesome: used for basket icon and star rating icons -->
     <link rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 <body>
+    <!-- Navigation header: back button, logo, and basket button -->
     <header>
         <div class="back-button">
+            <!-- Back button: returns the user to the home page -->
             <a href="index.html" class="back-button header-button">
                 BACK
             </a>
         </div>
-
         <img src="images/Logos/main-logo-white.png" class="header-logo" alt="MTB Builder">
-
+        <!-- Basket button: click handler in builder-script.js saves current build state
+             to localStorage before navigating to basket.html -->
         <a class="basket">
             <i class="fas fa-shopping-basket"></i>
             <span class="basket-text">Basket</span>
         </a>
-
     </header>
 
-    <!-- Bike Display -->
+    <!-- Bike image display: layered <img> elements are injected here by builder-script.js
+         in the correct z-order for the selected bike type -->
     <div id="bike-display"></div>
 
+    <!-- Zoom controls: increase or decrease the width of all bike preview images -->
     <div class="bike-size-controls">
         <button id="zoom-out">−</button>
         <button id="zoom-in">+</button>
     </div>
 
-
     <div class="part-selector-bar">
-        <!-- Save -->
+        <!-- Save bike button: saves the current build to the user's account -->
         <div class="save-button">
             <button id="save-bike">Save Bike</button>
         </div>
 
         <div class="part-selector-bar">
-            <!-- totals bar -->
+            <!-- Total price and weight display: updated by UpdateTotalPrice() in builder-script.js -->
             <div id="total-price" style="margin-top:10px; font-weight:bold;">
                 Total: £0 <br /><br /> Weight: 0g
             </div>
 
+            <!-- Previous category button: navigates to the previous build step -->
             <button class="prev-button">Previous</button>
-            <!-- builder-script inserts steps -->
+
+            <!-- Part selection steps are dynamically inserted here by RenderPartSection()
+                 in builder-script.js, one section per part category -->
+            <!-- Next category button: navigates to the next build step -->
             <button class="next-button">Next</button>
         </div>
 
-
-        <!-- add to basket -->
+        <!-- Add to basket button: adds the current configured bike to the basket -->
         <div class="save-button">
             <button id="add-to-basket">Add to Basket</button>
         </div>
-
     </div>
+
+    <!-- basket-button-script.js: loads and displays the basket item count in the nav bar -->
     <script src="js/basket-button-script.js"></script>
+    <!-- builder-script.js: controls all builder page logic -->
     <script src="js/builder-script.js"></script>
 </body>
 </html>

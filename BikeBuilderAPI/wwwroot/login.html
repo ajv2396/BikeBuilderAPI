@@ -3,33 +3,34 @@
 <head>
     <meta charset="utf-8" />
     <title>MTB Builder - Login</title>
+    <!-- Shared header/nav bar styles -->
     <link rel="stylesheet" href="styles/header.css">
+    <!-- Login and signup shared styles -->
     <link rel="stylesheet" href="styles/login-signup-styles.css">
 </head>
 
+<!-- Navigation header: back button and logo (no basket or account buttons on this page) -->
 <header>
     <!-- Back button (left) -->
     <a href="index.html" class="header-button back-button">
         BACK
     </a>
-
     <!-- Center logo -->
     <img src="images/Logos/main-logo.png" class="header-logo" alt="MTB Builder">
 </header>
 
-
 <body>
-
-
     <div class="main-container">
-        <!--LOGIN FORM HTML-->
         <div>
             <h1>LOGIN</h1>
         </div>
+
+        <!--LOGIN FORM HTML-->
         <form id="LoginForm">
             <div>
                 <label>Email</label>
                 <br />
+                <!-- type="email" provides basic browser-level format validation -->
                 <input class="FormBox" type="email" id="email" required />
             </div>
             <br />
@@ -48,8 +49,9 @@
     <!--JAVASCRIPT-->
     <script>
         document.getElementById("LoginForm").addEventListener("submit", function (e) {
-            e.preventDefault();
+            e.preventDefault();  // Prevent default form submission and page reload
 
+            // Convert email to lowercase so login is not case-sensitive
             const LoginEmail = document.getElementById("email").value.toLowerCase(); //also convert to lowercase so email isnt case sensitive
             const LoginPassword = document.getElementById("password").value;
 
@@ -62,6 +64,7 @@
             console.log("Password:", LoginPassword);
 
             // CHECK IF ACCOUNT INFORMATION MATCHES DATABASE (AuthController.cs)
+            // The backend hashes the submitted password and compares it to the stored hash
             fetch("https://localhost:7165/api/auth/login", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
@@ -73,6 +76,7 @@
                         //redirect to homepage
                         window.location.href = "index.html";
                     } else {
+                        // Non-200 response means credentials did not match
                         alert("Login Failed. Please check your credentials.");
                     }
                 })
@@ -81,7 +85,6 @@
                     alert("An error occurred during login.");
                 });
         });
-
     </script>
 </body>
 </html>

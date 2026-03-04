@@ -3,34 +3,40 @@
 <head>
     <meta charset="utf-8" />
     <title>MTB Builder - Basket</title>
+    <!-- Shared header/nav bar styles -->
     <link rel="stylesheet" href="styles/header.css">
+    <!-- Basket page specific styles -->
     <link rel="stylesheet" href="styles/basket-styles.css">
 </head>
 <body>
-
+    <!-- Navigation header: contains back button and site logo -->
     <header>
+        <!-- Back button: navigates to the previous page (handled by basket-script.js) -->
         <a id="back-btn" class="header-button back-button">Back</a>
         <img src="images/Logos/main-logo.png" class="header-logo" alt="MTB Builder">
     </header>
 
     <div class="basket-container">
-
         <h1>Your Basket</h1>
 
-        <!-- basket items here -->
+        <!-- Basket items are dynamically inserted here by basket-script.js -->
         <div class="basket-items" id="BasketItems"></div>
 
-        <!--checkout -->
+        <!-- Checkout section: shows total price and checkout button -->
         <div class="checkout-container">
+            <!-- Total price display, updated dynamically by basket-script.js -->
             <div class="basket-total" id="BasketTotal">
                 Total: £0.00
             </div>
+            <!-- Checkout button: validates basket is not empty, stores summary in localStorage,
+                 then navigates to checkout.html -->
             <button id="checkout-btn">Checkout</button>
         </div>
-
     </div>
 
+    <!-- basket-script.js: loads basket items, renders bike previews, handles remove and checkout -->
     <script src="js/basket-script.js"></script>
+    <!-- global-script.js: forces page reload on bfcache restore to keep session state fresh -->
     <script src="js/global-script.js"></script>
 </body>
 </html>

@@ -3,16 +3,21 @@
 <head>
     <meta charset="utf-8" />
     <title>MTB Builder - Part Details</title>
+    <!-- Font Awesome: used for star rating icons in the review list -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
 </head>
 <body>
+    <!-- Main layout: part image on the left, part info and reviews on the right -->
     <div id="part-details-container">
-        <div id="image-wrapper">
-            <img id="part-image" src="" alt="Part Image" />
 
+        <div id="image-wrapper">
+            <!-- Part image: src is set dynamically by LoadPartInfo() -->
+            <img id="part-image" src="" alt="Part Image" />
             <br />
+            <!-- Write Review button: only opens popup if user is logged in -->
             <button id="write-review">Write Review</button>
 
+            <!-- Review submission popup: hidden by default, shown when write-review is clicked -->
             <div class="popup" id="popup">
                 <div class="popup-inner">
                     <h2>Write Review</h2>
@@ -21,9 +26,10 @@
                             <br />
                             <label>Rating</label>
                             <br />
+                            <!-- Range slider: value between 1-5, star display updated live via RenderStars() -->
                             <input type="range" id="rating" name="rating" min="1" max="5" value="3" />
+                            <!-- Star icons rendered here dynamically by RenderStars() -->
                             <div id="stars" class="stars"></div>
-
                         </div>
                         <br />
                         <div>
@@ -39,30 +45,32 @@
             </div>
         </div>
 
-
+        <!-- Part info section: all fields populated dynamically by LoadPartInfo() -->
         <div id="part-info">
             <h1 id="part-name"></h1>
             <p id="part-description"></p>
             <p id="part-price"></p>
             <p id="part-weight"></p>
 
+            <!-- Reviews section: average rating and individual reviews loaded by LoadReviews() -->
             <div id="part-reviews">
                 <h2>Reviews</h2>
+                <!-- Average rating text inserted here by LoadReviews() -->
                 <p id="average-rating"></p>
+                <!-- Individual review list items appended here by LoadReviews() -->
                 <ul id="reviews-list"></ul>
             </div>
         </div>
     </div>
 
 
-
-
     <script>
-        let LoggedInAccountID = null;
-        let Firstname = null;
-        let Lastname = null;
+        let LoggedInAccountID = null;   // Stores the logged-in user's account ID
+        let Firstname = null;           // Stores the logged-in user's first name (used as review username)
+        let Lastname = null;            // Stores the logged-in user's last name (used as review username)
 
         // -------------------------- LOAD SESSION --------------------------
+        // Fetch user session to get the account ID and name for review submission
         fetch("user_session.json")
             .then((response) => {
                 if (!response.ok) throw new Error("Response was not ok");
@@ -77,32 +85,34 @@
             .catch((error) => console.error("Error fetching session:", error));
 
         //------------------------GET ID FROM URL------------------------
+        // Read the part ID and bike type ID passed as query parameters from builder-script.js
         const qs = new URLSearchParams(window.location.search);
         const PartId = parseInt(qs.get("id"));
         const BikeTypeId = parseInt(qs.get("TypeId"));
-        //set part file
+
+        // Determine the correct parts JSON file based on the bike type ID
         let PartFile = "";
         if (BikeTypeId == 1) {
             PartFile = "bike-parts/enduro_parts.json";
-
         } else if (BikeTypeId == 2) {
             PartFile = "bike-parts/dh_parts.json";
-
         } else if (BikeTypeId == 3) {
             PartFile = "bike-parts/dj_parts.json";
-
         } else {
             alert("Could not determine bike type.")
         }
 
+        // Load the part details immediately using the resolved file and part ID
         LoadPartInfo(PartFile, PartId);
 
         //-----------------GET PART INFO-----------------------
+        // Fetches the parts file, finds the part by ID, and populates the info section
         async function LoadPartInfo(file, PartId) {
             try {
                 const resp = await fetch(file);
                 const parts = await resp.json();
 
+                // Find the specific part by its ID
                 const part = parts.find(p => p.Id === PartId);
 
                 if (!part) {
@@ -110,31 +120,36 @@
                     return;
                 }
 
+                // Destructure only the needed fields from the part object
                 const { Name, Description, ThumbnailPath, Price, Weight, PartType } = part;
 
+                // Populate all part info elements in the DOM
                 document.getElementById("part-name").textContent = Name;
                 document.getElementById("part-image").src = ThumbnailPath;
                 document.getElementById("part-image").alt = Name;
                 document.getElementById("part-description").textContent = Description;
                 document.getElementById("part-price").textContent = `Price: £${Price}`;
                 document.getElementById("part-weight").textContent = `Weight: ${Weight} g`;
+
+                // Update the browser tab title to show the part name
                 document.title = `${Name} Details`;
 
             } catch (error) {
                 console.error("Error loading part info:", error);
             }
-
         }
 
         //------------------LOAD REVIEWS------------------------
-        let AllReviews = [];
+        let AllReviews = [];    // Stores all reviews loaded from the reviews JSON file
 
+        // Fetches all reviews, filters to this part, calculates average, and renders the list
         async function LoadReviews() {
             try {
                 const resp = await fetch("reviews/reviews.json");
                 if (!resp.ok) throw new Error("Failed to load reviews");
                 AllReviews = await resp.json();
 
+                // Filter reviews to only those for this specific part
                 const PartReviews = AllReviews.filter(r => r.BikePartID === PartId);
 
                 const ReviewsList = document.getElementById("reviews-list");
@@ -145,7 +160,7 @@
                     return;
                 }
 
-                //average reviews
+                // Calculate and display the average rating across all reviews for this part
                 const TotalRating = PartReviews.reduce((sum, r) => sum + r.Rating, 0);
                 const AverageRating = (TotalRating / PartReviews.length).toFixed(1);
 
@@ -153,7 +168,7 @@
                 AverageElement.textContent = `Average Rating: ${AverageRating} / 5`;
                 document.getElementById("part-reviews").prepend(AverageElement);
 
-                //add each review
+                // Render each individual review as a list item
                 PartReviews.forEach(r => {
                     const listitem = document.createElement("li");
                     listitem.innerHTML = `<strong>${r.Username}</strong> (Rating: ${r.Rating}/5): ${r.Description}`;
@@ -165,7 +180,6 @@
             }
         }
 
-
         LoadReviews();
 
 
@@ -174,41 +188,52 @@
         const CloseButton = document.getElementById("close-popup");
         const popup = document.getElementById("popup");
 
+        // Open popup only if the user is logged in
         OpenButton.addEventListener("click", () => {
             if (LoggedInAccountID == null) { //only allow logged in users to write reviews
                 alert("You must be logged in to write a review")
             } else {
-                popup.classList.add("open");
+                popup.classList.add("open");    // Adding "open" class shows popup via CSS transition
             }
         });
+
+        // Close the popup by removing the "open" class
         CloseButton.addEventListener("click", () => {
             popup.classList.remove("open");
         });
 
+        // Initialise the star display once the DOM is fully loaded
         document.addEventListener("DOMContentLoaded", () => {
             const input = document.querySelector("#rating");
             const StarsContainer = document.querySelector("#stars");
 
+            // Renders filled or empty star icons based on the given rating value
             function RenderStars(rating) {
                 let stars = "";
                 for (let i = 1; i <= 5; i++) {
                     if (i <= rating) {
-                        stars += `<i class="fas fa-star"></i>`;
+                        stars += `<i class="fas fa-star"></i>`;     // Full star
                     } else {
-                        stars += `<i class="far fa-star"></i>`; 
+                        stars += `<i class="far fa-star"></i>`;     // Empty star
                     }
                 }
                 StarsContainer.innerHTML = stars;
             }
+
+            // Render stars for the default slider value on page load
             RenderStars(input.value);
 
+            // Update the star display live as the user moves the slider
             input.addEventListener("input", (event) => {
                 RenderStars(event.target.value);
             });
         });
 
         //----------------------FORM VALUES-------------------------
+        // Handles review form submission: collects values, sends to backend, refreshes review list
         document.getElementById("submit-review").addEventListener("click", function () {
+
+            // Build the review username from the logged-in user's first and last name
             const ReviewUsername = Firstname + " " + Lastname;
             const ReviewBikePartID = PartId;
             const ReviewRating = document.getElementById("rating").value;
@@ -221,6 +246,7 @@
                 Description: ReviewDescription
             };
 
+            // Submit the review to the backend API
             fetch("https://localhost:7165/api/reviews", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
@@ -229,6 +255,7 @@
                 .then(res => {
                     if (res.ok) {
                         alert("Review Sent");
+                        // Reload the reviews list so the new review appears immediately
                         LoadReviews();
                     } else {
                         alert("Failed to submit review.");
@@ -241,10 +268,6 @@
 
             popup.classList.remove("open"); //Close popup
         });
-
-
-
-
     </script>
 
     <style>
@@ -427,7 +450,6 @@
             button:hover {
                 background-color: #154aa5;
             }
-
     </style>
 </body>
 </html>
