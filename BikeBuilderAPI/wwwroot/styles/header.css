@@ -2,7 +2,7 @@
     --header-height: 64px;
 }
 
-/* GLOBAL HEADER */
+/*---------- GLOBAL HEADER ----------*/
 header {
     position: fixed;
     top: 0;
@@ -17,7 +17,7 @@ header {
     z-index: 1000;
 }
 
-/* CENTER LOGO */
+/*---------- CENTER LOGO ----------*/
 .header-logo {
     position: absolute;
     left: 50%;
@@ -27,18 +27,18 @@ header {
     pointer-events: none;
 }
 
-/* RIGHT SIDE BUTTONS */
+/*---------- RIGHT SIDE BUTTONS ----------*/
 .login-signup {
     display: flex;
     gap: 12px;
 }
 
-/* LEFT BACK BUTTON SUPPORT */
+/*---------- LEFT BACK BUTTON SUPPORT ----------*/
 .header-left {
     margin-right: auto;
 }
 
-/*---------BASKET ANIMATION----------*/
+/*--------- BASKET ANIMATION ----------*/
 .basket-bump {
     transform: scale(1.1);
     transition: transform 0.2s ease;

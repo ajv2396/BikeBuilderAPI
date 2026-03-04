@@ -1,7 +1,8 @@
 ﻿* {
   box-sizing: border-box;
 }
- 
+
+/* ---------- BODY ---------- */
 html,
 body {
   font-family: 'Montserrat', sans-serif;
@@ -13,6 +14,7 @@ body {
   align-items: center;
 }
 
+/* ---------- MAIN PANEL ---------- */
 .checkout-panel {
     display: flex;
     flex-direction: column;
@@ -27,6 +29,7 @@ body {
     flex: 1;
 }
 
+
 .title {
     font-weight: 700;
     margin-top: 0;
@@ -40,6 +43,7 @@ body {
     justify-content: space-between;
 }
 
+/* ---------- STEPS ---------- */
 .step {
     box-sizing: border-box;
     position: relative;
@@ -113,6 +117,7 @@ body {
         content: 'Finish';
     }
 
+/* ---------- PAYMENT ---------- */
 .payment-method {
     display: flex;
     margin-bottom: 60px;
@@ -133,6 +138,7 @@ body {
     align-items: center;
 }
 
+/* ---------- CONFIRMATION ---------- */
 .confirmation {
     font-size: 14px;
 }
@@ -154,7 +160,7 @@ body {
     margin-bottom: 12px;
 }
 
-
+/* ---------- CARDS ---------- */
 .card-logos {
     display: flex;
     width: 150px;
@@ -197,6 +203,7 @@ div[class*='column'] {
     width: 382px;
 }
 
+/* ---------- INPUTS ---------- */
 input[type='text'],
 input[type='password'],
 input[type='number']
@@ -227,6 +234,7 @@ input[type='number']
         width: 182px;
     }
 
+/* ---------- PANEL FOOTER ---------- */
 .panel-footer {
     display: flex;
     width: 100%;
@@ -237,6 +245,7 @@ input[type='number']
     align-items: center;
 }
 
+/* ---------- BUTTONS ---------- */
 .btn {
     font-size: 16px;
     width: 163px;
@@ -275,6 +284,7 @@ input[type='number']
     border-color: #f62f5e;
 }
 
+/* ---------- LOADER ---------- */
 .loader {
     border: 16px solid #f3f3f3; /* Light grey */
     border-radius: 50%;

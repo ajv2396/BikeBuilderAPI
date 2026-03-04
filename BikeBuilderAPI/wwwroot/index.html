@@ -4,39 +4,44 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MTB Builder - Home</title>
-
+    <!-- Shared header/nav bar styles -->
     <link rel="stylesheet" href="styles/header.css">
+    <!-- Home page specific styles -->
     <link rel="stylesheet" href="styles/index-styles.css">
+    <!-- Font Awesome: used for basket icon -->
     <link rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
-
 <body>
-
+    <!-- Navigation header: logo, session info, login/logout buttons, basket -->
     <header>
-        <!-- Logo -->
         <img src="images/Logos/main-logo.png" alt="MTB Builder" class="header-logo">
 
-        <!-- Logged in name -->
+        <!-- Login status message: updated by index-script.js when a user is logged in -->
         <div class="is-logged-in">
             <span id="LoggedInName">To save bikes and use the basket, you must log into an account</span>
         </div>
 
-        <!-- Login / Signup -->
+        <!-- Nav buttons: visibility is toggled by index-script.js based on session state -->
         <div class="login-signup">
+            <!-- Shown only when logged in: triggers a saves refresh before navigating -->
             <a class="loginsignup-button view-account-button" id="view-account-button">VIEW ACCOUNT</a>
+            <!-- Shown only when logged in: clears session and saves JSON on the server -->
             <a class="loginsignup-button log-out-button" id="log-out-button">LOG OUT</a>
+            <!-- Shown only when logged out -->
             <a href="login.html" class="loginsignup-button login-button">LOGIN</a>
+            <!-- Shown only when logged out -->
             <a href="signup.html" class="loginsignup-button signup-button">SIGN UP</a>
         </div>
 
+        <!-- Basket button: passes originator parameter so basket back button returns here -->
         <a class="basket" href="basket.html?originator=index.html">
             <i class="fas fa-shopping-basket"></i>
             <span class="basket-text">Basket</span>
         </a>
     </header>
 
-    <!-- Middle Selection Container -->
+    <!-- Main selection area: intro text and the three bike type buttons -->
     <div class="page-wrapper">
         <div class="selection-container">
             <p class="intro-text">
@@ -45,11 +50,14 @@
             <h2>Select Type to Begin</h2>
 
             <div class="button-container">
-                <!-- ENDURO -->
+                <!-- ENDURO button: navigates to builder with bike=enduro query parameter -->
+                <!-- data-bike attribute is read by index-script.js for the hover image animation -->
                 <a href="builder.html?bike=enduro"
                    class="bike-button preview-button"
                    data-bike="enduro">
                     <div class="bike-preview">
+                        <!-- Two overlapping images used for the crossfade hover animation in index-script.js -->
+                        <!-- First image is active (visible) by default; second is hidden until the animation starts -->
                         <img class="preview-img active" src="images/HomePage/Enduro/1.png">
                         <img class="preview-img" src="">
                     </div>
@@ -57,7 +65,7 @@
                     <span class="bike-desc">Built for fast, technical descents and efficient climbing.</span>
                 </a>
 
-                <!-- DOWNHILL -->
+                <!-- DOWNHILL button -->
                 <a href="builder.html?bike=dh"
                    class="bike-button preview-button"
                    data-bike="dh">
@@ -69,7 +77,7 @@
                     <span class="bike-desc">Made for descending steep, technical terrain at high speeds.</span>
                 </a>
 
-                <!-- DIRT JUMPER -->
+                <!-- DIRT JUMPER button -->
                 <a href="builder.html?bike=dj"
                    class="bike-button preview-button"
                    data-bike="dj">
@@ -81,11 +89,11 @@
                     <span class="bike-desc">Designed for jumps and tricks on pump tracks and skate parks.</span>
                 </a>
             </div>
-
         </div>
     </div>
 
-    <!-- Background Bike Gallery -->
+    <!-- Background bike gallery: SavedBikesContainer is populated by index-script.js
+         with layered bike card previews loaded from all-saves.json -->
     <div class="bike-background">
         <div class="bike-grid" id="SavedBikesContainer"></div>
     </div>
@@ -94,8 +102,11 @@
         © 2025 MTB Builder · Computer Science NEA
     </footer>
 
+    <!-- basket-button-script.js: loads and displays the basket item count in the nav bar -->
     <script src="js/basket-button-script.js"></script>
+    <!-- index-script.js: controls session display, logout/account buttons, background carousel, and button hover animation -->
     <script src="js/index-script.js"></script>
+    <!-- global-script.js: forces page reload on bfcache restore to keep session state fresh -->
     <script src="js/global-script.js"></script>
 </body>
 </html>

@@ -3,30 +3,36 @@
 <head>
     <meta charset="utf-8" />
     <title>MTB Builder - View Account</title>
+    <!-- Shared header/nav bar styles -->
     <link rel="stylesheet" href="styles/header.css">
+    <!-- View account page specific styles -->
     <link rel="stylesheet" href="styles/view-account-styles.css">
+    <!-- Font Awesome: used for basket icon -->
     <link rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 
+<!-- Navigation header: back button, logo, and basket button -->
 <header>
     <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
     <div class="login-signup">
+        <!-- Back button: returns the user to the home page -->
         <a href="index.html" class="back-button header-button">
             BACK
         </a>
-
     </div>
     <img src="images/Logos/main-logo.png" class="header-logo" alt="MTB Builder">
+    <!-- Basket button: passes originator parameter so basket back button returns to this page -->
     <a class="basket" href="basket.html?originator=view-account.html">
         <i class="fas fa-shopping-basket"></i>
         <span class="basket-text">Basket</span>
     </a>
-
 </header>
 
 <body>
     <div class="info-container">
+
+        <!-- Account information section: fields populated by view-account-script.js -->
         <div class="title">
             <label>ACCOUNT INFORMATION</label>
         </div>
@@ -34,6 +40,7 @@
         <div>
             <label>Name: </label>
             <br />
+            <!-- First and last name displayed side by side with a space between -->
             <span id="FirstName"></span><label> </label><span id="LastName"></span>
         </div>
         <br />
@@ -49,22 +56,30 @@
             <span id="ID"></span>
         </div>
         <br />
+
         <hr />
+
+        <!-- Orders section: order cards are dynamically appended here by LoadUserOrders() -->
         <div class="title">
             <label>YOUR ORDERS: </label>
         </div>
         <div class="orders-container" id="OrdersContainer"></div>
+
         <br />
         <hr />
+
+        <!-- Saved bikes section: bike cards are dynamically appended here by the user_saves.json fetch -->
         <div class="title">
             <label>SAVE INFO: </label>
         </div>
         <div class="bike-cards-container" id="SavedBikesContainer">
         </div>
 
-
+        <!-- basket-button-script.js: loads and displays the basket item count in the nav bar -->
         <script src="js/basket-button-script.js"></script>
+        <!-- view-account-script.js: loads session, orders, and saved bikes; handles delete/edit/add-to-basket -->
         <script src="js/view-account-script.js"></script>
+        <!-- global-script.js: forces page reload on bfcache restore to keep session state fresh -->
         <script src="js/global-script.js"></script>
 </body>
 </html>
