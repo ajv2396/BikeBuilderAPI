@@ -35,7 +35,7 @@ async function LoadBasket() {
                 "Basket (" + NumberOfBasketItems + ")";
         }
 
-        // If number of reviews doesn't equal 0 then add the number of reviews to the text
+        // Always update the button text to show the current basket count
         if (NumberOfBasketItems != null) {
             document.querySelector('.basket-text').textContent = "Basket (" + NumberOfBasketItems + ")";
         }
